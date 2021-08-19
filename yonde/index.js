@@ -12,3 +12,9 @@ rl.on('line', handle)
 function handle(line) {
   console.log(`you typed '${line}'`)
 }
+
+function getDefs() {
+  return {
+    
+  }
+}
