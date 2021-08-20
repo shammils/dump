@@ -1,0 +1,18 @@
+{
+  "data": [
+		{
+			"action": "currentTime",
+			"terms": [
+				["what","time","is","it"]
+			],
+			"type": "command"
+		},
+		{
+			"action": "retort",
+			"terms": [
+				"hey","yo","oi"
+			],
+			"type": "response"
+		}
+	]
+}
