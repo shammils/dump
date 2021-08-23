@@ -2,10 +2,14 @@ const yonde = require('./yonde.js')
 
 //yonde.loadDefinitions()
 
-search('what')
-async function search(term) {
+// should perfectly hit 'reply' action with 100% accuracy
+processRequest('oi')
+
+// should return no results, hit 'currentTime' with a score of less than 25% but more than 0%
+//search('what')
+async function processRequest(term) {
 	const defs = getDefinitions()
-	const scores = score()	
+	const response = search()	
 	function getDefinitions() {
 		return [
   	  {
@@ -13,14 +17,21 @@ async function search(term) {
       	"terms": [
            ["what","time","is","it"]
          ],
-				 "triggerWords": ["time"],
-         "type": "command"
+				"matchType": "complex",
+				 "conditions": [
+					 {
+						 "type": "mustContain",
+						 "values": ["time"]
+					 }
+				 ],
+         "actionType": "command"
       },
       {
         "action": "retort",
         "terms": ["hey","yo","oi","aibo"],
-        "type": "response",
-				"limitation": "allHit"
+				"matchType": "basic",
+        "actionType": "response",
+				"conditions": ["allMatch"]
       },
 			/*{
 				"action": "reply",
@@ -29,12 +40,40 @@ async function search(term) {
 			}*/
     ]
 	}
-	function score() {
-		const result = []
-		for (let i = 0; i < defs.length; i++) {
-			console.log(`on action '${defs[i].action}'`)
+	function search() {
+		const terms = term.trim().split(' ')
+		const results = { atari: null, other: [] }
+		for (let di = 0; di < defs.length; di++) {
+			if (results.atari) break
+			const result = {
+				action: defs[di].action,
+				score: 0, // irrelevant for now
+				hits: 0,
+				misses: 0,
+			}
+			console.log(`term '${term}', on action '${defs[di].action}'`)
+			if (defs[di].matchType === 'basic') {
+				// failing to take conditions into account atm
+				console.log(`term '${term}', action  '${defs[di].action}' is basic, order will not be taken into account`)
+				// loop through passed in terms
+				for (let ti = 0; ti < terms.length; ti++) {
+					if (defs[di].terms.includes(terms[ti])) { result.hits += 1 }
+					else { result.misses += 1 }
+				}
+				if (result.hits > 0 && result.misses === 0) { 
+					results.atari = result
+				} else {
+					result.valid = false
+					results.other.push(result)
+				}
+			} else {
+				// complex is the only other option
+				console.log(`term '${term}', action '${defs[di].action}' is complex, will take order into account`)
+
+			}
 		}
-		return result
+		console.log(`term '${term}',  results: ${JSON.stringify(results)}`)
+		return results
 	}
 }
 /*
