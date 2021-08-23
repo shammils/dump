@@ -8,6 +8,9 @@ const api = {
 	loadDefinitions: async () => {
 		definitions = fs.readFileSync('./definitions.json', {encoding:'utf8'})
 		console.log('defs', JSON.parse(definitions))
+	},
+	search: async (term) => {
+		throw 'unimplemented'
 	}
 }
 
