@@ -1,3 +1,6 @@
+sugi:
+	mustContain and complex. keep it simple
+
 how do we determine:
 	hey partner what time is it
 

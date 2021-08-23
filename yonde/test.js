@@ -22,6 +22,11 @@ async function processRequest(term) {
 					 {
 						 "type": "mustContain",
 						 "values": ["time"]
+					 },
+					 { // not sure about this
+						 "type": "mustExist",
+						 "position": 0,
+						 "value": "what"
 					 }
 				 ],
          "actionType": "command"
