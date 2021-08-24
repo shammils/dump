@@ -6,7 +6,7 @@ const yonde = require('./yonde.js')
 processRequest('oi')
 
 // should return no results, hit 'currentTime' with a score of less than 25% but more than 0%
-//search('what')
+processRequest('what is it')
 async function processRequest(term) {
 	const defs = getDefinitions()
 	const response = search()	
@@ -46,7 +46,7 @@ async function processRequest(term) {
     ]
 	}
 	function search() {
-		const terms = term.trim().split(' ')
+		const terms = term.toLowerCase().trim().split(' ')
 		const results = { atari: null, other: [] }
 		for (let di = 0; di < defs.length; di++) {
 			if (results.atari) break
@@ -74,7 +74,25 @@ async function processRequest(term) {
 			} else {
 				// complex is the only other option
 				console.log(`term '${term}', action '${defs[di].action}' is complex, will take order into account`)
-
+				// process conditions
+				let conditionsMet = true
+				for (let ci = 0; ci < defs[di].conditions.length; ci++) {
+				  const cond = defs[di].conditions[ci]
+				  if (typeof cond === 'object' && cond.type === 'mustContain') {
+				    for (let cvi = 0; cvi < cond.values.length; cvi++) {
+				      if (!terms.includes(cond.values[cvi])) {
+				        conditionsMet = false
+				        break
+				      }
+				    }
+				  }
+				}
+				if (!conditionsMet) {
+				  console.log(`term '${term}', action '${defs[di].action}' failed to meet conditions`)
+				  //continue
+				}
+				// score
+				
 			}
 		}
 		console.log(`term '${term}',  results: ${JSON.stringify(results)}`)
