@@ -6,17 +6,17 @@ const yonde = require('./yonde.js')
 processRequest('oi')
 
 // should return no results, hit 'currentTime' with a score of less than 25% but more than 0%
-processRequest('what is it')
+processRequest('what')
+
+//processRequest('what is it')
 async function processRequest(term) {
 	const defs = getDefinitions()
-	const response = search()	
+	const response = search()
 	function getDefinitions() {
 		return [
   	  {
        "action": "currentTime",
-      	"terms": [
-           ["what","time","is","it"]
-         ],
+      	"terms": ["what","time","is","it"],
 				"matchType": "complex",
 				 "conditions": [
 					 {
@@ -65,7 +65,7 @@ async function processRequest(term) {
 					if (defs[di].terms.includes(terms[ti])) { result.hits += 1 }
 					else { result.misses += 1 }
 				}
-				if (result.hits > 0 && result.misses === 0) { 
+				if (result.hits > 0 && result.misses === 0) {
 					results.atari = result
 				} else {
 					result.valid = false
@@ -92,7 +92,28 @@ async function processRequest(term) {
 				  //continue
 				}
 				// score
-				
+
+				// first see how many words matched
+				let matchedWords = []
+				let matchedWordScore
+				for (let ti = 0; ti < terms.length; ti++) {
+					console.log(`term '${term}', action '${defs[di].action}' 0${terms[ti]} 1${defs[di].terms.includes(terms[ti])} 2${!matchedWords.includes(terms[ti])}`,defs[di].terms)
+					if (defs[di].terms.includes(terms[ti]) && !matchedWords.includes(terms[ti])) {
+						matchedWords.push(terms[ti])
+					}
+				}
+				matchedWordScore = matchedWords.length / defs[di].terms.length * 100
+
+				// second see how many words matched the order
+				let wordsInOrder = 0
+				let ti = 0
+				let wordOrderScore
+				while(ti < defs[di].terms.length && ti < terms.length) {
+					if (defs[di].terms[ti] === terms[ti]) wordsInOrder += 1
+					ti += 1
+				}
+				wordOrderScore = wordsInOrder / defs[di].terms.length * 100
+				console.log(`term '${term}', action '${defs[di].action}': MWS: ${matchedWordScore}%, WOS:${wordOrderScore}%`)
 			}
 		}
 		console.log(`term '${term}',  results: ${JSON.stringify(results)}`)
