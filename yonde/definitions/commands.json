@@ -1,0 +1,19 @@
+[
+  {
+   "action": "currentTime",
+    "terms": ["what","time","is","it"],
+    "matchType": "complex",
+     "conditions": [
+       {
+         "type": "mustContain",
+         "values": ["time"]
+       },
+       {
+         "type": "mustExist",
+         "position": 0,
+         "value": "what"
+       }
+     ],
+     "actionType": "command"
+  }
+]

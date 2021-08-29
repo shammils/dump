@@ -1,0 +1,9 @@
+[
+  {
+    "action": "retort",
+    "terms": ["hey","yo","oi","aibo"],
+    "matchType": "basic",
+    "actionType": "response",
+    "conditions": ["allMatch"]
+  }
+]
