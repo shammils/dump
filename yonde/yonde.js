@@ -25,6 +25,7 @@ class Yonde {
 			if (results.atari) break
 			const result = {
 				action: this.definitions[di].action,
+				term
 			}
 			log('debug', `term '${term}', on action '${this.definitions[di].action}'`)
 			if (this.definitions[di].matchType === 'basic') {
