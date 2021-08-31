@@ -1,5 +1,15 @@
 sugi:
-	mustContain and complex. keep it simple
+  complex command: 
+    how many items sold today/this week/month in site a/b/all
+    
+    is it possible to define this in json? my guess is no atm
+    
+    > how is <sitename> doing
+    
+    in order to answer this question the tool needs to know that <sitename> is a site.
+    this question will need alt names. dafranka in japanese is what?
+    we need to design the response module now since search is ok i guess
+    
 
 how do we determine:
 	hey partner what time is it

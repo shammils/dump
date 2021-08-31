@@ -15,5 +15,17 @@
        }
      ],
      "actionType": "command"
+  },
+  {
+   "action": "websiteSales",
+    "terms": ["how","many","sales"],
+    "matchType": "complex",
+     "conditions": [
+       {
+         "type": "mustContain",
+         "values": ["sales"]
+       }
+     ],
+     "actionType": "command"
   }
 ]
