@@ -4,8 +4,8 @@ const path = require('path')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 let definitions = []
-// TODO: manage context. can only do this once yonde is responding somewhat properly
-let currentContext
+let info = {}
+
 let _self
 
 function log(level, message) { _self.emit("log",{module:'yonde',level,message})}
@@ -17,6 +17,17 @@ class Yonde {
 		this.definitions = []
 	}
 	search(term) {
+	  console.log(info)
+	  const res = this.findAction(term)
+	  if (res.atari) {
+	    if (res.atari.definition.queryType === 'dynamic') {
+	      console.log(`${res.atari.action} is dynamic`)
+	    }
+	  }
+	  // we can check scores at this point
+	  return res
+	}
+	findAction(term) {
 		if (!this.definitions.length) throw `no definitions loaded`
 		const results = { atari: null, other: [] }
 		if (!term || !term.length) return results
@@ -25,7 +36,8 @@ class Yonde {
 			if (results.atari) break
 			const result = {
 				action: this.definitions[di].action,
-				term
+				term,
+				definition: this.definitions[di]
 			}
 			log('debug', `term '${term}', on action '${this.definitions[di].action}'`)
 			if (this.definitions[di].matchType === 'basic') {
@@ -103,14 +115,18 @@ class Yonde {
 	search_score() {}
 	async loadDefinitions() {
 		return new Promise((resolve, reject) => {
-			klaw('./definitions')
+			klaw('./data')
 			.on('readable', function () {
 				let item
 				while ((item = this.read())) {
 					if (path.extname(item.path) === '.json') {
-						_self.definitions = _self.definitions.concat(
-							JSON.parse(fs.readFileSync(item.path, {encoding:'utf8'}))
-						)
+					  
+					  const obj = JSON.parse(fs.readFileSync(item.path, {encoding:'utf8'}))
+					  if (Array.isArray(obj)) {
+					    _self.definitions = _self.definitions.concat(obj)
+					  } else {
+					    for (let prop in obj) info[prop] = obj[prop]
+					  }
 					}
 				}
 			})

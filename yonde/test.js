@@ -16,7 +16,7 @@ yonde.on('log', (log) => {
 })
 ;(async () => {
 	await yonde.loadDefinitions()
-	console.log(yonde.search('oi'))
+	console.log(yonde.search('how many sales'))
 })()
 
 //blueprinting()

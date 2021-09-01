@@ -14,7 +14,8 @@
          "value": "what"
        }
      ],
-     "actionType": "command"
+     "actionType": "command",
+     "queryType": "static"
   },
   {
    "action": "websiteSales",
@@ -26,6 +27,7 @@
          "values": ["sales"]
        }
      ],
-     "actionType": "command"
+     "actionType": "command",
+     "queryType": "dynamic"
   }
 ]
