@@ -1,8 +1,12 @@
 const chalk = require('chalk')
 const Yonde = require('./yonde.js')
+const Kokoro = require('./kokoro.js')
 const yonde = new Yonde()
+const kokoro = new Kokoro()
 
-yonde.on('log', (log) => {
+yonde.on('log', log)
+kokoro.on('log', log)
+function log(log) {
   switch (log.level) {
     case 'debug': {
       console.log(chalk.blue(`${new Date().toISOString()}: ${log.message}`))
@@ -13,10 +17,13 @@ yonde.on('log', (log) => {
     default:
       throw `unsupported log level ${log.level}`
   }
-})
+}
 ;(async () => {
 	await yonde.loadDefinitions()
-	console.log(yonde.search('how many sales'))
+  const searchResult = yonde.search('how many sales in dafranka')
+	console.log('search result', searchResult)
+  const response = kokoro.kangaeru(searchResult)
+  console.log('response:', response)
 })()
 
 //blueprinting()

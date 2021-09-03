@@ -8,6 +8,8 @@ let info = {}
 
 let _self
 
+const chainWords = ["at","for","in"]
+
 function log(level, message) { _self.emit("log",{module:'yonde',level,message})}
 
 class Yonde {
@@ -17,14 +19,33 @@ class Yonde {
 		this.definitions = []
 	}
 	search(term) {
-	  console.log(info)
 	  const res = this.findAction(term)
 	  if (res.atari) {
 	    if (res.atari.definition.queryType === 'dynamic') {
-	      console.log(`${res.atari.action} is dynamic`)
+	      /*
+					'how many sales at/for/in <sitename>'
+					hard to write a 100% working block of code to always pluck the value we
+					want in this case.
+				*/
+				// TODO-TABUN: find the closest matching data object from char hits/order
+				// TODO-TABUN: hit on nearest character, IE 'hit' vs 'hir' vs 'git' vs 'hot' vs 'hiy'. these are all one char off and the char is next to the intended char
+				// loop through all the missed words and see if we find something in the
+				// the data object
+				let subject
+				if (res.atari.missedWords && res.atari.missedWords.length) {
+					for (let prop in info) {
+						const word = res.atari.missedWords.find(w => w === prop.toLowerCase())
+						if (word) subject = info[prop]
+					}
+				}
+				if (subject) {
+					res.atari.subject = subject
+				}
 	    }
-	  }
-	  // we can check scores at this point
+	  } else {
+			// didnt get a perfect match so we can check scores and ? at this point
+		}
+
 	  return res
 	}
 	findAction(term) {
@@ -58,6 +79,8 @@ class Yonde {
 				}
 			} else {
 				result.score = 0
+				result.matchedWords = []
+				result.missedWords = []
 				// complex is the only other option
 				log('debug', `term '${term}', action '${this.definitions[di].action}' is complex, will take order into account`)
 				// process conditions
@@ -80,16 +103,19 @@ class Yonde {
 				// score
 
 				// first see how many words matched
-				let matchedWords = []
 				let scoreCriteriaCount = 2 // matched words and word order
 				let matchedWordScore
+				// loop through terms to find matches
 				for (let ti = 0; ti < terms.length; ti++) {
-					log('debug', `term '${term}', action '${this.definitions[di].action}' 0${terms[ti]} 1${this.definitions[di].terms.includes(terms[ti])} 2${!matchedWords.includes(terms[ti])}`,this.definitions[di].terms)
-					if (this.definitions[di].terms.includes(terms[ti]) && !matchedWords.includes(terms[ti])) {
-						matchedWords.push(terms[ti])
+					log('debug', `term '${term}', action '${this.definitions[di].action}' 0${terms[ti]} 1${this.definitions[di].terms.includes(terms[ti])} 2${!result.matchedWords.includes(terms[ti])}`,this.definitions[di].terms)
+					if (this.definitions[di].terms.includes(terms[ti]) && !result.matchedWords.includes(terms[ti])) {
+						result.matchedWords.push(terms[ti])
+					} else {
+						// add non 'ni' article words to different array
+						if (!chainWords.includes(terms[ti].toLowerCase())) result.missedWords.push(terms[ti])
 					}
 				}
-				matchedWordScore = matchedWords.length / this.definitions[di].terms.length * 100
+				matchedWordScore = result.matchedWords.length / this.definitions[di].terms.length * 100
 
 				// second see how many words matched the order
 				let wordsInOrder = 0
@@ -103,6 +129,7 @@ class Yonde {
 				const averageAverage = (matchedWordScore+wordOrderScore)/scoreCriteriaCount
 				log('debug', `term '${term}', action '${this.definitions[di].action}': MWS: ${matchedWordScore}%, WOS:${wordOrderScore}% final score: ${averageAverage}%`)
 
+				result.score = averageAverage
 				// for now, if averageAverage is 100, success(duh)
 				if (averageAverage === 100) results.atari = result
 			}
@@ -120,7 +147,7 @@ class Yonde {
 				let item
 				while ((item = this.read())) {
 					if (path.extname(item.path) === '.json') {
-					  
+
 					  const obj = JSON.parse(fs.readFileSync(item.path, {encoding:'utf8'}))
 					  if (Array.isArray(obj)) {
 					    _self.definitions = _self.definitions.concat(obj)

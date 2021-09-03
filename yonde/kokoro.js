@@ -9,15 +9,17 @@ let _self
 
 function log(level, message) { _self.emit("log",{module:'yonde',level,message})}
 
-class Retorter {
+class Kokoro {
 	constructor() {
 		_self = this
 		EventEmitter.call(this)
 		//this.definitions = []
 	}
-	deliberate()
+	kangaeru(obj) {
+		return 'Kokoro kangaiteimasu ne'
+	}
 }
 
-nodeUtil.inherits(Yonde, EventEmitter)
+nodeUtil.inherits(Kokoro, EventEmitter)
 
-module.exports = Yonde
+module.exports = Kokoro
