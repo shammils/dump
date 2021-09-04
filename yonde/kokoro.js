@@ -16,10 +16,33 @@ class Kokoro {
 		//this.definitions = []
 	}
 	kangaeru(obj) {
-		return 'Kokoro kangaiteimasu ne'
+		console.log('-- Kokoro kangaiteimasu ne')
+		if (obj.atari) {
+		  return respond(obj)
+		} else {
+		  // no direct hit, try to determine what inquirer wants
+		  return 'koko ni wa dame da'
+		}
 	}
 }
 
+function respond(obj) {
+  switch (obj.atari.action) {
+    case 'retort': {
+      const torts = ['what', 'nanika', 'nan da']
+      return torts[Math.floor(Math.random() * torts.length)]
+    } break
+    case 'websiteSales': {
+      return 'on website sales'
+    } break
+    'default': {
+      return 'sono mele ga wakarimasen'
+    } break
+  }
+}
+function determineIntentions(obj) {
+  
+}
 nodeUtil.inherits(Kokoro, EventEmitter)
 
 module.exports = Kokoro
