@@ -19,16 +19,5 @@ const url = require('url')
     - prioritize 'base' property which does not exist yet
 */
 async function scanDir() {
-  new Promise((resolve, reject) => {
-    klaw('/some/dir')
-    .on('readable', function () {
-      let item
-      while ((item = this.read())) {
-        items.push(item.path)
-      }
-    })
-    .on('end', () => {
-
-    })
-  })
+  
 }
