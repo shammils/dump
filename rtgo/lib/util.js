@@ -32,6 +32,10 @@ const api = {
       })
     })
   },
+  windowsifyString: (text) => {
+    if (!text) return text
+    return text.replace(/[<>:"\/\\|?*]+/g, '')
+  }
 }
 
 module.exports = api
