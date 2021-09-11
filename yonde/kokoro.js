@@ -1,13 +1,10 @@
-const fs = require('fs')
-const klaw = require('klaw')
-const path = require('path')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 // TODO: manage context. can only do this once yonde is responding somewhat properly
 let currentContext
 let _self
 
-function log(level, message) { _self.emit("log",{module:'yonde',level,message})}
+function log(level, message) { _self.emit("log",{module:'kokoro',level,message})}
 
 class Kokoro {
 	constructor() {
@@ -16,7 +13,7 @@ class Kokoro {
 		//this.definitions = []
 	}
 	kangaeru(obj) {
-		console.log('-- Kokoro kangaiteimasu ne')
+		console.log('-- Kokoro ga kangaiteimasu ne')
 		if (obj.atari) {
 		  return respond(obj)
 		} else {
@@ -35,13 +32,13 @@ function respond(obj) {
     case 'websiteSales': {
       return 'on website sales'
     } break
-    'default': {
+    default: {
       return 'sono mele ga wakarimasen'
     } break
   }
 }
 function determineIntentions(obj) {
-  
+
 }
 nodeUtil.inherits(Kokoro, EventEmitter)
 
