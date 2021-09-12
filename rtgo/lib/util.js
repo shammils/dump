@@ -35,6 +35,14 @@ const api = {
   windowsifyString: (text) => {
     if (!text) return text
     return text.replace(/[<>:"\/\\|?*]+/g, '')
+  },
+  skuwerString: (text) => {
+    if (!text) return text
+    const found = text.match(/[A-Za-z\d]/g)
+    if (found && found.length) {
+      return found.join('').toUpperCase()
+    }
+    return text
   }
 }
 

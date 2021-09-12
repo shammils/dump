@@ -9,7 +9,6 @@
   "author": "Skyler Hamilton",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "iohook": "^0.9.3"
+    "chalk": "^4.1.2"
   }
 }

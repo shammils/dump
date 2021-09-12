@@ -2,7 +2,7 @@ const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 
 const request = require('./request.js')
-
+const util = require('./util.js')
 let _self
 
 function log(level, message) { _self.emit("log",{module:'shopify',level,message})}
@@ -16,15 +16,9 @@ class Shopify {
     this.apiKey = process.env.SHOPIFYAPIKEY
     this.password = process.env.SHOPIFYPASSWORD
   }
+
   getSku(obj) {
-    let sku = ''
-    obj.title.split(' ').forEach(w => {
-      if (w.length) sku += w[0]
-    })
-    if (sku.length === 1) {
-      // 1 char names increases collision possibility too high
-      sku = obj.title
-    }
+    let sku = util.skuwerString(obj.title)
     if (obj.type === "Movie") sku += '-MV'
     else if (obj.type === 'TV Series') sku += `-TV`
     else throw `unknown type ${obj.type}`
@@ -32,6 +26,7 @@ class Shopify {
     sku += '-USD-DVD'
     return sku
   }
+
   generateProductObject(data, status, base64Image=null) {
     if (status !== 'draft' && status !== 'active') throw `incorrect status ${status}`
 
@@ -64,9 +59,9 @@ class Shopify {
         option3: null,
         taxable: true,
         barcode: '',
-        grams: 136,
-        weight: 0.3,
-        weight_unit: 'lb',
+        //grams: 136,
+        weight: 3.0,
+        weight_unit: 'oz',
         inventory_quantity: 0,
         requires_shipping: true,
       }]
@@ -122,17 +117,69 @@ class Shopify {
     return product
   }
 
-  publishProduct(product) {
-    /*const res = JSON.parse(Buffer.from(await request('https', {
-      method: 'POST',
-      host: `${this.storeName}.myshopify.com`,
-      path: `/admin/api/2020-10/products.json`,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      auth: `${this.apiKey}:${this.password}`
-    }, JSON.stringify({product}))))
-    return res*/
+  async publishProduct(product) {
+    return JSON.parse(
+      Buffer.from(await request('https', {
+        method: 'POST',
+        host: `${this.storeName}.myshopify.com`,
+        path: `/admin/api/2020-10/products.json`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      }, JSON.stringify({product}))))
+  }
+
+  async getProductCount() {
+    return JSON.parse(
+      Buffer.from(await request('https', {
+        method: 'GET',
+        host: `${this.storeName}.myshopify.com`,
+        path: `/admin/api/2020-10/products/count.json`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      })))
+  }
+
+  async getProducts() {
+    return JSON.parse(
+      Buffer.from(await request('https', {
+        method: 'GET',
+        host: `${this.storeName}.myshopify.com`,
+        path: `/admin/api/2020-10/products.json`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      })))
+  }
+
+  async getInventoryItems(ids) {
+    return JSON.parse(
+      Buffer.from(await request('https', {
+        method: 'GET',
+        host: `${this.storeName}.myshopify.com`,
+        path: `/admin/api/2021-07/inventory_items.json?ids=${ids.join(',')}`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      })))
+  }
+
+  async updateInventoryItem(id, putRequestObj) {
+    return JSON.parse(
+      Buffer.from(await request('https', {
+        method: 'PUT',
+        host: `${this.storeName}.myshopify.com`,
+        path: `/admin/api/2021-07/inventory_items/${id}.json`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      }, JSON.stringify(putRequestObj))))
   }
 }
 

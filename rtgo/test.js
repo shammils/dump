@@ -9,7 +9,18 @@ const storeName = process.env.SHOPIFYSTORENAME
 const apiKey = process.env.SHOPIFYAPIKEY
 const password = process.env.SHOPIFYPASSWORD
 
-dryRunProducts()
+//skuwerString()
+function skuwerString() {
+  const paragraph = 'sdfsdfs';
+  const regex = /[A-Za-z\d]/g;
+  const found = paragraph.match(regex)
+  if (found && found.length) {
+    console.log(found.join('').toUpperCase())
+  }
+  console.log(found);
+}
+
+//dryRunProducts()
 async function dryRunProducts() {
   const paths = await util.fetchInfoFileDirs('/home/watashino/Videos/products')
   if (paths.length) {
@@ -100,8 +111,8 @@ async function createProduct() {
       taxable: true,
       barcode: '',
       grams: 136,
-      weight: 0.3,
-      weight_unit: 'lb',
+      weight: 3.0,
+      weight_unit: 'oz',
       inventory_quantity: 0,
       old_inventory_quantity: 0,
       requires_shipping: true,
@@ -155,7 +166,7 @@ async function createProduct() {
   }
 }
 
-//getProducts()
+getProducts()
 async function getProducts() {
   const res = JSON.parse(
     Buffer.from(await request('https', {
@@ -167,19 +178,39 @@ async function getProducts() {
       },
       auth: `${apiKey}:${password}`
     })));
-  console.log('res', res);
+  //console.log('res', res);
   for (let i = 0; i < res.products.length; i++) {
-    if (res.products[i].id === 7053586038939) {
+    //if (res.products[i].id === 7053586038939) {
       console.log(JSON.stringify(res.products[i], ' ', 2))
-      process.exit(0)
-    }
+      //process.exit(0)
+    //}
   }
+}
 
+//getInventoryItems()
+async function getInventoryItems() {
+  const res = JSON.parse(
+    Buffer.from(await request('https', {
+      method: 'GET',
+      host: `${storeName}.myshopify.com`,
+      path: `/admin/api/2021-07/inventory_items.json?ids=43185025646747`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      auth: `${apiKey}:${password}`
+    })));
+  console.log('res', JSON.stringify(res, ' ', 2));
+  //for (let i = 0; i < res.items.length; i++) {
+    //if (res.products[i].id === 7053586038939) {
+      //console.log(JSON.stringify(res.products[i], ' ', 2))
+      //process.exit(0)
+    //}
+  //}
 }
 
 //getProductCount()
 async function getProductCount() {
-  const res = JSON.parse(
+  /*const res = JSON.parse(
     Buffer.from(await request('https', {
       method: 'GET',
       host: `${storeName}.myshopify.com`,
@@ -188,8 +219,8 @@ async function getProductCount() {
         'Content-Type': 'application/json'
       },
       auth: `${apiKey}:${password}`
-    })));
-  console.log('res', res);
+    })));*/
+  console.log('res', JSON.stringify(await shopify.getProductCount(), ' ', 2));
 }
 
 //cleanString()
