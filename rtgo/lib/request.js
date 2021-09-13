@@ -25,9 +25,17 @@ const api = (type, request, payload = false) =>
       }*/
       const body = [];
       res.on('data', body.push.bind(body));
-      res.on('end', () => resolve(Buffer.concat(body)));
+      res.on('end', () => {
+        resolve(JSON.stringify({
+          body: JSON.parse(Buffer.from(Buffer.concat(body))),
+          headers: res.headers,
+        }))
+      });
     });
-    req.on('error', err => reject(err));
+    req.on('error', err => {
+      console.log('error in request lib')
+      reject(err)
+    });
     if (payload) req.write(payload);
     req.end();
   });

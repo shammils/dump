@@ -26,7 +26,7 @@ const password = process.env.SHOPIFYPASSWORD
         const buf = fs.readFileSync(imagePath)
         base64Image = buf.toString('base64')
       } else {
-        console.log('MISSING FULL IMDB IMAGE')
+        console.log(`\n\n '${paths[i]}' MISSING FULL IMDB IMAGE \n\n`)
         continue
       }
       const product = shopify.generateProductObject(data,'active',base64Image)
@@ -61,7 +61,7 @@ const password = process.env.SHOPIFYPASSWORD
         //continue
       }
       // save product and inventory item to disk
-      data.shopify = { createProductResult }
+      data.shopify = { product: createProductResult.product }
       await fs.writeJson(paths[i], data, {spaces:2})
 
     }

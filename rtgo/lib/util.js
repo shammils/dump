@@ -43,6 +43,11 @@ const api = {
       return found.join('').toUpperCase()
     }
     return text
+  },
+  parseLink: (string) => {
+    // I rather it throw in this case
+    const val = string.match(/(?<=\<)(.*?)(?=\>)/g)
+    if (val && val.length) return val[0]
   }
 }
 

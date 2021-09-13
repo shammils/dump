@@ -30,12 +30,12 @@ const spawn = require('child_process').spawn
             console.log(`year is not at the end of the folder name: ${paths[i]}`)
             continue
           }
-          const newPath = path.join(process.env.TARGETDIR, `${util.windowsifyString(imdb.title)}-TV-S${j+1}-${twoCharYear}`)
+          const newPath = path.join(process.env.TARGETDIR, `${util.windowsifyString(imdb.title)}-TV-${twoCharYear}`, `SEASON ${j+1}`)
           await fs.ensureDir(newPath)
           // create folder/info.json file with updated data in target dir
           const clone = JSON.parse(JSON.stringify(data))
           clone.base = {
-            title: imdb.title,
+            title: `${imdb.title} Season ${j+1}`,
             description: imdb.description,
             genres: imdb.genres,
             stars: imdb.stars,
@@ -53,13 +53,11 @@ const spawn = require('child_process').spawn
 
           // copy metadata folder to folder/metadata. should be it?
           await copyFolder(path.join(pathObj.dir, 'metadata'), path.join(newPath, 'metadata'))
-          console.log('did all shit')
-          process.exit(0)
+          console.log(`path ${i+1}/${paths.length}, season ${j+1}/${imdb.seasons.length} processed`)
         }
       } else {
         console.log(`movie in TV dir. path: ${paths[i]}`)
       }
-      process.exit(0)
     }
   } else {
     console.log('no paths returned')

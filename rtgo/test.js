@@ -9,6 +9,96 @@ const storeName = process.env.SHOPIFYSTORENAME
 const apiKey = process.env.SHOPIFYAPIKEY
 const password = process.env.SHOPIFYPASSWORD
 
+
+//matchBetween()
+function matchBetween() {
+  const string = "<https://storename.myshopify.com/admin/api/2020-10/products.json?limit=10&page_info=eyJsYXN0X2lkIjo3MDYxMzY0NjA1MDgzLCJsYXN0X3ZhbHVlIjoiR2FyZmllbGQiLCJkaXJlY3Rpb24iOiJuZXh0In0>; rel=\"next\""
+  const gex = /(?<=\<)(.*?)(?=\>)/g
+  console.log(string.match(gex))
+
+  console.log(string.endsWith('rel="next"'))
+}
+
+//updatePrices()
+async function updatePrices() {
+  // for some reason will only update prices of objects that are saved locally.
+  // if you want non local files updated, first pull them down(even though that
+  // functionality does not exist yet)
+  const paths = await util.fetchInfoFileDirs(process.env.PRODUCTSPATH ?? "")
+  const fromPrice = process.env.FROMPRICE
+  const toPrice = process.env.TOPRICE
+  if (isNaN(parseFloat(fromPrice)) || isNaN(parseFloat(toPrice))) {
+    console.log('prices must be floats')
+    process.exit(0)
+  }
+  const localProducts = []
+  for (let i = 0; i < paths.length; i++) {
+    const data = await fs.readJson(paths[i])
+    if (data.shopify && data.shopify.product) {
+      localProducts.push(data)
+    }
+  }
+  if (!localProducts.length) {
+    console.log('failed to find any products')
+    process.exit(0)
+  }
+  const localProductIds = localProducts.map(p => p.shopify.product.id)
+  console.log(localProductIds)
+  // get products by ids
+  const products = await shopify.getProducts({ids:localProductIds})
+  console.log('pl', products.length)
+  if (!products.length) {
+    console.log(`no products found in dir ${process.env.PRODUCTSPATH}`)
+    products.exit(0)
+  }
+  // we need to update the base variants and inventory products
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].variants.length === 1) {
+      if (products[i].variants[0].price === fromPrice) {
+        const updateProductResult = await shopify.updateProduct(products[i].id, {
+          product: {
+            id: products[i].id,
+            variants: [{
+              id: products[i].variants[0].id,
+              price: toPrice,
+            }]
+          }
+        })
+        console.log('updateProductResult', updateProductResult)
+
+        // update inventory item
+        const updateItemResult = await shopify.updateInventoryItem(products[i].variants[0].inventory_item_id, {
+          inventory_item: {
+            id: products[i].variants[0].inventory_item_id,
+            cost: toPrice,
+          }
+        })
+        console.log('updateItemResult', updateItemResult)
+
+        // update local file?
+        console.log(`${i+1}/${products.length} processed`)
+      } else {
+        console.log(`${i+1}/${products.length} product '${products[i].title}' has a price of ${products[i].variants[0].price}, not updating`)
+        continue
+      }
+    } else {
+      console.log(`${i+1}/${products.length} product '${products[i].title}' has more than 1 variant, ignoring for now`)
+      continue
+    }
+  }
+  console.log('complete')
+  process.exit(0)
+}
+
+//pagingTest()
+async function pagingTest() {
+  const products = await shopify.getProducts({
+    limit: 10
+  })
+  console.log(products)
+  process.exit(0)
+}
+
 //skuwerString()
 function skuwerString() {
   const paragraph = 'sdfsdfs';
@@ -57,6 +147,7 @@ async function tabThroughOptions() {
   }
   process.exit(0)
 }
+
 //getPaths()
 async function getPaths() {
   const paths = await util.fetchInfoFileDirs()
@@ -168,23 +259,25 @@ async function createProduct() {
 
 getProducts()
 async function getProducts() {
-  const res = JSON.parse(
+  /*const res = JSON.parse(
     Buffer.from(await request('https', {
       method: 'GET',
       host: `${storeName}.myshopify.com`,
-      path: `/admin/api/2020-10/products.json`,
+      path: `/admin/api/2020-10/products.json?ids=7062631383195`,
       headers: {
         'Content-Type': 'application/json'
       },
       auth: `${apiKey}:${password}`
     })));
-  //console.log('res', res);
+  console.log('res', res);
   for (let i = 0; i < res.products.length; i++) {
     //if (res.products[i].id === 7053586038939) {
       console.log(JSON.stringify(res.products[i], ' ', 2))
       //process.exit(0)
     //}
-  }
+  }*/
+  const res = await shopify.getProducts({ids:[7062631383195]})
+  console.log('res', JSON.stringify(res, ' ', 2))
 }
 
 //getInventoryItems()
@@ -210,7 +303,7 @@ async function getInventoryItems() {
 
 //getProductCount()
 async function getProductCount() {
-  /*const res = JSON.parse(
+  const res = JSON.parse(
     Buffer.from(await request('https', {
       method: 'GET',
       host: `${storeName}.myshopify.com`,
@@ -219,8 +312,9 @@ async function getProductCount() {
         'Content-Type': 'application/json'
       },
       auth: `${apiKey}:${password}`
-    })));*/
-  console.log('res', JSON.stringify(await shopify.getProductCount(), ' ', 2));
+    })));
+  console.log('res', JSON.stringify(res, ' ', 2));
+  //console.log('res', JSON.stringify(await shopify.getProductCount(), ' ', 2));
 }
 
 //cleanString()

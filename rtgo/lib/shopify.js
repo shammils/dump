@@ -1,3 +1,4 @@
+const url = require('url')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 
@@ -35,11 +36,17 @@ class Shopify {
     if (data.sources.wikipedia && typeof data.sources.wikipedia.version === 'number') {
       wiki = data.data[`wikipedia_${data.sources.wikipedia.version}`]
     }
+
+    // overwite the title from base. TODO: overwrite everything with base basically...
+    if (data.base && data.base.title) {
+      log('debug', `title changed from ${imdb.title} to ${data.base.title}`)
+      imdb.title = data.base.title
+    }
     const product = {
       title: imdb.title,
       body_html: `<p>${imdb.description}</p>\n<ul>\n`,
       vendor: this.storeName,
-      product_type: 'DVD',
+      product_type: imdb.type,
       status,
       tags: imdb.genres.join(', '),
       options: [{
@@ -48,7 +55,7 @@ class Shopify {
       }],
       variants: [{
         title: 'Default Title',
-        price: '0.99',
+        price: '3.99',
         sku: this.getSku(imdb),
         inventory_policy: 'deny',
         compare_at_price: null,
@@ -118,7 +125,7 @@ class Shopify {
   }
 
   async publishProduct(product) {
-    return JSON.parse(
+    const response = JSON.parse(
       Buffer.from(await request('https', {
         method: 'POST',
         host: `${this.storeName}.myshopify.com`,
@@ -128,10 +135,11 @@ class Shopify {
         },
         auth: `${this.apiKey}:${this.password}`
       }, JSON.stringify({product}))))
+    return response.body
   }
 
   async getProductCount() {
-    return JSON.parse(
+    const response = JSON.parse(
       Buffer.from(await request('https', {
         method: 'GET',
         host: `${this.storeName}.myshopify.com`,
@@ -141,11 +149,13 @@ class Shopify {
         },
         auth: `${this.apiKey}:${this.password}`
       })))
+    return response.body
   }
 
-  async getProducts() {
-    return JSON.parse(
-      Buffer.from(await request('https', {
+  async getProducts(params = null, uri = null, products = null) {
+    let options
+    if (!uri) {
+      options = {
         method: 'GET',
         host: `${this.storeName}.myshopify.com`,
         path: `/admin/api/2020-10/products.json`,
@@ -153,11 +163,60 @@ class Shopify {
           'Content-Type': 'application/json'
         },
         auth: `${this.apiKey}:${this.password}`
-      })))
+      }
+      // feels shitty to build a query string like this
+      if (params) {
+        let queryParts = []
+        if (params.limit) queryParts.push(`limit=${params.limit}`)
+        if (params.ids) queryParts.push(`ids=${params.ids.join(',')}`)
+        if (queryParts.length) options.path += `?${queryParts.join('&')}`
+      }
+    } else {
+      const uriObj = new URL(uri)
+      options = {
+        method: 'GET',
+        host: uriObj.host,
+        path: `${uriObj.pathname}${uriObj.search}`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      }
+    }
+    //console.log('options', options)
+    const response = JSON.parse(
+      Buffer.from(await request('https', options))
+    )
+    //console.log(JSON.stringify(response))
+    if (products) products = products.concat(response.body.products)
+    else products = response.body.products
+    // it would be smarter to use regex to pluck next in case order changes
+    if (response.headers.link && response.headers.link.endsWith('rel="next"')) {
+      // get next page of results
+      const link = util.parseLink(response.headers.link)
+      //console.log(`will now hit this thingy`, link)
+      return this.getProducts(null, link, products)
+    }
+    return products
+    //process.exit(0)
+  }
+
+  async updateProduct(id, putRequestObj) {
+    const response = JSON.parse(
+      Buffer.from(await request('https', {
+        method: 'PUT',
+        host: `${this.storeName}.myshopify.com`,
+        path: `/admin/api/2021-07/products/${id}.json`,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        auth: `${this.apiKey}:${this.password}`
+      }, JSON.stringify(putRequestObj))))
+    return response.body
   }
 
   async getInventoryItems(ids) {
-    return JSON.parse(
+    const response = JSON.parse(
       Buffer.from(await request('https', {
         method: 'GET',
         host: `${this.storeName}.myshopify.com`,
@@ -167,10 +226,11 @@ class Shopify {
         },
         auth: `${this.apiKey}:${this.password}`
       })))
+    return response.body
   }
 
   async updateInventoryItem(id, putRequestObj) {
-    return JSON.parse(
+    const response = JSON.parse(
       Buffer.from(await request('https', {
         method: 'PUT',
         host: `${this.storeName}.myshopify.com`,
@@ -180,6 +240,7 @@ class Shopify {
         },
         auth: `${this.apiKey}:${this.password}`
       }, JSON.stringify(putRequestObj))))
+    return response.body
   }
 }
 
