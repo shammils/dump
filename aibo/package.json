@@ -1,0 +1,14 @@
+{
+  "name": "あいぼ",
+  "version": "0.0.0",
+  "description": "おれ の なかま",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Skyler Hamilton",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
