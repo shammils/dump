@@ -1,4 +1,10 @@
-const { http, https } = require('follow-redirects');
+// disabled follow redirects due to this error
+// Error [ERR_FR_MAX_BODY_LENGTH_EXCEEDED]: Request body larger than maxBodyLength limit
+// https://forums.expo.dev/t/solved-request-body-larger-than-maxbodylength-limit/6298
+//const { http, https } = require('follow-redirects');
+const http = require('http')
+const https = require('https')
+
 const fs = require('fs')
 
 const api = (type, request, payload = false) =>

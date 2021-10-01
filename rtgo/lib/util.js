@@ -50,8 +50,8 @@ const api = {
     if (val && val.length) return val[0]
   },
   delay: ms =>
-  new Promise(resolve =>
-    setTimeout(() => resolve(), ms)),
+    new Promise(resolve =>
+      setTimeout(() => resolve(), ms)),
 }
 
 module.exports = api

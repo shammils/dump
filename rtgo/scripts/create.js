@@ -30,7 +30,7 @@ const password = process.env.SHOPIFYPASSWORD
         continue
       }
       if (data.shopify) {
-        console.log(`skipping '${product.title}' since it already exists in shopify`)
+        console.log(`skipping '${data.shopify.product.title}' since it already exists in shopify`)
         continue
       }
       const product = shopify.generateProductObject({
@@ -59,6 +59,7 @@ const password = process.env.SHOPIFYPASSWORD
         console.log('error creating product', createProductResult)
         continue
       }
+      await util.delay(1000)
       // set inventory item to proper country code
       const updateItemResult = await shopify.updateInventoryItem(createProductResult.product.variants[0].inventory_item_id, {
         inventory_item: {
