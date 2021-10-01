@@ -11,6 +11,9 @@ process.stdin.on('keypress', (str, key) => {
   navigate(key)
 });
 
+// termux と linux, それ だけ だ. まど は ぜんぜん しらないん です けど ね
+const usingTermux = process.env.SHELL.includes('com.termux')
+
 let currentRow = 0
 let currentLevel = 0
 let selectedOption
@@ -109,10 +112,18 @@ function print(message) {
 }
 
 async function startRecord() {
+  if (usingTermux) {
 
+  } else {
+
+  }
 }
 async function stopRecord() {
+  if (usingTermux) {
 
+  } else {
+
+  }
 }
 async function submit() {
   // push recording to STT -> Translate -> TTS service
@@ -120,5 +131,9 @@ async function submit() {
   play()
 }
 async function play() {
+  if (usingTermux) {
 
+  } else {
+
+  }
 }
