@@ -48,7 +48,10 @@ const api = {
     // I rather it throw in this case
     const val = string.match(/(?<=\<)(.*?)(?=\>)/g)
     if (val && val.length) return val[0]
-  }
+  },
+  delay: ms =>
+  new Promise(resolve =>
+    setTimeout(() => resolve(), ms)),
 }
 
 module.exports = api

@@ -29,17 +29,29 @@ const password = process.env.SHOPIFYPASSWORD
         console.log(`\n\n '${paths[i]}' MISSING FULL IMDB IMAGE \n\n`)
         continue
       }
-      const product = shopify.generateProductObject(data,'active',base64Image)
       if (data.shopify) {
         console.log(`skipping '${product.title}' since it already exists in shopify`)
         continue
       }
+      const product = shopify.generateProductObject({
+        data,
+        status: 'draft',
+        base64Image,
+        price: '9.99',
+      })
 
       // make clone without product image since it takes so much space
       const productClone = JSON.parse(JSON.stringify(product))
       productClone.images = [{attachment: 'base64String'}]
       console.log(`${i+1}/${paths.length}`, productClone)
+
+      // manual input path
       const answer = await util.askQuestion(`suzuki?`)
+
+      // auto path
+      //console.log('creating product in 10 seconds')
+      //await util.delay(10000)
+
       // create shopify product
       const createProductResult = await shopify.publishProduct(product)
       console.log('createProductResult', createProductResult)

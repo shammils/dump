@@ -24,30 +24,31 @@ class Shopify {
     else if (obj.type === 'TV Series') sku += `-TV`
     else throw `unknown type ${obj.type}`
     sku += `-${obj.releaseYear}`//.substring(2)
-    sku += '-USD-DVD'
+    sku += '-NTSC-USD-DVD'
     return sku
   }
 
-  generateProductObject(data, status, base64Image=null) {
-    if (status !== 'draft' && status !== 'active') throw `incorrect status ${status}`
+  generateProductObject(params) {
+    if (params.status !== 'draft' && params.status !== 'active') throw `incorrect status ${params.status}`
+    if (!params.price) throw `price required`
 
-    const imdb = data.data[`imdb_${data.sources.imdb.version}`]
+    const imdb = params.data.data[`imdb_${params.data.sources.imdb.version}`]
     let wiki
-    if (data.sources.wikipedia && typeof data.sources.wikipedia.version === 'number') {
-      wiki = data.data[`wikipedia_${data.sources.wikipedia.version}`]
+    if (params.data.sources.wikipedia && typeof params.data.sources.wikipedia.version === 'number') {
+      wiki = params.data.data[`wikipedia_${params.data.sources.wikipedia.version}`]
     }
 
     // overwite the title from base. TODO: overwrite everything with base basically...
-    if (data.base && data.base.title) {
-      log('debug', `title changed from ${imdb.title} to ${data.base.title}`)
-      imdb.title = data.base.title
+    if (params.data.base && params.data.base.title) {
+      log('debug', `title changed from ${imdb.title} to ${params.data.base.title}`)
+      imdb.title = params.data.base.title
     }
     const product = {
       title: imdb.title,
-      body_html: `<p>${imdb.description}</p>\n<ul>\n`,
+      body_html: `<p>Barely used, excellent condition, like new</p>\n<p>${imdb.description}</p>\n<ul>\n`,
       vendor: this.storeName,
       product_type: imdb.type,
-      status,
+      status: params.status,
       tags: imdb.genres.join(', '),
       options: [{
         name: 'Title',
@@ -55,7 +56,7 @@ class Shopify {
       }],
       variants: [{
         title: 'Default Title',
-        price: '3.99',
+        price: params.price,
         sku: this.getSku(imdb),
         inventory_policy: 'deny',
         compare_at_price: null,
@@ -73,6 +74,7 @@ class Shopify {
         requires_shipping: true,
       }]
     }
+
     if (imdb.director) {
       product.body_html += `  <li>Director: ${imdb.director}</li>\n`
     }
@@ -80,7 +82,7 @@ class Shopify {
     if (imdb.creator && imdb.director !== imdb.creator) {
       product.body_html += `  <li>Creator: ${imdb.creator}</li>\n`
     }
-    if (!imdb.creator && imdb.director && wiki) {
+    if (!imdb.creator && !imdb.director && wiki) {
       // try to pull something from wiki?
       if (wiki['Directed by']) {
         product.body_html += `  <li>Director: ${wiki['Directed by']}</li>\n`
@@ -115,10 +117,11 @@ class Shopify {
       }
     }
     product.body_html += `  <li>Release Year: ${imdb.releaseYear}</li>\n`
+    product.body_html += `  <li>Region: NTSC</li>\n`
     product.body_html += '</ul>'
 
-    if (base64Image) {
-      product.images = [{attachment: base64Image}]
+    if (params.base64Image) {
+      product.images = [{attachment: params.base64Image}]
     }
 
     return product

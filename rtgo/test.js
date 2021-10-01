@@ -19,6 +19,104 @@ function matchBetween() {
   console.log(string.endsWith('rel="next"'))
 }
 
+// TODO: batch update by product ID batches instead of pulling all products
+// at once
+//updateProducts()
+async function updateProducts() {
+  // this copy is just going to update everything, IDGAF
+  const paths = await util.fetchInfoFileDirs(process.env.PRODUCTSPATH ?? "")
+  const toPrice = process.env.TOPRICE
+  const status = process.env.STATUS
+
+  if (isNaN(parseFloat(toPrice))) {
+    console.log('prices must be floats')
+    process.exit(400)
+  }
+  if (!paths.length) {
+    console.log('didnt find shit in path', process.env.PRODUCTSPATH)
+    process.exit(400)
+  }
+  if (status !== 'draft' && status !== 'active') {
+    console.log('only draft and active are status options. recieved', process.env.STATUS)
+    process.exit(400)
+  }
+
+  const localProducts = {}
+  for (let i = 0; i < paths.length; i++) {
+    const data = await fs.readJson(paths[i])
+    if (data.shopify && data.shopify.product) {
+      localProducts[data.shopify.product.id] = {
+        data,
+        updatedProduct: shopify.generateProductObject({
+          data,
+          status,
+          price: toPrice,
+        }),
+        path: paths[i]
+      }
+    }
+  }
+
+  const localProductIds = Object.keys(localProducts).map(p => parseInt(p))
+  console.log('product ids', localProductIds)
+
+  // get products by ids
+  const products = await shopify.getProducts({ids:localProductIds})
+  console.log('products from shopify count', products.length)
+
+  if (!products.length) {
+    console.log(`no products returned from shopify for some reason`)
+    process.exit(0)
+  }
+
+  for (let i = 0; i < products.length; i++) {
+    if (products[i].variants.length === 1) {
+      let localProduct = localProducts[products[i].id]
+      const updateProductResult = await shopify.updateProduct(products[i].id, {
+        product: {
+          id: products[i].id,
+          body_html: localProduct.updatedProduct.body_html,
+          status,
+          variants: [{
+            id: products[i].variants[0].id,
+            price: toPrice,
+          }]
+        }
+      })
+      console.log(`${i+1}/${products.length} update product '${products[i].title}' result`, updateProductResult)
+      if (!updateProductResult.product) {
+        console.log(`failed to update '${products[i].title}'`, updateProductResult)
+        process.exit(500)
+      }
+
+      // update inventory item
+      await util.delay(500)
+      const updateItemResult = await shopify.updateInventoryItem(products[i].variants[0].inventory_item_id, {
+        inventory_item: {
+          id: products[i].variants[0].inventory_item_id,
+          cost: toPrice,
+        }
+      })
+      if (!updateItemResult.inventory_item) {
+        console.log(`${i+1}/${products.length} failed to update inventory item '${products[i].title}', inv id '${products[i].variants[0].inventory_item_id}' product id '${products[i].id}'`)
+        process.exit(500)
+      }
+      console.log(`${i+1}/${products.length} update inventory item result`, updateItemResult)
+      // update file on disk
+      localProduct.data.shopify.product = updateProductResult.product
+      // currently not saving inventory item for some reason. just dont really
+      // care 'is all
+      await fs.writeJson(localProduct.path, localProduct.data, {spaces:2})
+      console.log(`${i+1}/${products.length} updated json file for '${products[i].title}' at '${localProduct.path}'`)
+      await util.delay(1000)
+    } else {
+      console.log(`product ${products[i].id} has no variant`)
+    }
+  }
+  console.log('complete')
+  process.exit(0)
+}
+
 //updatePrices()
 async function updatePrices() {
   // for some reason will only update prices of objects that are saved locally.
@@ -49,7 +147,7 @@ async function updatePrices() {
   console.log('pl', products.length)
   if (!products.length) {
     console.log(`no products found in dir ${process.env.PRODUCTSPATH}`)
-    products.exit(0)
+    process.exit(0)
   }
   // we need to update the base variants and inventory products
   for (let i = 0; i < products.length; i++) {
@@ -112,7 +210,7 @@ function skuwerString() {
 
 //dryRunProducts()
 async function dryRunProducts() {
-  const paths = await util.fetchInfoFileDirs('/home/watashino/Videos/products')
+  const paths = await util.fetchInfoFileDirs('/home/shigoto/products/ACTIVE')
   if (paths.length) {
     for (let i = 0; i < paths.length; i++) {
       const data = await fs.readJson(paths[i])
@@ -128,7 +226,12 @@ async function dryRunProducts() {
       } else {
         console.log('MISSING FULL IMDB IMAGE')
       }
-      const product = shopify.generateProductObject(data,'draft')
+      const product = shopify.generateProductObject({
+        data,
+        status: 'draft',
+        base64Image: null,
+        price: '9.99',
+      })
       console.log(`${i+1}/${paths.length}`, product)
       const answer = await util.askQuestion(`suzuki?`)
     }
@@ -257,7 +360,7 @@ async function createProduct() {
   }
 }
 
-getProducts()
+//getProducts()
 async function getProducts() {
   /*const res = JSON.parse(
     Buffer.from(await request('https', {
