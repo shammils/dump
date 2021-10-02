@@ -166,8 +166,8 @@ class Util {
     })
     const request = {
       config: {
-        encoding: 'LINEAR16',
-        sampleRateHertz: 48000,
+        encoding: 'AMR_WB',
+        sampleRateHertz: 16000,
         languageCode,//ja-JP en-US
       },
       audio: {

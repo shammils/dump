@@ -3,9 +3,6 @@ const Util = require('./lib/util.js')
 const util = new Util()
 const spawn = require('child_process').spawn;
 
-process.env.GOOGLECLOUDKEY = '/home/shigoto/.gc/aibo-301005-22ef784a5d61.json'
-process.env.GOOGLECLOUDPROJECTNAME = 'aibo'
-
 const readline = require('readline')
 readline.emitKeypressEvents(process.stdin);
 if (process.stdin.isTTY) { process.stdin.setRawMode(true) }
@@ -154,10 +151,9 @@ function print(message) {
 
 async function startRecord() {
   recording = true
-  return
   if (usingTermux) {
     spawn('termux-microphone-record', [
-      '-f', 'request.wav', '-r', '48000', '-c', '1', '-b', '16'
+      '-f', 'request.wav', '-r', '16000', '-c', '1', '-b', '16', '-e', 'amr_wb'
     ])
   } else {
     audioProcess = spawn('arecord', [
