@@ -2,7 +2,7 @@
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 const spawn = require('child_process').spawn
-const aws = requre('aws-sdk')
+const aws = require('aws-sdk')
 
 let _self
 function log(level, message) { _self.emit("log",{module:'util',level,message})}
