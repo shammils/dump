@@ -3,28 +3,41 @@ const Util = require('./lib/util.js')
 const util = new Util()
 const spawn = require('child_process').spawn;
 
+process.env.GOOGLECLOUDKEY = '/home/shigoto/.gc/aibo-301005-22ef784a5d61.json'
+process.env.GOOGLECLOUDPROJECTNAME = 'aibo'
+
 const readline = require('readline')
 readline.emitKeypressEvents(process.stdin);
 if (process.stdin.isTTY) { process.stdin.setRawMode(true) }
 process.stdin.on('keypress', (str, key) => {
   //console.log(key.name)
   if (key.name === 'escape') process.exit(0)
-  navigate(key)
+  if (!processing) navigate(key)
 });
 
 // termux と linux, それ だけ だ. まど は ぜんぜん しらないん です けど ね
 const usingTermux = process.env.SHELL.includes('com.termux')
-let audioProcess
+let audioProcess // linux desktop only
+
+let recording = false
+let processing = false // true when posting to cloud
+let playing = false // TODO: use this value to prevent actions while playing/speaking
 
 let currentRow = 0
-let currentLevel = 0
 let selectedOption
-const mainMenu = [
+const mainMenu = {
   //'にほんご   まで   にほんご',
-  'にほんご   まで   えいご',
-  'えいご     まで   にほんご',
+  'にほんご   まで   えいご': {
+    from: 'ja-JP',
+    to: 'en-US'
+  },
+  'えいご     まで   にほんご': {
+    from: 'en-US',
+    to: 'ja-JP',
+  },
   //'えいご     まで   えいご',
-]
+}
+const mainMenuArr = Object.keys(mainMenu)
 const secondaryMenu = [
   'おわた',
   //'やりなおし',
@@ -42,18 +55,19 @@ function log(log) {
     case 'warn': { logStream.push(chalk.yellow(`${new Date().toISOString()}: ${log.message}`)) } break
     case 'error': { logStream.push(chalk.red(`${new Date().toISOString()}: ${log.message}`)) } break
     default: {
-      console.log(`\nunsupported log level ${log.level}`)
+      console.log(`\nunsupported log level ${log.level}, message: ${log.message}`)
       process.exit(500)
     } break
   }
   if (logStream.length > maxLogLength) logStream.shift()
+  draw()
 }
 
 ;(async () => {
   draw()
 })()
 
-function navigate(key) {
+async function navigate(key) {
   if (key.name === 'up') {
     if (currentRow > 0) {
       currentRow -= 1
@@ -65,7 +79,7 @@ function navigate(key) {
         currentRow += 1
       }
     } else {
-      if (currentRow < mainMenu.length-1) {
+      if (currentRow < mainMenuArr.length-1) {
         currentRow += 1
       }
     }
@@ -75,17 +89,16 @@ function navigate(key) {
       if (currentRow === 0) {
         //log({level:'debug',message:`pushing recording to interwebs`});draw()
         stopRecord()
-        //submit()
-        // playing for debugging reasons
-        play()
+        submit()
+        // play for debugging reasons
+        //play()
       } else {
         // only 2 options atm
         stopRecord()
-        selectedOption = null
-        currentRow = 0
+        reset()
       }
     } else {
-      selectedOption = mainMenu[currentRow]
+      selectedOption = mainMenuArr[currentRow]
       currentRow = 0
       startRecord()
     }
@@ -98,6 +111,7 @@ function navigate(key) {
   }
   draw()
 }
+
 function draw() {
   let text = ''
   if (selectedOption) {
@@ -114,11 +128,11 @@ function draw() {
       } break
     }
   } else {
-    for (let i = 0; i < mainMenu.length; i++) {
+    for (let i = 0; i < mainMenuArr.length; i++) {
       if (currentRow === i) {
-        text += chalk.underline.bold(`> ${mainMenu[i]}\n`)
+        text += chalk.underline.bold(`> ${mainMenuArr[i]}\n`)
       } else {
-        text += `  ${mainMenu[i]}\n`
+        text += `  ${mainMenuArr[i]}\n`
       }
     }
   }
@@ -129,7 +143,7 @@ function print(message) {
   console.clear()
   readline.clearLine(process.stdout, 0)
   readline.cursorTo(process.stdout, 0)
-  // append log stream
+  // append log stream. TODO: move this code to the draw() function?
   if (logStream.length) {
     message += '\n___________\n'
     for (let i = 0; i < logStream.length; i++) message += `${logStream[i]}\n`
@@ -139,10 +153,11 @@ function print(message) {
 }
 
 async function startRecord() {
+  recording = true
+  return
   if (usingTermux) {
-    // shit, dont know enough termux to write this yet. test.js here we come
     spawn('termux-microphone-record', [
-      '-f', 'request.wav', '-r', '48000'
+      '-f', 'request.wav', '-r', '48000', '-c', '1', '-b', '16'
     ])
   } else {
     audioProcess = spawn('arecord', [
@@ -159,41 +174,63 @@ async function startRecord() {
     });
   }
 }
+
 async function stopRecord() {
   if (usingTermux) {
-
+    spawn('termux-microphone-record', ['-q'])
   } else {
-    // this code might work for both
-    audioProcess.kill('SIGTERM');
-    audioProcess = null;
+    //audioProcess.kill('SIGTERM');
+    //audioProcess = null;
   }
+  recording = false
 }
+
 async function submit() {
   // push recording to STT -> Translate -> TTS service
-
+  log({level:'debug',message:`selectedOption: ${selectedOption}`})
+  processing = true
+  const sttRes = await util.stt_google(`${__dirname}/request.wav`, mainMenu[selectedOption].from)
+  const translationRes = await util.translate_google(sttRes.text, mainMenu[selectedOption].to.split('-')[0])
+  speak(translationRes.text, mainMenu[selectedOption].to.replace('-', '_'))
+  processing = false
+  reset()
 }
+
+async function speak(text, lang) {
+  if (usingTermux) {
+    // only termux support
+    spawn('termux-tts-speak', ['-l', lang, '-r', '0.7', text])
+  } else {
+    log({level:'info',message:`saying '${text}' in ${lang}!`})
+  }
+}
+
 async function play() {
   if (usingTermux) {
-
+    spawn('termux-media-player', ['play', `${__dirname}/request.wav`])
   } else {
+    // tried to install sox on termux, but sox wont either record my audio properly
+    // or wont play it properly
+
     // padding a little time to allow wav to flush to disk for testing
-    await util.delay(3000)
-    // TODO: do something to prevent user input
+    await util.delay(1000)
     // theres a copy of this in util, use that one
     const p = spawn('play', [`${__dirname}/request.wav`]);
     p.stdout.on('data', (data) => {
       log({level:'debug',message:`play stdout: ${data}`})
-
     });
     p.stderr.on('data', (data) => {
       log({level:'debug',message:`play stderr: ${data}`})
     });
     p.on('close', (code) => {
       log({level:'debug',message:`play code: ${code}`})
-      // TODO: do something to re-enable user input
-      selectedOption = null
-      currentRow = 0
-      draw()
+      reset()
     });
   }
+}
+
+function reset() {
+  selectedOption = null
+  currentRow = 0
+  draw()
 }

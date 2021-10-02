@@ -1,12 +1,18 @@
 // just going to dump functions here for now, dumping ground landfill style
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
+
 const spawn = require('child_process').spawn
-const aws = require('aws-sdk')
+const speech = require('@google-cloud/speech');
+const textToSpeech = require('@google-cloud/text-to-speech');
+const {Translate} = require('@google-cloud/translate').v2;
+const fs = require('fs');
 
 let _self
 function log(level, message) { _self.emit("log",{module:'util',level,message})}
 
+// TODO: wrap everything in tries, I want the logs to pipe properly for the first
+// time in my life
 class Util {
 	constructor() {
 		_self = this
@@ -151,6 +157,69 @@ class Util {
   delay(ms) {
     return new Promise(resolve =>
       setTimeout(() => resolve(), ms))
+  }
+  async stt_google(filePath, languageCode) {
+    log('debug', `stt_google: fp: ${filePath}, lc: ${languageCode}`)
+    const client = new speech.SpeechClient({
+      projectId: process.env.GOOGLECLOUDPROJECTNAME,
+      keyFilename: process.env.GOOGLECLOUDKEY,
+    })
+    const request = {
+      config: {
+        encoding: 'LINEAR16',
+        sampleRateHertz: 48000,
+        languageCode,//ja-JP en-US
+      },
+      audio: {
+        content: fs.readFileSync(filePath).toString('base64'),
+      }
+    }
+    const [response] = await client.recognize(request)
+    const transcription = response.results
+      .map(result => result.alternatives[0].transcript)
+      .join('\n')
+    log('debug', `stt_google transcription res: ${transcription}`)
+    return {
+      text: transcription,
+      integration: 'google',
+      languageCode,
+    }
+  }
+  async tts_google(text, languageCode, config, fileSavePath) {
+    // if things go as planned, I will never use this method, not even to see if
+    // it works
+    log('debug', `tts_google ${JSON.stringify({text, languageCode, config, fileSavePath})}`)
+    const client = new textToSpeech.TextToSpeechClient({
+      projectId: process.env.GOOGLECLOUDPROJECTNAME,
+      keyFilename: process.env.GOOGLECLOUDKEY,
+    })
+    const params = {
+      input: {text},
+      // Select the language and SSML voice gender (optional)
+      voice: {languageCode, ssmlGender: config.gender},
+      // select the type of audio encoding
+      audioConfig: {audioEncoding: 'LINEAR16'},
+    }
+    if (config.voice) params.name = config.voice
+    const [response] = await client.synthesizeSpeech(params)
+    //fs.writeFileSync(fileSavePath, response.audioContent, 'binary')
+    return {
+      integration: 'google',
+      audio: response.audioContent,
+    }
+  }
+  async translate_google(text, target) {
+    log('debug', `translate_google start: '${text}', '${target}'`)
+    const translate = new Translate({
+      projectId: process.env.GOOGLECLOUDPROJECTNAME,
+      keyFilename: process.env.GOOGLECLOUDKEY,
+    })
+    const [translation] = await translate.translate(text, target)
+    log('debug', `translate_google translation '${translation}'`)
+    return {
+      text: translation,
+      integration: 'google',
+    }
   }
 }
 nodeUtil.inherits(Util, EventEmitter)

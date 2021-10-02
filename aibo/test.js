@@ -14,9 +14,11 @@ const termux = {
     spawn('termux-microphone-record', ['-q'])
   },
   playAudioFile: async (audioPath) => {
+    // TODO: implement stop
     spawn('termux-media-player', ['play', audioPath])
   },
   speak: async (lang, text) => {
+    // TODO: test if we can listen for exit event
     spawn('termux-tts-speak', ['-l', lang, '-r', '0.7', text])
   }
 }
