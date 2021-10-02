@@ -1,8 +1,11 @@
-const spawn = require('child_process').spawn;
+const speech = require('@google-cloud/speech');
+const textToSpeech = require('@google-cloud/text-to-speech')
+const {Translate} = require('@google-cloud/translate').v2
+const spawn = require('child_process').spawn
 const Util = require('./lib/util.js')
 const util = new Util()
 
-util.on('log', () => {})
+util.on('log', (log) => { console.log(log.message) })
 
 const termux = {
   startRecord: async () => {
@@ -23,7 +26,22 @@ const termux = {
   }
 }
 
-speak()
+stt()
+async function stt() {
+  const config = {
+    encoding: 'OGG_OPUS',
+    sampleRateHertz: 48000,
+    languageCode: mainMenu[selectedOption].from
+  }
+  console.log(
+    await util.stt_google(
+      `/data/data/com.termux/files/home/projects/dump/aibo/request.ogg`,
+      config
+    )
+  )
+}
+
+//speak()
 async function speak() {
   termux.speak('en_US', 'using termux speak from code!')
   await util.delay(4000)

@@ -185,7 +185,21 @@ async function submit() {
   // push recording to STT -> Translate -> TTS service
   log({level:'debug',message:`selectedOption: ${selectedOption}`})
   processing = true
-  const sttRes = await util.stt_google(`${__dirname}/request.wav`, mainMenu[selectedOption].from)
+  let sttConfig
+  if (usingTermux) {
+    sttConfig = {
+      encoding: 'OGG_OPUS',
+      sampleRateHertz: 48000,
+      languageCode: mainMenu[selectedOption].from
+    }
+  } else {
+    sttConfig = {
+      encoding: 'LINEAR16',
+      sampleRateHertz: 48000,
+      languageCode: mainMenu[selectedOption].from
+    }
+  }
+  const sttRes = await util.stt_google(`${__dirname}/request.wav`, sttConfig)
   const translationRes = await util.translate_google(sttRes.text, mainMenu[selectedOption].to.split('-')[0])
   speak(translationRes.text, mainMenu[selectedOption].to.replace('-', '_'))
   processing = false

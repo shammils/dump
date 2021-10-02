@@ -158,18 +158,14 @@ class Util {
     return new Promise(resolve =>
       setTimeout(() => resolve(), ms))
   }
-  async stt_google(filePath, languageCode) {
-    log('debug', `stt_google: fp: ${filePath}, lc: ${languageCode}`)
+  async stt_google(filePath, config) {
+    log('debug', `stt_google: fp: ${filePath}, lc: ${config}`)
     const client = new speech.SpeechClient({
       projectId: process.env.GOOGLECLOUDPROJECTNAME,
       keyFilename: process.env.GOOGLECLOUDKEY,
     })
     const request = {
-      config: {
-        encoding: 'AMR_WB',
-        sampleRateHertz: 16000,
-        languageCode,//ja-JP en-US
-      },
+      config,
       audio: {
         content: fs.readFileSync(filePath).toString('base64'),
       }
@@ -182,7 +178,6 @@ class Util {
     return {
       text: transcription,
       integration: 'google',
-      languageCode,
     }
   }
   async tts_google(text, languageCode, config, fileSavePath) {
