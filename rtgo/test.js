@@ -4,23 +4,32 @@ const request = require('./lib/request.js')
 const Shopify = require('./lib/shopify.js')
 const shopify = new Shopify()
 const util = require('./lib/util.js')
+const chalk = require('chalk')
 
 const storeName = process.env.SHOPIFYSTORENAME
 const apiKey = process.env.SHOPIFYAPIKEY
 const password = process.env.SHOPIFYPASSWORD
 
-temp()
-function temp() {
-  let arr = [{id:1,value:''},{id:2,value:''},{id:3,value:''}]
-  const obj = {}
-  arr.forEach(x => {obj[x.id] = x})
-  console.log(obj)
-  arr.length = 0
-  for (let prop in obj) {
-    arr.push(obj[prop])
+shopify.on('log', log)
+
+function log(log) {
+  switch (log.level) {
+    case 'debug': {
+      console.log(chalk.blue(`${new Date().toISOString()}: ${log.message}`))
+    } break
+    case 'info': { console.log(`${new Date().toISOString()}: ${log.message}`) } break
+    case 'warn': { console.log(chalk.yellow(`${new Date().toISOString()}: ${log.message}`)) } break
+    case 'error': { console.log(chalk.red(`${new Date().toISOString()}: ${log.message}`)) } break
+    default:
+      throw `unsupported log level ${log.level}`
   }
-  console.log(arr)
-  process.exit(0)
+}
+//temp()
+async function temp() {
+  const l0 = '<https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJuZXh0IiwibGFzdF9pZCI6NzEyODUzOTI5OTk5NSwibGFzdF92YWx1ZSI6IkksIFJvYm90In0>; rel="next"'
+  const l1 = '<https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJwcmV2IiwibGFzdF9pZCI6NzA2MjY0OTA0NTE0NywibGFzdF92YWx1ZSI6IkljZSBBZ2U6IFRoZSBNZWx0ZG93biJ9>; rel="previous", <https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJuZXh0IiwibGFzdF9pZCI6NzEyODU2MjE3MjA1OSwibGFzdF92YWx1ZSI6IlRoZSBEYXkgQWZ0ZXIgVG9tb3Jyb3cifQ>; rel="next"'
+  console.log(util.parseLink(l0))
+  console.log(util.parseLink(l1))
 }
 
 //pullBatch()
@@ -381,27 +390,42 @@ async function createProduct() {
   }
 }
 
-//getProducts()
+//getProductsFromURI()
+async function getProductsFromURI() {
+  const uriObj = new URL('https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJuZXh0IiwibGFzdF9pZCI6NzEyODU2MjE3MjA1OSwibGFzdF92YWx1ZSI6IlRoZSBEYXkgQWZ0ZXIgVG9tb3Jyb3cifQ')
+  options = {
+    method: 'GET',
+    host: uriObj.host,
+    path: `${uriObj.pathname}${uriObj.search}`,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    auth: `${apiKey}:${password}`
+  }
+  const response = JSON.parse(
+    Buffer.from(await request('https', options))
+  )
+  console.log(response)
+  process.exit(0)
+}
+
+getProducts()
 async function getProducts() {
   /*const res = JSON.parse(
     Buffer.from(await request('https', {
       method: 'GET',
       host: `${storeName}.myshopify.com`,
-      path: `/admin/api/2020-10/products.json?ids=7062631383195`,
+      path: `/admin/api/2020-10/products.json`,
       headers: {
         'Content-Type': 'application/json'
       },
       auth: `${apiKey}:${password}`
     })));
   console.log('res', res);
-  for (let i = 0; i < res.products.length; i++) {
-    //if (res.products[i].id === 7053586038939) {
-      console.log(JSON.stringify(res.products[i], ' ', 2))
-      //process.exit(0)
-    //}
-  }*/
-  const res = await shopify.getProducts({ids:[7062631383195]})
-  console.log('res', JSON.stringify(res, ' ', 2))
+  process.exit(0)
+*/
+  const res = await shopify.getProducts()
+  console.log('res', res)
 }
 
 //getInventoryItems()
@@ -430,12 +454,12 @@ async function getProductCount() {
   const res = JSON.parse(
     Buffer.from(await request('https', {
       method: 'GET',
-      host: `${storeName}.myshopify.com`,
+      host: `${process.env.SHOPIFYSTORENAME}.myshopify.com`,
       path: `/admin/api/2020-10/products/count.json`,
       headers: {
         'Content-Type': 'application/json'
       },
-      auth: `${apiKey}:${password}`
+      auth: `${process.env.SHOPIFYAPIKEY}:${process.env.SHOPIFYPASSWORD}`
     })));
   console.log('res', JSON.stringify(res, ' ', 2));
   //console.log('res', JSON.stringify(await shopify.getProductCount(), ' ', 2));

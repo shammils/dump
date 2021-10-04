@@ -170,7 +170,7 @@ class Shopify {
       // feels shitty to build a query string like this
       if (params) {
         let queryParts = []
-        if (params.updated_at_min) queryParts.push(`updated_at_min=${params.updated_at_min}`) 
+        if (params.updated_at_min) queryParts.push(`updated_at_min=${params.updated_at_min}`)
         if (params.limit) queryParts.push(`limit=${params.limit}`)
         if (params.ids) queryParts.push(`ids=${params.ids.join(',')}`)
         if (queryParts.length) options.path += `?${queryParts.join('&')}`
@@ -199,10 +199,21 @@ class Shopify {
       // get next page of results
       const link = util.parseLink(response.headers.link)
       //console.log(`will now hit this thingy`, link)
+      log('debug', `getProducts API limit: ${response.headers.http_x_shopify_shop_api_call_limit}`)
+      log('info', `getProducts, at ${products.length}, fetching next batch of products from '${link}'`)
+      await util.delay(1000)
       return this.getProducts(null, link, products)
     }
     return products
     //process.exit(0)
+  }
+
+  async getOrderCount() {
+    throw 'Unimplemented'
+  }
+
+  async getOrders(params = null, uri = null, orders = null) {
+    throw 'Unimplemented'
   }
 
   async updateProduct(id, putRequestObj) {

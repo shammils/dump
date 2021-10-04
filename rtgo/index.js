@@ -4,6 +4,8 @@ const Util = require('./lib/cuiUtil.js')
 const util = new Util()
 const Shopify = require('./lib/shopify.js')
 const shopify = new Shopify()
+const Reports = require('./lib/reports.js')
+const reports = new Reports()
 
 const readline = require('readline')
 readline.emitKeypressEvents(process.stdin)
@@ -40,6 +42,7 @@ const maxLogLength = 1000 // TODO: setting variable
 const maxLogViewSize = 10 // how many to show
 util.on('log', log)
 shopify.on('log', log)
+reports.on('log', log)
 // im not printing which module the log comes from??
 function log(log) {
   switch (log.level) {
@@ -103,14 +106,7 @@ const mainMenu = {
         {
           name: 'Products General(Audio)',
           type: 'function',
-          handler: async () => {
-            /*
-              - product count
-              - how many
-                - active, draft, etc
-              - last one created
-            */
-          }
+          handler: generateProductReport
         },
         {
           name: 'Orders General(Audio)',
@@ -143,10 +139,7 @@ const mainMenu = {
     {
       name: 'Update Settings',
       type: 'function',
-      handler: async () => {
-        console.log('TODO: figure out how the shit this is going to work(properly)')
-        process.exit(0)
-      }
+      handler: updateSettings
     },
     {
       name: 'View Logs',
@@ -198,14 +191,16 @@ function navigate(key) {
         } break
         case 'select': {
           stack.push(current)
+          currentRow = 0
         } break
         case 'menu': {
           stack.push(current)
+          currentRow = 0
         } break
         case 'multi-select': {
           mode = 'multi-select'
-          currentRow = 0
           stack.push(current)
+          currentRow = 0
         } break
       }
     }
@@ -242,6 +237,8 @@ function draw() {
   // render notes
   if (notes[current.name]) {
     text += `${notes[current.name].join(', ')}\n`
+  } else {
+    text += '\n' // add line break anyway
   }
   // render menu
   if (current.type === 'menu') {
@@ -326,9 +323,7 @@ async function syncProducts() {
   if (!storeInfo.products.updated) {
     log({level:'info',message:`syncing all products`})
     // fetch all, replace whatever is on disk
-    const products = await shopify.getProducts({
-      ids: [7061319024795,7128490246299]
-    })
+    const products = await shopify.getProducts()
     await fs.writeJson('./data/products.json', products)
     log({level:'debug',message:`retrieved ${products.length} from shopify`})
     storeInfo.products.updated = new Date().toISOString()
@@ -396,14 +391,27 @@ function updateHomepageNotes() {
 
 function goBack() {
   if (stack.length > 1) stack.pop()
+  currentRow = 0
   draw()
 }
 
-function viewLogs() {
-  console.log('NOT WORKING FOR SOME REASON')
-  process.exit(0)
+async function viewLogs() {
+  log({level:'error',message:'this friggen method does not work, cant get it to work to save my life'})
   let text = ''
   for (let i = 0; i < logStream.length; i++) text += `${logStream[i]}\n`
   text += chalk.underline.bold('hit backspace to exit')
   print(text)
+}
+
+async function generateProductReport() {
+  let products = await fs.readJson('./data/products.json')
+  const summary = reports.generateProductSummary(products)
+  const report = reports.generateProductAudioReport(summary)
+  products = null
+  util.shaberu(report, 'en-US')
+  goBack()
+}
+
+async function updateSettings() {
+  log({level:'warn',message:'Doesnt do anything at the moment'})
 }

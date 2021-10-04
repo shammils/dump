@@ -46,6 +46,7 @@ const api = {
   },
   parseLink: (string) => {
     // I rather it throw in this case
+    if (string.includes(', ')) string = string.split(', ')[1]
     const val = string.match(/(?<=\<)(.*?)(?=\>)/g)
     if (val && val.length) return val[0]
   },

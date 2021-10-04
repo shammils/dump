@@ -29,7 +29,7 @@ class Util {
       // only termux support
       spawn('termux-tts-speak', ['-l', lang, '-r', '0.7', text])
     } else {
-      log({level:'info',message:`saying '${text}' in ${lang}!`})
+      log('info', `saying '${text}' in ${lang}!`)
     }
   }
   // TODO: R&D how to stop tts-speak. killing the process should work, but do it
@@ -52,7 +52,7 @@ class Util {
       else return string.substring(0, maxLength)
     }
   }
-  
+
 }
 nodeUtil.inherits(Util, EventEmitter)
 
