@@ -7,6 +7,7 @@ const EventEmitter = require('events').EventEmitter
 
 const path = require('path')
 const fs = require('fs-extra')
+const spawn = require('child_process').spawn
 
 // termux と linux, それ だけ だ. まど は ぜんぜん しらないん です けど ね
 const usingTermux = process.env.SHELL.includes('com.termux')
