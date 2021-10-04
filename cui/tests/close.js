@@ -1,3 +1,7 @@
+/*
+  First attempt at switching between input and navigation, absolute failure. no
+  real reason to ever run this code
+*/
 const chalk = require('chalk')
 const readline = require('readline')
 let rl

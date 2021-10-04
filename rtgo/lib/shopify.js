@@ -170,6 +170,7 @@ class Shopify {
       // feels shitty to build a query string like this
       if (params) {
         let queryParts = []
+        if (params.updated_at_min) queryParts.push(`updated_at_min=${params.updated_at_min}`) 
         if (params.limit) queryParts.push(`limit=${params.limit}`)
         if (params.ids) queryParts.push(`ids=${params.ids.join(',')}`)
         if (queryParts.length) options.path += `?${queryParts.join('&')}`

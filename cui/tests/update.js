@@ -1,3 +1,7 @@
+/*
+  Second attempt, born from close.js, success. Update a persistent value. of
+  course will need tweeks to actually use
+*/
 const chalk = require('chalk')
 /*
 const ioHook = require('iohook')

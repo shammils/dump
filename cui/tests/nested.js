@@ -1,24 +1,15 @@
 /*
-  Third attempt, born from update.js
-  multi select options, success. Also rewrote how menu navigation works, even
-  bigger success.
+  Fourth attempt, navigating n levels of nesting properly, born from select.js.
+  Dai seiko. going back up the tree was already built in the last iteration. Also
+  added breakcrumb support
 */
 const chalk = require('chalk')
-/*
-const ioHook = require('iohook')
-ioHook.on('keypress', function (msg) {
-  console.log(msg);
-});
-ioHook.start();
-*/
 const readline = require('readline')
-//const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-readline.emitKeypressEvents(process.stdin);
+readline.emitKeypressEvents(process.stdin)
 
 if (process.stdin.isTTY) { process.stdin.setRawMode(true) }
 
 process.stdin.on('keypress', (str, key) => {
-  //console.log(key.name)
   if (key.name === 'escape') process.exit(0)
   if (mode === 'navigate' || mode === 'multi-select') navigate(key)
   else if (mode === 'input') {
@@ -47,12 +38,53 @@ const mainMenu = {
   type: 'menu',
   options: [
     {
-      name: 'Select Options',
-      type: 'multi-select',
+      name: 'Manage Things',
+      type: 'menu',
       options: [
-        {name: 'Optioin 1', selected: false },
-        {name: 'Thingy', selected: false },
-        {name: 'Cats for Days', selected: false },
+        {
+          name: 'Thingoid #0',
+          type: 'menu',
+          options: [
+            {
+              name: 'thigoud Quit #0',
+              type: 'function',
+              handler: () => {
+                console.log(JSON.stringify(stack))
+                process.exit(0)
+              }
+            },
+            {
+              name: 'thigoud Quit #1',
+              type: 'function',
+              handler: () => {
+                console.log(JSON.stringify(stack))
+                process.exit(0)
+              }
+            }
+          ]
+        },
+        {
+          name: 'Some Other Thing #1',
+          type: 'menu',
+          options: [
+            {
+              name: 'other Quit #0',
+              type: 'function',
+              handler: () => {
+                console.log(JSON.stringify(stack))
+                process.exit(0)
+              }
+            },
+            {
+              name: 'other Quit #1',
+              type: 'function',
+              handler: () => {
+                console.log(JSON.stringify(stack))
+                process.exit(0)
+              }
+            }
+          ]
+        },
       ],
     },
     {
@@ -100,6 +132,9 @@ function navigate(key) {
         case 'select': {
           stack.push(current)
         } break
+        case 'menu': {
+          stack.push(current)
+        } break
         case 'multi-select': {
           mode = 'multi-select'
           currentRow = 0
@@ -126,6 +161,17 @@ function navigate(key) {
 
 function draw() {
   let text = ''
+  // render breadcrumbs
+  if (stack.length > 1) {
+    const crumbArr = []
+    for (let i = 1; i < stack.length; i++) {
+      crumbArr.push(trim(stack[i].name, 20, true))
+    }
+    text += `${chalk.cyan.bold(crumbArr.join(' > '))}\n`
+  } else {
+    text += chalk.cyan.bold('HOME\n')
+  }
+  // render rest of shit
   const current = stack[stack.length-1]
   if (current.type === 'menu') {
     for (let i = 0; i < current.options.length; i++) {
@@ -155,4 +201,13 @@ function print(message) {
   readline.clearLine(process.stdout, 0)
   readline.cursorTo(process.stdout, 0)
   process.stdout.write(message)
+}
+
+function trim(string, maxLength, prependThingy) {
+  if (!string || !string.length) return string
+  if (string.length < maxLength) return string
+  else {
+    if (prependThingy) return `${string.substring(0, maxLength-4)}...`
+    else return string.substring(0, maxLength)
+  }
 }

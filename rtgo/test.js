@@ -9,6 +9,27 @@ const storeName = process.env.SHOPIFYSTORENAME
 const apiKey = process.env.SHOPIFYAPIKEY
 const password = process.env.SHOPIFYPASSWORD
 
+temp()
+function temp() {
+  let arr = [{id:1,value:''},{id:2,value:''},{id:3,value:''}]
+  const obj = {}
+  arr.forEach(x => {obj[x.id] = x})
+  console.log(obj)
+  arr.length = 0
+  for (let prop in obj) {
+    arr.push(obj[prop])
+  }
+  console.log(arr)
+  process.exit(0)
+}
+
+//pullBatch()
+function pullBatch() {
+  // grab the last n results(without throwing)
+  const max = 5
+  const arr = [1,2,3,4,5,6,7,8,9]
+  console.log(arr.slice(arr.length-max, arr.length))
+}
 
 //matchBetween()
 function matchBetween() {
