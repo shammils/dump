@@ -197,7 +197,7 @@ class Reports {
     }
     // reporting time
     for (let tag in data.tags) {
-      const genericTemplates = ['The tag $TAG occurs $VALUE times.','$TAG has $VALUE instances.','$TAG is coming in at $VALUE.','tag $TAG has a total of $VALUE.','$TAG equals $VALUE.', '$TAG has $VALUE.']
+      const genericTemplates = ['The tag $TAG occurs $VALUE times.','$TAG has $VALUE instances.','$TAG is coming in at $VALUE.','tag $TAG has a total of $VALUE.','$TAG equals $VALUE.','$TAG has $VALUE.','$TAG has $VALUE.','$TAG has $VALUE.','$TAG has $VALUE.','$TAG has $VALUE.','$TAG has $VALUE.']
       const singleDigitTemplates = ['$TAG has just $VALUE.','Tag $TAG has only $VALUE.','$TAG trailing in at just $VALUE.','$TAG has just $VALUE. Ha ha ha ha.','$TAG has a pathetic $VALUE instance.']
       const highestTemplates = ['$TAG has a whopping $VALUE instances.','Drumroll please. Tag $TAG has the highest occurrences at $VALUE.']
       if (data.tags[tag].count === 1) {
@@ -233,9 +233,9 @@ class Reports {
       report.push(`The price points are ${pricePointTextArr.join(' ')}.`)
       let i = 0
       for (let price in data.prices) {
-        if (i === 0) report.push(`There are ${data.prices[price].count} priced at ${price.replace('.', ' ')}`)
+        if (i === 0) report.push(`There are ${data.prices[price].count} priced at ${price.replace('.', ' ')}.`)
         else {
-          if ((i+1) === pricePoints.length) report.push(`Finally, ${data.prices[price].count} at ${price.replace('.', ' ')}`)
+          if ((i+1) === pricePoints.length) report.push(`Finally, ${data.prices[price].count} at ${price.replace('.', ' ')}.`)
           else report.push(`${data.prices[price].count} at ${price.replace('.', ' ')}.`)
         }
         i++
