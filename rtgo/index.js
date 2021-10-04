@@ -324,6 +324,7 @@ async function syncProducts() {
     log({level:'info',message:`syncing all products`})
     // fetch all, replace whatever is on disk
     const products = await shopify.getProducts()
+    productIds = products.map(x => x.id)
     await fs.writeJson('./data/products.json', products)
     log({level:'debug',message:`retrieved ${products.length} from shopify`})
     storeInfo.products.updated = new Date().toISOString()
@@ -359,8 +360,29 @@ async function syncProducts() {
       log({level:'info',message:`no products updated since ${from}`})
     }
   }
+
   updateHomepageNotes()
   draw()
+}
+
+// this really doesnt belong here
+async function syncInventoryItems(productIds) {
+  const batchSize = 100
+  // if productIds doesnt exist, pull from disk. always replace all inventory items
+  // for some reason unknown to me atm
+  if (!productIds) {
+    let products = await fs.readJson('./data/products.json')
+    productIds = products.map(x => x.id)
+  }
+  let inventoryItems = []
+  for (let i = 0; i < productIds.length; i+= batchSize) {
+    const idBatch = productIds.slice(i, i+batchSize)
+    const res = await shopify.getInventoryItems(idBatch)
+    // not sure wtf a failure looks like for this, bad
+    inventoryItems = inventoryItems.concat(res.body.inventory_items)
+    await util.delay(1000)
+  }
+  await fs.writeJson('./data/inventoryItems.json', inventoryItems)
 }
 
 async function syncOrders() {

@@ -5,6 +5,8 @@ const Shopify = require('./lib/shopify.js')
 const shopify = new Shopify()
 const util = require('./lib/util.js')
 const chalk = require('chalk')
+const Reports = require('./lib/reports.js')
+const reports = new Reports()
 
 const storeName = process.env.SHOPIFYSTORENAME
 const apiKey = process.env.SHOPIFYAPIKEY
@@ -24,12 +26,22 @@ function log(log) {
       throw `unsupported log level ${log.level}`
   }
 }
+
 //temp()
 async function temp() {
-  const l0 = '<https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJuZXh0IiwibGFzdF9pZCI6NzEyODUzOTI5OTk5NSwibGFzdF92YWx1ZSI6IkksIFJvYm90In0>; rel="next"'
-  const l1 = '<https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJwcmV2IiwibGFzdF9pZCI6NzA2MjY0OTA0NTE0NywibGFzdF92YWx1ZSI6IkljZSBBZ2U6IFRoZSBNZWx0ZG93biJ9>; rel="previous", <https://themoviestore53.myshopify.com/admin/api/2020-10/products.json?limit=50&page_info=eyJkaXJlY3Rpb24iOiJuZXh0IiwibGFzdF9pZCI6NzEyODU2MjE3MjA1OSwibGFzdF92YWx1ZSI6IlRoZSBEYXkgQWZ0ZXIgVG9tb3Jyb3cifQ>; rel="next"'
-  console.log(util.parseLink(l0))
-  console.log(util.parseLink(l1))
+
+}
+
+testReporting()
+async function testReporting() {
+  const products = await fs.readJson('./data/products.json')
+  const summary = await reports.generateProductSummary(products)
+  console.log(summary)
+  console.log(reports.audioProductBase(summary))
+  console.log(reports.audioProductPrice(summary))
+  console.log(reports.audioProductTagsSimple(summary))
+  console.log(reports.audioProductTagsDetailed(summary))
+  process.exit(0)
 }
 
 //pullBatch()
@@ -409,7 +421,7 @@ async function getProductsFromURI() {
   process.exit(0)
 }
 
-getProducts()
+//getProducts()
 async function getProducts() {
   /*const res = JSON.parse(
     Buffer.from(await request('https', {

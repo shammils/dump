@@ -231,6 +231,10 @@ class Shopify {
   }
 
   async getInventoryItems(ids) {
+    if (ids.length > 250) {
+      console.log('\ncannot process more that 250 at a time\nhttps://shopify.dev/api/admin-rest/2021-10/resources/inventoryitem#[get]/admin/api/2021-10/inventory_items.json')
+      process.exit(0)
+    }
     const response = JSON.parse(
       Buffer.from(await request('https', {
         method: 'GET',
