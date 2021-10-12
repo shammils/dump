@@ -5,6 +5,7 @@ const path = require('path')
 const spawn = require('child_process').spawn
 
 ;(async () => {
+  const broken = []
   if (!process.env.SOURCEDIR || !process.env.TARGETDIR) {
     console.log('SOURCEDIR and TARGETDIR are required')
     process.exit(0)
@@ -20,14 +21,19 @@ const spawn = require('child_process').spawn
       const imdb = data.data[`imdb_${data.sources.imdb.version}`]
       // if imdb doesnt exist, let it break
       if (imdb.type === 'TV Series') {
+        if (!imdb.seasons || !imdb.seasons.length) {
+          broken.push(`missing seasons property. path ${paths[i]}`)
+          continue
+        }
         // not actually going to read the imdb.seasons[index].season value, just
         // going to go from the array length
+        console.log(`expanding '${imdb.title}'`)
         for (let j = 0; j < imdb.seasons.length; j++) {
           console.log(pathObj)
           // create folder in target dir with season number
           const twoCharYear = pathObj.dir.substring(pathObj.dir.length-2)
           if (isNaN(parseInt(twoCharYear))) {
-            console.log(`year is not at the end of the folder name: ${paths[i]}`)
+            broken.push(`year '${twoCharYear}' is not at the end of the folder name: ${paths[i]}`)
             continue
           }
           const newPath = path.join(process.env.TARGETDIR, `${util.windowsifyString(imdb.title)}-TV-${twoCharYear}`, `SEASON ${j+1}`)
@@ -41,6 +47,7 @@ const spawn = require('child_process').spawn
             stars: imdb.stars,
             releaseYear: imdb.releaseYear,
             parentalRating: imdb.parentalRating,
+            season: j+1, // look for this property on the create side of things
           }
           // TODO: pluck from wiki
           if (imdb.runtime) clone.base.runtime = imdb.runtime
@@ -61,6 +68,9 @@ const spawn = require('child_process').spawn
     }
   } else {
     console.log('no paths returned')
+  }
+  if (broken.length) {
+    console.log(broken.join('\n'))
   }
   process.exit(0)
 })()

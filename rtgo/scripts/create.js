@@ -46,11 +46,11 @@ const password = process.env.SHOPIFYPASSWORD
       console.log(`${i+1}/${paths.length}`, productClone)
 
       // manual input path
-      const answer = await util.askQuestion(`suzuki?`)
+      //const answer = await util.askQuestion(`suzuki?`)
 
       // auto path
-      //console.log('creating product in 10 seconds')
-      //await util.delay(10000)
+      console.log('creating product in 10 seconds')
+      await util.delay(10000)
 
       // create shopify product
       const createProductResult = await shopify.publishProduct(product)

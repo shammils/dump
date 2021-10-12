@@ -21,9 +21,12 @@ class Shopify {
   getSku(obj) {
     let sku = util.skuwerString(obj.title)
     if (obj.type === "Movie") sku += '-MV'
-    else if (obj.type === 'TV Series') sku += `-TV`
-    else throw `unknown type ${obj.type}`
+    else if (obj.type === 'TV Series') {
+      sku += `-TV-S${obj.season}`
+    } else throw `unknown type ${obj.type}`
     sku += `-${obj.releaseYear}`//.substring(2)
+    // might support PAL one day, and we should be supporting blueray sooner than
+    // later. USD means used
     sku += '-NTSC-USD-DVD'
     return sku
   }
@@ -43,6 +46,18 @@ class Shopify {
       log('debug', `title changed from ${imdb.title} to ${params.data.base.title}`)
       imdb.title = params.data.base.title
     }
+    // HACK: adding base.season value to imdb object... should just be using a
+    // universal object in this case
+    if (params.data.base && !isNaN(params.data.base.season)) {
+      if (imdb.type !== 'TV Series') {
+        // how did this happen
+        console.log(`'${imdb.title}' is not a TV Series but a season was assigned to it`, params.data)
+        process.exit(500)
+      }
+      imdb.season = params.data.base.season
+    }
+
+    const sku = this.getSku(imdb)
     const product = {
       title: imdb.title,
       body_html: `<p>Barely used, excellent condition, like new</p>\n<p>${imdb.description}</p>\n<ul>\n`,
@@ -57,7 +72,7 @@ class Shopify {
       variants: [{
         title: 'Default Title',
         price: params.price,
-        sku: this.getSku(imdb),
+        sku,
         inventory_policy: 'deny',
         compare_at_price: null,
         fulfillment_service: 'manual',
