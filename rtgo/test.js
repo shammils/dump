@@ -7,6 +7,9 @@ const util = require('./lib/util.js')
 const chalk = require('chalk')
 const Reports = require('./lib/reports.js')
 const reports = new Reports()
+const Gooten = require('./lib/gooten.js')
+const gooten = new Gooten()
+const url = require('url')
 
 const storeName = process.env.SHOPIFYSTORENAME
 const apiKey = process.env.SHOPIFYAPIKEY
@@ -27,12 +30,14 @@ function log(log) {
   }
 }
 
-//temp()
+temp()
 async function temp() {
-
+  //console.log(await gooten.listPRPProducts())
+  console.log(await gooten.listPRPProductVariants({productName:'Throw Pillows test'}))
+  process.exit()
 }
 
-testReporting()
+//testReporting()
 async function testReporting() {
   const products = await fs.readJson('./data/products.json')
   const summary = await reports.generateProductSummary(products)

@@ -1,0 +1,14 @@
+{
+  "name": "gooten-automate",
+  "version": "0.0.0",
+  "description": "gomi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Skyler Hamilton",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "^4.0.0"
+  }
+}
