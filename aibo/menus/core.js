@@ -3,12 +3,18 @@ const chalk = require('chalk')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 
+const TranslateMenu = require('./translate.js')
+
 let _self
 function log(level, message) { _self.emit("log",{module:'core',level,message})}
 
 class CoreMenu {
-  constructor() {
+  constructor(menuStack, render) {
     _self = this
+    this.name = 'Main'
+    this.menuStack = menuStack
+    this.render = render
+
     this.currentRow = 0
     this.stack = []
     this.mode = util.modes.navigate
@@ -20,7 +26,13 @@ class CoreMenu {
         name: 'Lang 2 Lang',
         type: util.menuItemTypes.function,
         handler: () => {
-
+          const translateMenu = new TranslateMenu(this.menuStack, this.render)
+          this.menuStack.push(translateMenu)
+          // HACK: put the render call in a setTimeout function to allow the
+          // processing loop to draw core's view first, then the intended translate
+          // view after. Trying to draw translate's view without the setTimeout
+          // fails with core's view rendered on top.
+          setTimeout(() => {this.render()}, 10)
         },
       },
       {
@@ -109,7 +121,7 @@ class CoreMenu {
       }
       text += `${chalk.cyan.bold(crumbArr.join(' > '))}\n`
     } else {
-      text += chalk.cyan.bold('HOME\n')
+      text += chalk.cyan.bold(`${this.name}\n`)
     }
     // render rest of shit
     const current = this.stack[this.stack.length-1]

@@ -13,6 +13,7 @@ const api = {
     navigate: 'navigate',
     multiSelect: 'multi-select',
     input: 'input',
+    disabled: 'disabled',
   },
   menuItemTypes: {
     function: 'function',
@@ -36,6 +37,15 @@ const api = {
       if (prependThingy) return `${string.substring(0, maxLength-4)}...`
       else return string.substring(0, maxLength)
     }
+  },
+  createBreadcrumbs: (menuStack) => {
+    // dont bother creating crumbs if we are at the top level
+    if (!menuStack || !menuStack.length || menuStack.length === 1) return
+    let crumbArr = []
+    for (let i = 0; i < menuStack.length; i++) {
+       crumbArr.push(api.trim(menuStack[i].name, 10))
+    }
+    return crumbArr.join(' > ')
   },
 }
 

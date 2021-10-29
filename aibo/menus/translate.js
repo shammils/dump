@@ -9,8 +9,12 @@ let _self
 function log(level, message) { _self.emit("log",{module:'translate',level,message})}
 
 class TranslateMenu {
-  constructor() {
+  constructor(menuStack, render) {
     _self = this
+    this.name = 'Translate'
+    this.menuStack = menuStack
+    this.render = render
+
     this.currentRow = 0
     this.selectedOption = null
 
@@ -56,7 +60,7 @@ class TranslateMenu {
           this.currentRow += 1
         }
       } else {
-        if (this.currentRow < this.mainMenuArr.length-1) {
+        if (this.currentRow < this.menuArr.length-1) {
           this.currentRow += 1
         }
       }
@@ -74,19 +78,28 @@ class TranslateMenu {
           await fs.emptyDir('./temp')
         }
       } else {
-        this.selectedOption = this.mainMenuArr[this.currentRow]
+        this.selectedOption = this.menuArr[this.currentRow]
         this.currentRow = 0
         //startRecord()
       }
     }
     if (key.name === 'backspace') {
-      // this is where we go back to the parent menu
+      // go to parent menu if applicable
+      if (this.menuStack && this.menuStack.length &&
+      this.render && typeof this.render === 'function') {
+        this.menuStack.pop()
+        this.render()
+        return
+      }
     }
     //if (key.name === 'space') {}
     this.draw()
   }
   draw() {
     let text = ''
+    // handle breadcrumbs
+    const crumbs = util.createBreadcrumbs(this.menuStack)
+    if (crumbs) text += `${chalk.cyan.bold(crumbs)}\n`
     if (this.selectedOption) {
       text += chalk.bold(`${this.selectedOption}\n`)
       //for (let i = 0; i < secondaryMenu.length; i++) {}
@@ -101,11 +114,11 @@ class TranslateMenu {
         } break
       }
     } else {
-      for (let i = 0; i < this.mainMenuArr.length; i++) {
+      for (let i = 0; i < this.menuArr.length; i++) {
         if (this.currentRow === i) {
-          text += chalk.underline.bold(`> ${this.mainMenuArr[i]}\n`)
+          text += chalk.underline.bold(`> ${this.menuArr[i]}\n`)
         } else {
-          text += `  ${this.mainMenuArr[i]}\n`
+          text += `  ${this.menuArr[i]}\n`
         }
       }
     }
