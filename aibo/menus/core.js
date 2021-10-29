@@ -61,7 +61,7 @@ class CoreMenu {
         name: 'Voice Mode',
         type: util.menuItemTypes.function,
         handler: () => {
-          console.log('nothing here')
+          console.log('interfacing directly with Yonde with STT goes here.. I think. Global aibo makes this obsolete')
           process.exit(0)
         }
       },

@@ -2,6 +2,8 @@
 
 TODO:
   - The ability to talk to aibo globally, no matter which class we are in
+    - map english/japanese output to... buttons, like e for english and j for jap.
+      will probably want some kind of global indicator above the breadcrumbs
   - explanations/descriptions on classes. explanations will be audible of course
   - write to log file
     - When selecting a menu item, show/play description/explanation
