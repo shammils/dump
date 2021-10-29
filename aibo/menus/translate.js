@@ -44,7 +44,7 @@ class TranslateMenu {
     await fs.emptyDir('./temp')
     this.draw()
   }
-  navigate(key) {
+  async navigate(key) {
     if (key.name === 'up') {
       if (this.currentRow > 0) {
         this.currentRow -= 1
@@ -117,3 +117,6 @@ class TranslateMenu {
     this.draw()
   }
 }
+nodeUtil.inherits(TranslateMenu, EventEmitter)
+
+module.exports = TranslateMenu
