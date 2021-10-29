@@ -26,7 +26,12 @@ const termux = {
   }
 }
 
-stt()
+any()
+async function any() {
+  console.log(util.settings)
+}
+
+//stt()
 async function stt() {
   const config = {
     encoding: 'OGG_OPUS',

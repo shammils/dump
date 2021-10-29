@@ -1,16 +1,17 @@
 const chalk = require('chalk')
 const Util = require('./lib/util.js')
 const util = new Util()
-const spawn = require('child_process').spawn;
+const spawn = require('child_process').spawn
+const fs = require('fs-extra')
 
 const readline = require('readline')
-readline.emitKeypressEvents(process.stdin);
+readline.emitKeypressEvents(process.stdin)
 if (process.stdin.isTTY) { process.stdin.setRawMode(true) }
 process.stdin.on('keypress', (str, key) => {
   //console.log(key.name)
   if (key.name === 'escape') process.exit(0)
   if (!processing) navigate(key)
-});
+})
 
 // termux と linux, それ だけ だ. まど は ぜんぜん しらないん です けど ね
 const usingTermux = process.env.SHELL.includes('com.termux')
@@ -153,11 +154,11 @@ async function startRecord() {
   recording = true
   if (usingTermux) {
     spawn('termux-microphone-record', [
-      '-f', 'request.wav', '-r', '16000', '-c', '1', '-b', '16', '-e', 'amr_wb'
+      '-f', `${__dirname}/temp/${util.settings.termux.record.file}`, '-e', 'amr_wb'
     ])
   } else {
     audioProcess = spawn('arecord', [
-      'request.wav', '-c', '1', '-r', '48000', '-f', 'S16_LE'
+      `${__dirname}/temp/${util.settings.linux.file}`, '-c', '1', '-r', '48000', '-f', 'S16_LE'
     ]);
     audioProcess.stdout.on('data', (data) => {
       log({level:'debug',message:`arecord stdout: ${data}`})
@@ -174,9 +175,15 @@ async function startRecord() {
 async function stopRecord() {
   if (usingTermux) {
     spawn('termux-microphone-record', ['-q'])
+    // we require one more step for termux: convert to PCM using ffmpeg
+    await util.delay(500)
+    await util.convertFileUsingFfmpeg(
+      `${__dirname}/temp/${util.settings.termux.record.file}`,
+      `${__dirname}/temp/${util.settings.termux.ffmpeg.file}`
+    )
   } else {
-    //audioProcess.kill('SIGTERM');
-    //audioProcess = null;
+    audioProcess.kill('SIGTERM');
+    audioProcess = null;
   }
   recording = false
 }
@@ -185,23 +192,28 @@ async function submit() {
   // push recording to STT -> Translate -> TTS service
   log({level:'debug',message:`selectedOption: ${selectedOption}`})
   processing = true
+  let fileName
   let sttConfig
   if (usingTermux) {
     sttConfig = {
-      encoding: 'OGG_OPUS',
-      sampleRateHertz: 48000,
+      encoding: 'LINEAR16',
+      sampleRateHertz: 16000,
       languageCode: mainMenu[selectedOption].from
     }
+    fileName = util.settings.termux.record.file
+    const sttRes = await util.stt_google(`${__dirname}/temp/${fileName}`, sttConfig)
+    const translationRes = await util.translate_google(sttRes.text, mainMenu[selectedOption].to.split('-')[0])
+    speak(translationRes.text, mainMenu[selectedOption].to.replace('-', '_'))
+
   } else {
     sttConfig = {
       encoding: 'LINEAR16',
       sampleRateHertz: 48000,
       languageCode: mainMenu[selectedOption].from
     }
+    speak('not actually doing anything', 'en-US')
   }
-  const sttRes = await util.stt_google(`${__dirname}/request.wav`, sttConfig)
-  const translationRes = await util.translate_google(sttRes.text, mainMenu[selectedOption].to.split('-')[0])
-  speak(translationRes.text, mainMenu[selectedOption].to.replace('-', '_'))
+
   processing = false
   reset()
 }
@@ -209,6 +221,7 @@ async function submit() {
 async function speak(text, lang) {
   if (usingTermux) {
     // only termux support
+    // TODO: reference speech speed from settings
     spawn('termux-tts-speak', ['-l', lang, '-r', '0.7', text])
   } else {
     log({level:'info',message:`saying '${text}' in ${lang}!`})
@@ -217,7 +230,7 @@ async function speak(text, lang) {
 
 async function play() {
   if (usingTermux) {
-    spawn('termux-media-player', ['play', `${__dirname}/request.wav`])
+    spawn('termux-media-player', ['play', `${__dirname}/temp/${util.settings.termux.ffmpeg.file}`])
   } else {
     // tried to install sox on termux, but sox wont either record my audio properly
     // or wont play it properly
@@ -225,7 +238,7 @@ async function play() {
     // padding a little time to allow wav to flush to disk for testing
     await util.delay(1000)
     // theres a copy of this in util, use that one
-    const p = spawn('play', [`${__dirname}/request.wav`]);
+    const p = spawn('play', [`${__dirname}/temp/${util.settings.linux.file}`]);
     p.stdout.on('data', (data) => {
       log({level:'debug',message:`play stdout: ${data}`})
     });
