@@ -63,6 +63,7 @@ function log(log) {
 
 ;(async () => {
   await fs.ensureDir('./temp')
+  await fs.emptyDir('./temp')
   draw()
 })()
 
@@ -180,7 +181,7 @@ async function stopRecord() {
     spawn('termux-microphone-record', ['-q'])
     // we require one more step for termux: convert to PCM using ffmpeg
     await util.delay(500)
-    await util.convertFileUsingFfmpeg(
+    await convertAMRToPCM(
       `${__dirname}/temp/${util.settings.termux.record.file}`,
       `${__dirname}/temp/${util.settings.termux.ffmpeg.file}`
     )
@@ -189,6 +190,19 @@ async function stopRecord() {
     audioProcess = null;
   }
   recording = false
+}
+
+async function convertAMRToPCM(from, to, backoff = 0) {
+  if (backoff === 10) {
+    console.log('took too long to flush amr to disk')
+    process.exit(0)
+  }
+  if (fs.existsSync(from)) {
+    await util.convertFileUsingFfmpeg(from, to)
+  } else {
+    await util.delay(100*backoff)
+    return convertAMRToPCM(from, to, backoff + 1)
+  }
 }
 
 async function submit() {
