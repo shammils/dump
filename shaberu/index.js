@@ -62,6 +62,7 @@ function log(log) {
 }
 
 ;(async () => {
+  await fs.ensureDir('./temp')
   draw()
 })()
 
@@ -94,6 +95,8 @@ async function navigate(key) {
         // only 2 options atm
         stopRecord()
         reset()
+        // clean up audio files
+        await fs.emptyDir('./temp')
       }
     } else {
       selectedOption = mainMenuArr[currentRow]
@@ -200,11 +203,12 @@ async function submit() {
       sampleRateHertz: 16000,
       languageCode: mainMenu[selectedOption].from
     }
-    fileName = util.settings.termux.record.file
+    fileName = util.settings.termux.ffmpeg.file
     const sttRes = await util.stt_google(`${__dirname}/temp/${fileName}`, sttConfig)
     const translationRes = await util.translate_google(sttRes.text, mainMenu[selectedOption].to.split('-')[0])
     speak(translationRes.text, mainMenu[selectedOption].to.replace('-', '_'))
-
+    // clean up audio files
+    await fs.emptyDir('./temp')
   } else {
     sttConfig = {
       encoding: 'LINEAR16',
