@@ -198,7 +198,12 @@ async function convertAMRToPCM(from, to, backoff = 0) {
     process.exit(0)
   }
   if (fs.existsSync(from)) {
-    await util.convertFileUsingFfmpeg(from, to)
+    const code = await util.convertFileUsingFfmpeg(from, to)
+    if (code !== 0) {
+      // probably still too early
+      await util.delay(100*backoff)
+      return convertAMRToPCM(from, to, backoff + 1)
+    }
   } else {
     await util.delay(100*backoff)
     return convertAMRToPCM(from, to, backoff + 1)

@@ -182,7 +182,7 @@ class Util {
   }
 	convertFileUsingFfmpeg(from, to) {
 		const promise = new Promise((resolve, reject) => {
-      const p = spawn('ffmpeg', [from, to]);
+      const p = spawn('ffmpeg', ['-i', from, to]);
       p.stdout.on('data', (data) => {
         //log('debug', `ffmpeg stdout: ${data}`);
       });
@@ -190,10 +190,10 @@ class Util {
         //log('debug', `ffmpeg stderr: ${data}`);
       });
       p.on('close', (code) => {
-        if (code === 0) resolve();
+        if (code === 0) resolve(code);
         else {
           log('debug', `copy received code ${code} attempting to convert file using ffmpeg`)
-          resolve(); // fuck it for now
+          resolve(code); // fuck it for now
         }
       });
     });
