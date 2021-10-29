@@ -88,13 +88,13 @@ async function navigate(key) {
     if (selectedOption) {
       if (currentRow === 0) {
         //log({level:'debug',message:`pushing recording to interwebs`});draw()
-        stopRecord()
-        submit()
+        await stopRecord()
+        await submit()
         // play for debugging reasons
         //play()
       } else {
         // only 2 options atm
-        stopRecord()
+        await stopRecord()
         reset()
         // clean up audio files
         await fs.emptyDir('./temp')
@@ -180,7 +180,6 @@ async function stopRecord() {
   if (usingTermux) {
     spawn('termux-microphone-record', ['-q'])
     // we require one more step for termux: convert to PCM using ffmpeg
-    await util.delay(500)
     await convertAMRToPCM(
       `${__dirname}/temp/${util.settings.termux.record.file}`,
       `${__dirname}/temp/${util.settings.termux.ffmpeg.file}`
@@ -190,6 +189,7 @@ async function stopRecord() {
     audioProcess = null;
   }
   recording = false
+	return
 }
 
 async function convertAMRToPCM(from, to, backoff = 0) {
