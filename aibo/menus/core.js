@@ -23,7 +23,7 @@ class CoreMenu {
     type: 'menu',
     options: [
       {
-        name: 'Lang 2 Lang',
+        name: 'Translate',
         type: util.menuItemTypes.function,
         handler: () => {
           const translateMenu = new TranslateMenu(this.menuStack, this.render)
@@ -36,7 +36,29 @@ class CoreMenu {
         },
       },
       {
+        name: 'Benkyou',
+        type: util.menuItemTypes.menu,
+        options: [
+          {
+            name: 'Kotoba Renshuu',
+            type: util.menuItemTypes.function,
+            handler: () => {
+              console.log('nothing here')
+              process.exit(0)
+            },
+          }
+        ]
+      },
+      {
         name: 'Text Mode',
+        type: util.menuItemTypes.function,
+        handler: () => {
+          console.log('interfacing directly with Yonde goes here')
+          process.exit(0)
+        }
+      },
+      {
+        name: 'Voice Mode',
         type: util.menuItemTypes.function,
         handler: () => {
           console.log('nothing here')
@@ -44,8 +66,8 @@ class CoreMenu {
         }
       },
       {
-        name: 'Voice Mode',
-        type: util.menuItemTypes.function,
+        name: 'Interface Testing',
+        type: util.menuItemTypes.menu,
         handler: () => {
           console.log('nothing here')
           process.exit(0)

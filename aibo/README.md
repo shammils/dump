@@ -1,6 +1,10 @@
 もおおおおおおおおおおお!
 
 TODO:
+  - The ability to talk to aibo globally, no matter which class we are in
+  - explanations/descriptions on classes. explanations will be audible of course
+  - write to log file
+    - When selecting a menu item, show/play description/explanation
   - We got audio in a format that works with google cloud!
     - Record audio using termux's built in tool(that doesnt work with google
       cloud) with command:

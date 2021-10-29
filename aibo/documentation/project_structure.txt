@@ -1,0 +1,53 @@
+TODO: make this a markdown file in the future.
+
+/documentation
+/lib
+  |
+  --> menuHelper.js
+  |
+  --> renshuuHelper.js
+  |
+  --> util.js
+/menus
+  |
+  --> /renshuu
+      |
+      --> kana.js
+      |
+      --> kotoba.js
+  |
+  --> core.js
+  |
+  --> translate.js
+/resources
+  |
+  --> strings.js
+
+/documentation
+this folder will house various fucked up badly organized notes, including this
+file.
+
+/lib
+houses all reusable utility functions
+  > menuHelper.js
+    intended to interface with /resources/strings.json for the most part. should
+    keep the classes cleaner
+  > renshuuHelper.js
+    will house code that does test stuff, like randomization, shuffling(same
+    fucking thing as randomization...), and test organizing(fuck, no different).
+    Intended to interface with /resources/? for the most part, keep renshuu
+    classes cleaner.
+
+/menus
+houses all navigation items that make sense to have its own class. I am still
+on the fence regarding organization of these files. my biggest delimiter at the
+moment is keeping the navigate function clean. the second it becomes dirty, make
+a new menu item
+
+/resources
+this folder will house... resources, like dictionaries, things and stuff
+  > string.json
+    this file is basically stealing Google Android's way of defining strings in apps.
+    If we keep names and descriptions here, it should make it easier to manipulate,
+    especially since we intend to use more than one language for the same names/
+    descriptions. DESIGN THIS GOOD OR ELSE

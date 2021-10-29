@@ -8,6 +8,8 @@ const fs = require('fs-extra')
 let _self
 function log(level, message) { _self.emit("log",{module:'translate',level,message})}
 
+// TODO: implement the google record, play and google cloud integration code
+
 class TranslateMenu {
   constructor(menuStack, render) {
     _self = this
@@ -23,16 +25,14 @@ class TranslateMenu {
     this.playing = false
     this.audioProcess = null
     this.menu = {
-      //'にほんご   まで   にほんご',
-      'にほんご   まで   えいご': {
+      'にほんご まで to english': {
         from: 'ja-JP',
         to: 'en-US'
       },
-      'えいご     まで   にほんご': {
+      'from english にほんご に': {
         from: 'en-US',
         to: 'ja-JP',
       },
-      //'えいご     まで   えいご',
     }
     this.menuArr = Object.keys(this.menu)
     this.secondaryMenu = [
