@@ -76,8 +76,23 @@ class CoreMenu {
     ]
   }
   /*
-    Typically what happens when a user submits a keystroke
+    Moved onKeyPress event to menus since they are menu specific. I dont like
+    that I might find myself stuck *if* I dont implement a process.exit call
+    properly but it is what it is.
   */
+  onKeypress(str, key) {
+    if (key.name === 'escape') {
+      // how about if we arent on the main menu, have it move up the stack. if we
+      // are at the top, exit the program
+      if (this.menuStack.length > 1) {
+        this.menuStack.pop()
+        this.render()
+      } else {
+        process.exit(0)
+      }
+    }
+    this.navigate(key)
+  }
   navigate(key) {
     const menuItem = this.stack[this.stack.length-1]
     const current = menuItem.options[this.currentRow]

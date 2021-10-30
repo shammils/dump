@@ -13,13 +13,14 @@ const api = {
     navigate: 'navigate',
     multiSelect: 'multi-select',
     input: 'input',
-    disabled: 'disabled',
   },
   menuItemTypes: {
     function: 'function',
     select: 'select',
     menu: 'menu',
     multiSelect: 'multi-select',
+    boolean: 'boolean',
+    input: 'input',
   },
   print: (text) => {
     console.clear()

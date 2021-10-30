@@ -1,5 +1,7 @@
 もおおおおおおおおおおお!
 
+●○■□◆◇▲△▶▷▼▽◀◁◐◑•x◈◉◊◢◣◤◥
+
 TODO:
   - The ability to talk to aibo globally, no matter which class we are in
     - map english/japanese output to... buttons, like e for english and j for jap.
