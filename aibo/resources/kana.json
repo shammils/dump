@@ -1,0 +1,162 @@
+{
+  "description": "All kana"
+  "data": [
+    { "hirigana": "あ", "katakana": "ア", "romanji": ["a"] },
+    { "hirigana": "い", "katakana": "イ", "romanji": ["i"] },
+    { "hirigana": "う", "katakana": "ウ", "romanji": ["u"] },
+    { "hirigana": "え", "katakana": "エ", "romanji": ["e"] },
+    { "hirigana": "お", "katakana": "オ", "romanji": ["o"] },
+
+    { "hirigana": "か", "katakana": "カ", "romanji": ["ka"] },
+    { "hirigana": "き", "katakana": "キ", "romanji": ["ki"] },
+    { "hirigana": "く", "katakana": "ク", "romanji": ["ku"] },
+    { "hirigana": "け", "katakana": "ケ", "romanji": ["ke"] },
+    { "hirigana": "こ", "katakana": "コ", "romanji": ["ko"] },
+
+    { "hirigana": "さ", "katakana": "サ", "romanji": ["sa"] },
+    { "hirigana": "し", "katakana": "シ", "romanji": ["shi"] },
+    { "hirigana": "す", "katakana": "ス", "romanji": ["su"] },
+    { "hirigana": "せ", "katakana": "セ", "romanji": ["se"] },
+    { "hirigana": "そ", "katakana": "ソ", "romanji": ["so"] },
+
+    { "hirigana": "た", "katakana": "タ", "romanji": ["ta"] },
+    { "hirigana": "ち", "katakana": "チ", "romanji": ["chi"] },
+    { "hirigana": "つ", "katakana": "ツ", "romanji": ["tsu"] },
+    { "hirigana": "て", "katakana": "テ", "romanji": ["te"] },
+    { "hirigana": "と", "katakana": "ト", "romanji": ["to"] },
+
+    { "hirigana": "な", "katakana": "ナ", "romanji": ["na"] },
+    { "hirigana": "に", "katakana": "ニ", "romanji": ["ni"] },
+    { "hirigana": "ぬ", "katakana": "ヌ", "romanji": ["nu"] },
+    { "hirigana": "ね", "katakana": "ネ", "romanji": ["ne"] },
+    { "hirigana": "の", "katakana": "ノ", "romanji": ["no"] },
+
+    { "hirigana": "は", "katakana": "ハ", "romanji": ["ha"] },
+    { "hirigana": "ひ", "katakana": "ヒ", "romanji": ["hi"] },
+    { "hirigana": "ふ", "katakana": "フ", "romanji": ["hu","fu"] },
+    { "hirigana": "へ", "katakana": "ヘ", "romanji": ["he"] },
+    { "hirigana": "ほ", "katakana": "ホ", "romanji": ["ho"] },
+
+    { "hirigana": "ま", "katakana": "マ", "romanji": ["ma"] },
+    { "hirigana": "み", "katakana": "ミ", "romanji": ["mi"] },
+    { "hirigana": "む", "katakana": "ム", "romanji": ["mu"] },
+    { "hirigana": "め", "katakana": "メ", "romanji": ["me"] },
+    { "hirigana": "も", "katakana": "モ", "romanji": ["mo"] },
+
+    { "hirigana": "や", "katakana": "ヤ", "romanji": ["ya"] },
+    { "hirigana": "ゆ", "katakana": "ユ", "romanji": ["yu"] },
+    { "hirigana": "よ", "katakana": "ヨ", "romanji": ["yo"] },
+
+    { "hirigana": "ら", "katakana": "ラ", "romanji": ["ra"] },
+    { "hirigana": "り", "katakana": "リ", "romanji": ["ri"] },
+    { "hirigana": "る", "katakana": "ル", "romanji": ["ru"] },
+    { "hirigana": "れ", "katakana": "レ", "romanji": ["re"] },
+    { "hirigana": "ろ", "katakana": "ロ", "romanji": ["ro"] },
+
+    { "hirigana": "わ", "katakana": "ワ", "romanji": ["wa"] },
+    { "hirigana": "を", "romanji": ["o"] },
+
+    { "hirigana": "ん", "katakana": "ン", "romanji": ["n"] },
+
+    { "hirigana": "が", "katakana": "ガ", "romanji": ["ga"] },
+    { "hirigana": "ぎ", "katakana": "ギ", "romanji": ["gi"] },
+    { "hirigana": "ぐ", "katakana": "グ", "romanji": ["gu"] },
+    { "hirigana": "げ", "katakana": "ゲ", "romanji": ["ge"] },
+    { "hirigana": "ご", "katakana": "ゴ", "romanji": ["go"] },
+
+    { "hirigana": "ざ", "katakana": "ザ", "romanji": ["za"] },
+    { "hirigana": "じ", "katakana": "ジ", "romanji": ["ji"] },
+    { "hirigana": "ず", "katakana": "ズ", "romanji": ["zu"] },
+    { "hirigana": "ぜ", "katakana": "ゼ", "romanji": ["ze"] },
+    { "hirigana": "ぞ", "katakana": "ゾ", "romanji": ["zo"] },
+
+    { "hirigana": "だ", "katakana": "ダ", "romanji": ["da"] },
+    { "hirigana": "ぢ", "katakana": "ヂ", "romanji": ["ji"] },
+    { "hirigana": "づ", "katakana": "ヅ", "romanji": ["zu"] },
+    { "hirigana": "で", "katakana": "デ", "romanji": ["de"] },
+    { "hirigana": "ど", "katakana": "ド", "romanji": ["do"] },
+
+    { "hirigana": "ば", "katakana": "バ", "romanji": ["ba"] },
+    { "hirigana": "び", "katakana": "ビ", "romanji": ["bi"] },
+    { "hirigana": "ぶ", "katakana": "ブ", "romanji": ["bu"] },
+    { "hirigana": "べ", "katakana": "ベ", "romanji": ["be"] },
+    { "hirigana": "ぼ", "katakana": "ボ", "romanji": ["bo"] },
+
+    { "hirigana": "ぱ", "katakana": "パ", "romanji": ["pa"] },
+    { "hirigana": "ぴ", "katakana": "ピ", "romanji": ["pi"] },
+    { "hirigana": "ぷ", "katakana": "プ", "romanji": ["pu"] },
+    { "hirigana": "ぺ", "katakana": "ペ", "romanji": ["pe"] },
+    { "hirigana": "ぽ", "katakana": "ポ", "romanji": ["po"] },
+
+    { "hirigana": "きゃ", "katakana": "キャ", "romanji": ["kya"] },
+    { "hirigana": "きゅ", "katakana": "キュ", "romanji": ["kyu"] },
+    { "hirigana": "きょ", "katakana": "キョ", "romanji": ["kyo"] },
+
+    { "hirigana": "しゃ", "katakana": "シャ", "romanji": ["sha"] },
+    { "hirigana": "しゅ", "katakana": "シュ", "romanji": ["shu"] },
+    { "hirigana": "しょ", "katakana": "ショ", "romanji": ["sho"] },
+
+    { "hirigana": "ちゃ", "katakana": "チャ", "romanji": ["cha"] },
+    { "hirigana": "ちゅ", "katakana": "チュ", "romanji": ["chu"] },
+    { "hirigana": "ちょ", "katakana": "チョ", "romanji": ["cho"] },
+
+    { "hirigana": "にゃ", "katakana": "ニャ", "romanji": ["nya"] },
+    { "hirigana": "にゅ", "katakana": "ニュ", "romanji": ["nyu"] },
+    { "hirigana": "にょ", "katakana": "ニョ", "romanji": ["nyo"] },
+
+    { "hirigana": "ひゃ", "katakana": "ヒャ", "romanji": ["hya"] },
+    { "hirigana": "ひゅ", "katakana": "ヒュ", "romanji": ["hyu"] },
+    { "hirigana": "ひょ", "katakana": "ヒョ", "romanji": ["hyo"] },
+
+    { "hirigana": "みゃ", "katakana": "ミャ", "romanji": ["mya"] },
+    { "hirigana": "みゅ", "katakana": "ミュ", "romanji": ["myu"] },
+    { "hirigana": "みょ", "katakana": "ミョ", "romanji": ["myo"] },
+
+    { "hirigana": "りゃ", "katakana": "リャ", "romanji": ["rya"] },
+    { "hirigana": "りゅ", "katakana": "リュ", "romanji": ["ryu"] },
+    { "hirigana": "りょ", "katakana": "リョ", "romanji": ["ryo"] },
+
+    { "hirigana": "ぎゃ", "katakana": "ギャ", "romanji": ["gya"] },
+    { "hirigana": "ぎゅ", "katakana": "ギュ", "romanji": ["gyu"] },
+    { "hirigana": "ぎょ", "katakana": "ギョ", "romanji": ["gyo"] },
+
+    { "hirigana": "じゃ", "katakana": "ジャ", "romanji": ["ja"] },
+    { "hirigana": "じゅ", "katakana": "ジュ", "romanji": ["ju"] },
+    { "hirigana": "じょ", "katakana": "ジョ", "romanji": ["jo"] },
+
+    { "hirigana": "びゃ", "katakana": "ビャ", "romanji": ["bya"] },
+    { "hirigana": "びゅ", "katakana": "ビュ", "romanji": ["byu"] },
+    { "hirigana": "びょ", "katakana": "ビョ", "romanji": ["byo"] },
+
+    { "hirigana": "ぴゃ", "katakana": "ピャ", "romanji": ["pya"] },
+    { "hirigana": "ぴゅ", "katakana": "ピュ", "romanji": ["pyu"] },
+    { "hirigana": "ぴょ", "katakana": "ピョ", "romanji": ["pyo"] },
+
+    { "katakana": "シェ", "romanji": ["she"] },
+    { "katakana": "チェ", "romanji": ["che"] },
+    { "katakana": "ジェ", "romanji": ["je"] },
+
+    { "katakana": "ツァ", "romanji": ["tsa"] },
+    { "katakana": "ツェ", "romanji": ["tse"] },
+    { "katakana": "ツォ", "romanji": ["tso"] },
+
+    { "katakana": "ファ", "romanji": ["fa"] },
+    { "katakana": "フィ", "romanji": ["fi"] },
+    { "katakana": "フェ", "romanji": ["fe"] },
+    { "katakana": "フォ", "romanji": ["fo"] },
+
+    { "katakana": "ティ", "romanji": ["ti"] },
+    { "katakana": "ディ", "romanji": ["dhi"] },
+    { "katakana": "デュ", "romanji": ["dyu"] },
+
+    { "katakana": "ウィ", "romanji": ["wi"] },
+    { "katakana": "ウェ", "romanji": ["we"] },
+    { "katakana": "ウォ", "romanji": ["wo"] },
+    { "katakana": "クォ", "romanji": ["quo"] },
+
+    { "katakana": "ヴァ", "romanji": ["va"] },
+    { "katakana": "ヴィ", "romanji": ["vi"] },
+    { "katakana": "ヴェ", "romanji": ["ve"] },
+    { "katakana": "ヴォ", "romanji": ["vo"] }
+  ]
+}

@@ -43,6 +43,20 @@ class TranslateMenu {
     this.logStream = []
     this.maxLogLength = 10
   }
+  onKeypress(str, key) {
+    if (key.name === 'escape') {
+      // how about if we arent on the main menu, have it move up the stack. if we
+      // are at the top, exit the program
+      if (this.menuStack.length > 1) {
+        this.menuStack.pop()
+        this.render()
+        return
+      } else {
+        process.exit(0)
+      }
+    }
+    this.navigate(key)
+  }
   async init() {
     await fs.ensureDir('./temp')
     await fs.emptyDir('./temp')

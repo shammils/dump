@@ -6,7 +6,7 @@ const EventEmitter = require('events').EventEmitter
 let _self
 function log(level, message) { _self.emit("log",{module:'settings',level,message})}
 
-function buildMenu(params) {
+const buildMenu = (params) => {
   const menu = {
     name: 'Settings',
     type: util.menuItemTypes.menu,
@@ -106,7 +106,8 @@ class SettingsMenu {
     this.selected = null
     this.mode = util.modes.navigate
     // will be built dynamically depending on the data provided
-    this.menu = buildMenu(params)
+    this.buildMenu = buildMenu
+    this.menu = this.buildMenu(params)
     this.menu.options.push({
       name: successMenuItem.name,
       onSuccessOption: true, // set so we know when the user hovers over it

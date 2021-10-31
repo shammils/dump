@@ -3,7 +3,11 @@ const chalk = require('chalk')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 
+const helper = require('../lib/menuHelper.js')
+
+const SettingsMenu = require('./settings.js')
 const TranslateMenu = require('./translate.js')
+const NanjiMenu = require('./renshuu/nanji.js')
 
 let _self
 function log(level, message) { _self.emit("log",{module:'core',level,message})}
@@ -19,6 +23,9 @@ class CoreMenu {
     this.stack = []
     this.mode = util.modes.navigate
   }
+  // TODO: add and show descriptions for the menu items
+  // TODO: how about we append go back options to non top level menu items? the
+  // top level will have 'quit' automatically added
   menu = {
     type: 'menu',
     options: [
@@ -36,17 +43,63 @@ class CoreMenu {
         },
       },
       {
-        name: 'Benkyou',
+        name: 'Renshuu',
         type: util.menuItemTypes.menu,
         options: [
           {
-            name: 'Kotoba Renshuu',
+            name: 'Nan Ji',
+            type: util.menuItemTypes.function,
+            handler: () => {
+              const settingsMenu = new SettingsMenu(
+                this.menuStack,
+                helper.menuConfiguration['Nan Ji'],
+                {
+                  name: 'Start Test',
+                  type: util.menuItemTypes.function,
+                  handler: (params) => {
+                    const nanji = new NanjiMenu(this.menuStack, this.render, params)
+                    this.menuStack.push(nanji)
+                    nanji.init()
+                  }
+                },
+                {
+                  name: 'Cancel',
+                  type: util.menuItemTypes.function,
+                  handler: () => {
+                    this.menuStack.pop()
+                    setTimeout(() => {this.render()}, 10)
+                  }
+                }
+              )
+              // add settings menu to the stack
+              this.menuStack.push(settingsMenu)
+              setTimeout(() => {this.render()}, 10)
+            },
+          },
+          {
+            name: 'Kotoba',
             type: util.menuItemTypes.function,
             handler: () => {
               console.log('nothing here')
               process.exit(0)
             },
-          }
+          },
+          {
+            name: 'Kanji',
+            type: util.menuItemTypes.function,
+            handler: () => {
+              console.log('nothing here')
+              process.exit(0)
+            },
+          },
+          {
+            name: 'Kana',
+            type: util.menuItemTypes.function,
+            handler: () => {
+              console.log('nothing here')
+              process.exit(0)
+            },
+          },
         ]
       },
       {
@@ -121,6 +174,7 @@ class CoreMenu {
           } break
           case util.menuItemTypes.menu: {
             this.stack.push(current)
+            this.currentRow = 0
           } break
           case util.menuItemTypes.multiSelect: {
             this.mode = util.modes.multiSelect

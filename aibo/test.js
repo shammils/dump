@@ -1,6 +1,83 @@
 
+nanJiSettings()
+async function nanJiSettings() {
+  const SettingsMenu = require('./menus/settings.js')
+  const settingsMenu = new SettingsMenu(
+    [{name:'Main'},{name:'Renshuu'},{name:'Nan Ji'}],
+    [
+      {
+        name: 'Difficulty',
+        required: true,
+        description: 'the damn difficulty',
+        type: 'select',
+        options: [
+          {
+            name: 'choroi',
+            description: 'basic',
+            selected: true,
+          },
+          {
+            name: 'muzukashii',
+            description: 'zenbuu, cho karai',
+          },
+        ]
+      },
+      {
+        name: 'Test Type',
+        required: true,
+        type: 'multi-select',
+        options: [
+          {name:'random', selected: true},
+          // too many possible variations, fuck it for now
+          /*{name:'Question kanji, answer english'},
+          {name:'Question kanji, answer romanji'},
 
-kanjiSettings()
+          {name:'Question romanji, answer english'},
+          {name:'Question romanji, answer kanji'},
+
+          {name:'Question english, answer kanji'},
+          {name:'Question english, answer romanji'},
+          
+          {name:'Question audible, answer kanji'},
+          {name:'Question audible, answer romanji'},
+          {name:'Question audible, answer english'}*/
+        ]
+      },
+      {
+        name: 'Count',
+        description: 'How many questions you want. 0 for all',
+        type: 'input',
+        inputType: 'number',
+        min: 0,
+        value: 0,
+        required: true,
+      }
+    ],
+    {
+      name: 'Start Test',
+      type: 'function',
+      handler: (params) => {
+        console.log('onSuccess, params', params)
+        process.exit(0)
+      },
+    },
+    {
+      name: '<- Cancel',
+      type: 'function',
+      handler: (params) => {
+        console.log('goBack')
+        process.exit(0)
+      },
+    }
+  )
+  settingsMenu.draw()
+  process.stdin.on('keypress', (str, key) => {
+    if (key.name === 'escape') process.exit(0)
+    settingsMenu.onKeypress(str, key)
+  })
+}
+
+//kanjiSettings()
 async function kanjiSettings() {
   const SettingsMenu = require('./menus/settings.js')
   const settingsMenu = new SettingsMenu(
@@ -44,6 +121,9 @@ async function kanjiSettings() {
           {name:'Question kanji, answer romanji'},
           {name:'Question english, answer kanji'},
           {name:'Question english, answer romanji'},
+          {name:'Question audible, answer kanji'},
+          {name:'Question audible, answer romanji'},
+          {name:'Question audible, answer english'},
         ]
       },
       {
