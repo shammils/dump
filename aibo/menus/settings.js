@@ -6,8 +6,6 @@ const EventEmitter = require('events').EventEmitter
 let _self
 function log(level, message) { _self.emit("log",{module:'settings',level,message})}
 
-// TODO: implement the google record, play and google cloud integration code
-
 function buildMenu(params) {
   const menu = {
     name: 'Settings',
@@ -19,6 +17,7 @@ function buildMenu(params) {
       name: params[i].name,
       type: params[i].type,
     }
+    if (params[i].required) menuItem.required = params[i].required
     if (params[i].description) menuItem.description = params[i].description
     switch (params[i].type) {
       case util.menuItemTypes.multiSelect: {
@@ -38,16 +37,28 @@ function buildMenu(params) {
           return o
         })
       } break
-      case util.menuItemTypes.boolean: {
+      // boolean considered the same as input for now
+      /*case util.menuItemTypes.boolean: {
         menuItem = {
           ...params[i]
         }
         if (menuItem.value == undefined) menuItem.value = false
-      } break
+      } break*/
       case util.menuItemTypes.input: {
         // screw it, im 1 to 1-ing this for now
         menuItem = {
           ...params[i]
+        }
+        if (params[i].inputType === util.menuItemTypes.boolean) {
+          if (menuItem.value == undefined) menuItem.value = false
+        } else {
+          // we need to add the value to the input array if there is one
+          // BUG: cant call .length on ints, sooooo yeah. fix someday
+          if (menuItem.value != null) {
+            menuItem.input = []
+            for (let i = 0; i < menuItem.value.length; i++)
+              menuItem.input.push(menuItem.value[i])
+          }
         }
       } break
       default: {
@@ -57,29 +68,38 @@ function buildMenu(params) {
     }
     menu.options.push(menuItem)
   }
-  // add go back option
-  menu.options.push({
-    name: ' <- Go Back',
+  // add start and go back option
+  // ISSUE: there is no start for updating settings, only for configuring thing
+  // before next step, so this needs to be a save, but we need to have a function
+  // to call after
+  /*menu.options.push({
+    name: ' Start ->',
     type: 'function',
     handler: () => {
-      console.log('TODO: implement back button when you know how settings navigation works')
+      console.log('TODO: implement start button when you know how settings navigation works')
       process.exit(0)
     },
   })
+  menu.options.push({
+    name: ' <- Go Back',
+    type: 'function',
+    handler: (menuStack, draw) => {
+      console.log('clicked the back button')
+      process.exit(0)
+      menuStack.pop()
+      draw()
+    },
+  })*/
   //console.log(JSON.stringify(menu, ' ', 2))
   //process.exit(0)
   return menu
 }
 
-// Validation should happen during menuItem update too
-function validate() {}
-
 class SettingsMenu {
-  constructor(menuStack, render, params) {
+  constructor(menuStack, params, successMenuItem, returnMenuItem) {
     _self = this
     this.name = 'Settings'
     this.menuStack = menuStack
-    this.render = render
     // TODO: save params locally if needed in the future
 
     this.currentRow = 0
@@ -87,7 +107,23 @@ class SettingsMenu {
     this.mode = util.modes.navigate
     // will be built dynamically depending on the data provided
     this.menu = buildMenu(params)
+    this.menu.options.push({
+      name: successMenuItem.name,
+      onSuccessOption: true, // set so we know when the user hovers over it
+      type: 'function',
+      handler: () => {
+        this.validate(this.menu)
+        if (this.errors.length) {
+          //console.log('errors happened', this.errors)
+          this.draw()
+        } else {
+          successMenuItem.handler(this.menu.options)
+        }
+      },
+    })
+    this.menu.options.push(returnMenuItem)
     this.menuStack.push(this.menu)
+    this.errors = []
   }
   init() {}
   onKeypress(str, key) {
@@ -99,10 +135,11 @@ class SettingsMenu {
       if (key.name === 'return') {
         this.reset()
       } else {
-        if (this.selected.type === util.menuItemTypes.boolean) {
+        if (this.selected.inputType === util.menuItemTypes.boolean) {
           // for now, it doesnt matter what key you hit if it isnt return, we
           // will flip the value
           this.selected.value = !this.selected.value
+          this.draw()
           return
         }
 
@@ -131,18 +168,30 @@ class SettingsMenu {
       }
     }
     if (key.name === 'down') {
-      if (this.selected) {
-        // ???
-      } else {
-        if (this.currentRow < this.menu.options.length-1) {
-          this.currentRow += 1
-        }
+      if (this.currentRow < this.menu.options.length-1) {
+        this.currentRow += 1
       }
+      if (this.selected) { }
+      else { }
     }
     if (key.name === 'return') {
       if (!this.selected) {
+        // handle functions first
+        if (this.menu.options[this.currentRow].type === util.menuItemTypes.function) {
+          this.menu.options[this.currentRow].handler()
+          return
+        }
+
+        // handle all non functions when enter clicked and no options selected
+        // yet
         this.selected = this.menu.options[this.currentRow]
         this.currentRow = 0
+        if (this.selected.type === util.menuItemTypes.input) {
+          this.mode = util.modes.input
+        }
+      } else {
+        // return to the top level
+        this.selected = null
       }
     }
     if (key.name === 'backspace') {
@@ -150,6 +199,7 @@ class SettingsMenu {
         // simulate go back for now?
         this.selected = null
         this.currentRow = 0
+        this.mode = util.modes.navigate
       } else {
         // exit the settings class
       }
@@ -166,62 +216,10 @@ class SettingsMenu {
             else el.selected = false
           })
         }
-      }
-    }
-
-    this.draw()
-  }
-  navigateBad(key) {
-    const menuItem = this.stack[this.stack.length-1]
-    const current = menuItem.options[this.currentRow]
-    if (key.name === 'up') {
-      if (this.currentRow > 0) {
-        this.currentRow -= 1
-      }
-    }
-    if (key.name === 'down') {
-      if (this.currentRow < menuItem.options.length-1) {
-        this.currentRow += 1
-      }
-    }
-    if (key.name === 'return') {
-      if (this.mode === util.menuItemTypes.multiSelect) {
-        this.mode = util.modes.navigate
-        this.stack.pop()
-        this.currentRow = 0
       } else {
-        switch(current.type) {
-          case util.menuItemTypes.function: {
-            current.handler()
-          } break
-          case util.menuItemTypes.select: {
-            this.stack.push(current)
-          } break
-          case util.menuItemTypes.multiSelect: {
-            this.mode = util.modes.multiSelect
-            this.currentRow = 0
-            this.stack.push(current)
-          } break
-        }
-      }
-    }
-    if (key.name === 'backspace') {
-      if (this.stack.length > 1) {
-        this.mode = util.modes.navigate
-        this.stack.pop()
+        // space and return should behave the same at the top level
+        this.selected = this.menu.options[this.currentRow]
         this.currentRow = 0
-      }
-    }
-    if (key.name === 'space') {
-      if (menuItem.type === util.menuItemTypes.multiSelect) {
-        menuItem.options[this.currentRow].selected = !menuItem.options[this.currentRow].selected
-      }
-      if (menuItem.type === util.menuItemTypes.select) {
-        // deselect everything elses
-        menuItem.options.forEach((el, i) => {
-          if (i === this.currentRow) el.selected = !el.selected
-          else el.selected = false
-        })
       }
     }
 
@@ -231,17 +229,25 @@ class SettingsMenu {
     let text = ''
     // handle breadcrumbs
     // menuStack and stack should be treated the same in crumb case
-    const crumbs = util.createBreadcrumbs(this.menuStack)
+    // add current option to the breadcrumps if applicable, but I dont want to
+    // modify the actual menuStack array. I dont consider the selected option as
+    // the same class as a menu item per say.
+    const crumbs = this.selected ?
+      util.createBreadcrumbs([...this.menuStack, {name:this.selected.name}]) :
+      util.createBreadcrumbs(this.menuStack)
     if (crumbs) text += `${chalk.cyan.bold(crumbs)}\n`
     // handle rest
     if (this.selected) {
       // menu item selected, render specific item
       if (this.selected.type === util.menuItemTypes.input) {
-        text += `> ${this.selected.value}`
-      }
-      if (this.selected.type === util.menuItemTypes.boolean) {
-        if (this.selected.value) text += `> ${chalk.green.bold(this.selected.value)}`
-        else text += `> ${chalk.red.bold(this.selected.value)}`
+        // handle booleans different only for now
+        if (this.selected.inputType === util.menuItemTypes.boolean) {
+          if (this.selected.value) text += `> ${chalk.green.bold(this.selected.value)}`
+          else text += `> ${chalk.red.bold(this.selected.value)}`
+        } else {
+          // text, ints, everything else for now
+          text += `> ${this.selected.value}`
+        }
       }
       if (this.selected.type === util.menuItemTypes.menu) {
         for (let i = 0; i < this.selected.options.length; i++) {
@@ -271,7 +277,7 @@ class SettingsMenu {
       let tempText = ''
       this.menu.options.forEach((el, i) => {
         const selected = this.getMenuItemValue(el)
-        // lets decorate it a bit
+        // TODO: decorate it a bit
         let value
         if (selected.value) {
           switch (selected.type) {
@@ -283,11 +289,28 @@ class SettingsMenu {
         if (this.currentRow === i) {
           if (el.description) description += `${util.trim(el.description, 50, true)}\n`
           else description += `\n` // still need to add the newline
-          if (selected.value != null) tempText += chalk.underline.bold(`> ${el.name} - '${selected.value}'\n`)
-          else tempText += chalk.underline.bold(`> ${el.name} - null\n`)
+
+          // show errors if errors exist and user is hovering over 'submit'
+          if (el.onSuccessOption && this.errors.length) {
+            // replace the description
+            description = chalk.red.bold(`errors: ${this.errors.join(', ')}\n`)
+          }
+
+          // dont show value on function types
+          if (el.type === util.menuItemTypes.function) {
+            tempText += chalk.underline.bold(`> ${el.name}'\n`)
+          } else {
+            if (selected.value != null) tempText += chalk.underline.bold(`> ${el.name} - '${selected.value}'\n`)
+            else tempText += chalk.underline.bold(`> ${el.name} - null\n`)
+          }
         } else {
-          if (selected.value != null) tempText += `  ${el.name} - '${selected.value}'\n`
-          else tempText += `  ${el.name} - null\n`
+          // dont show value on function types
+          if (el.type === util.menuItemTypes.function) {
+            tempText += `  ${el.name}'\n`
+          } else {
+            if (selected.value != null) tempText += `  ${el.name} - '${selected.value}'\n`
+            else tempText += `  ${el.name} - null\n`
+          }
         }
       })
       text += description
@@ -302,17 +325,26 @@ class SettingsMenu {
     }
     switch (menuItem.type) {
       // TODO: will need to handle multiple values in the case of multi selects
-      case util.menuItemTypes.select:
-      case util.menuItemTypes.multiSelect: {
+      case util.menuItemTypes.select: {
         menuItem.options.forEach(el => {
           if (el.selected) {
             selected.value = el.value ?? el.name
           }
         })
       } break
-      case util.menuItemTypes.boolean: {
-        selected.value = menuItem.value
+      case util.menuItemTypes.multiSelect: {
+        const selectedValues = []
+        menuItem.options.forEach(el => {
+          if (el.selected) {
+            selectedValues.push(el.value ?? el.name)
+          }
+        })
+        if (selectedValues.length) selected.value = selectedValues.join(',')
       } break
+      // boolean now considered .input
+      /*case util.menuItemTypes.boolean: {
+        selected.value = menuItem.value
+      } break*/
       case util.menuItemTypes.input: {
         selected.value = menuItem.value
       } break
@@ -321,9 +353,78 @@ class SettingsMenu {
   }
   reset() {
     this.currentRow = 0
-    this.stack.length = 0
     this.mode = util.modes.navigate
+    this.selected = null
     this.draw()
+  }
+  validate(menu) {
+    // Validation should happen during menuItem update too
+    this.errors = []
+    menu.options.forEach(el => {
+      switch(el.type) {
+        case util.menuItemTypes.multiSelect: {
+          // if required, at least one should be selected, otherwise we dont care
+          if (el.required) {
+            let somethingSelected = false
+            el.options.forEach(msi => {
+              if (msi.selected) {
+                somethingSelected = true
+              }
+            })
+            if (!somethingSelected) this.errors.push(`'${el.name}' required`)
+          }
+        } break
+        case util.menuItemTypes.select: {
+          // if required, only one should be selected. if more than one selected,
+          // thats the developer's fault for allowing that to happen, but lets
+          // check it anyway
+          if (el.required) {
+            let selectedCount = 0
+            el.options.forEach(si => {
+              if (si.selected) {
+                selectedCount += 1
+              }
+            })
+            if (selectedCount === 0) this.errors.push(`'${el.name}' required`)
+            else if (selectedCount > 1) this.errors.push(`'${el.name}' only one allowed`)
+          }
+        } break
+        case util.menuItemTypes.input: {
+          // required does not take precendence in this case. if the input only
+          // accepts ints but alphanumeric is present, this is also the dev's
+          // fauilt but check for it anyway
+          if (el.required && el.value == null) {
+            this.errors.push(`'${el.name}' required`)
+            return
+          }
+          if (el.inputType === util.dataTypes.number) {
+            // not sure if NaN works for decimals
+            const num = parseInt(el.value);
+            if (isNaN(num)) {
+              this.errors.push(`${el.name}' is not a number`)
+              return
+            }
+            if (el.min != null && el.min > num) {
+              this.errors.push(`${el.name}' is less than the minimum value '${el.min}'`)
+            }
+            if (el.max != null && el.max < num) {
+              this.errors.push(`${el.name}' is greater than the maximum value '${el.max}'`)
+            }
+          }
+        } break
+        case util.menuItemTypes.function: {
+          // do nothing. leaving here just in case default does something in the
+          // future. onSuccess and the back function should fall in here
+        } break
+        case util.menuItemTypes.menu: {
+          // I think there should be no menus in this step, so lets just throw an
+          // error for now
+          console.log(`menu type not allowed as of now in settings`, menu)
+          process.exit(500)
+        } break
+      }
+    })
+    return
   }
 }
 nodeUtil.inherits(SettingsMenu, EventEmitter)

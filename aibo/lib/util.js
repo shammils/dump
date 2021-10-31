@@ -22,6 +22,14 @@ const api = {
     boolean: 'boolean',
     input: 'input',
   },
+  dataTypes: {
+    function: 'function',
+    text: 'text',
+    number: 'number',
+    boolean: 'boolean',
+    float: 'float',
+    integer: 'integer',
+  },
   print: (text) => {
     console.clear()
     readline.clearLine(process.stdout, 0)
@@ -39,14 +47,19 @@ const api = {
       else return string.substring(0, maxLength)
     }
   },
-  createBreadcrumbs: (menuStack) => {
+  createBreadcrumbs: (menuStack, maxLength) => {
     // dont bother creating crumbs if we are at the top level
     if (!menuStack || !menuStack.length || menuStack.length === 1) return
     let crumbArr = []
     for (let i = 0; i < menuStack.length; i++) {
-       crumbArr.push(api.trim(menuStack[i].name, 10))
+       crumbArr.push(menuStack[i].name)
     }
-    return crumbArr.join(' > ')
+    let crumbs = crumbArr.join(' > ')
+    if (maxLength && crumbs.length > maxLength) {
+      // truncate from the front
+      crumbs = `...${crumbs.substring(crumbs.length-maxLength, crumbs.length-1)}`
+    }
+    return crumbs
   },
 }
 

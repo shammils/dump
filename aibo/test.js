@@ -4,14 +4,15 @@ kanjiSettings()
 async function kanjiSettings() {
   const SettingsMenu = require('./menus/settings.js')
   const settingsMenu = new SettingsMenu(
-    [{name:'Main'},{name:'Renshuu'},{name:'Kotoba'}],
-    () => {},
+    // current menu stack
+    [{name:'Main'},{name:'Renshuu'},{name:'Kanji'}],
+    // what will become the menu
     [
       {
         // automatically add a 'select all' option. if all are selected, switch
         // it to the opposite. (deselect all?)
-        name: 'Level',
-        description: 'Defined by some outside force',
+        name: 'Grade',
+        description: 'References japanese schooling system I think',
         type: 'multi-select', // this value will come from util
         required: true,
         options: [
@@ -26,7 +27,8 @@ async function kanjiSettings() {
       {
         name: 'Shuffle',
         description: 'Change the order of the questions',
-        type: 'boolean',
+        type: 'input',
+        inputType: 'boolean',
         value: true,
         required: true,
       },
@@ -52,15 +54,34 @@ async function kanjiSettings() {
         description: 'How many questions you want. 0 for all',
         type: 'input',
         // the default input type is text
-        inputType: 'integer',
+        inputType: 'number',
         min: 0,
+        max: 5,
         value: 0,
         // no way for us to know max unless we know how many possible options are
         // available at the given time
         // max: ?
         required: true,
       }
-    ]
+    ],
+    // what happens on success
+    {
+      name: 'Start Test',
+      type: 'function',
+      handler: (params) => {
+        console.log('onSuccess, params', params)
+        process.exit(0)
+      },
+    },
+    // exit functionality
+    {
+      name: '<- Cancel', // back, go back, etc
+      type: 'function',
+      handler: (params) => {
+        console.log('goBack')
+        process.exit(0)
+      },
+    }
   )
   settingsMenu.draw()
   process.stdin.on('keypress', (str, key) => {
