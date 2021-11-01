@@ -1,0 +1,5 @@
+overlay with icons and delimiter rendering.
+TODO:
+  - center icons
+  - render menu
+  - switch between menu and overlay controls
