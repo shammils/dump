@@ -17,6 +17,9 @@ process.stdin.on('keypress', (str, key) => {
     // enter overlay mode. my ipega controller uses this key for one of its buttons
     // so we need to watch for 'game' mode
   }
+  // at the moment we probably want to only override CTRL + c and 'escape', so
+  // pass the key to the currently loaded module
+  state.modules[state.modules.length-1].onKeypress(str, key)
 });
 process.stdout.on('resize', () => {
   //console.log(`screen size: ${process.stdout.columns}x${process.stdout.rows}`)
@@ -27,7 +30,7 @@ process.stdout.on('resize', () => {
 })
 // do not expose the state object to anyone, only the updateState method
 const state = {
-  stack: [],
+  modules: [],
   interactionTarget: 'application', // 'overlay', 'application'
   dimensions: {
     columns: process.stdout.columns,
@@ -40,10 +43,44 @@ const state = {
     location: 'home',
   }
 }
+// todo: put in its own file so we can do logging
+class ViewBuilder {
+  constructor(type) {
+    // types: list, table
+    this.type = type
+    this.rows = []
+    /*
+    Future Table support
+    this.table =
+      [
+        ['col0',     'col1',     'col2'     ]
+        ['col0_row0','col0_row0','col2_row0']
+        ['col0_row1','col0_row1','col2_row1']
+      ]
+    */
+  }
+  append(row) {
+    this.rows.push(row)
+  }
+  prepend(row) {
+    // insert at pos 0? would we ever even want this?
+    console.log('prepend not implemented')
+    process.exit()
+  }
+  // TODO: support grids/tables
+
+  //get() {return this}
+}
+
+const MainMenu = require('./modules/mainMenu.js')
+
 ;(async () => {
   // how about we call the .init function on every class after instantiating it?
   // its better than assuming .draw is the right one or something else.
-  render()
+  // TODO: logging
+  const mainMenu = new MainMenu(updateState, updateStack, ViewBuilder)
+  state.modules.push(mainMenu)
+  mainMenu.draw()
 })()
 // probably move the state stuff to its own file, like stateManager.js
 function updateStack(task, item) {
@@ -109,6 +146,23 @@ function render() {
   // if the current menu has its own draw/buildInterface function, call it. We
   // cannot handle every possible interface here
 
+  console.log('currentView', state.currentView)
+  state.currentView.rows.forEach(r => {
+    if (r.type === 'static') {
+      // apply styles
+      if (r.style) {
+        if (r.style === 'breadcrumb') { text += `${chalk.cyan.bold(r.value)}\n` }
+      } else {
+        text += `${r.value}\n`
+      }
+    }
+    if (r.type === 'menu' || r.type === 'list') {
+      r.options.forEach(el => {
+        if (el.selected) text += chalk.underline.bold(`> ${el.name}\n`)
+        else text += `  ${el.name}\n`
+      })
+    }
+  })
   print(text)
 }
 function print(text) {
