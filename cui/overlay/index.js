@@ -9,33 +9,7 @@ const MainMenu = require('./modules/mainMenu.js')
 const OverlayMenu = require('./modules/overlayMenu.js')
 const Logger = require('./lib/logger.js')
 // todo: put in its own file so we can do logging
-class ViewBuilder {
-  constructor(type) {
-    // types: list, table
-    this.type = type
-    this.rows = []
-    /*
-    Future Table support
-    this.table =
-      [
-        ['col0',     'col1',     'col2'     ]
-        ['col0_row0','col0_row0','col2_row0']
-        ['col0_row1','col0_row1','col2_row1']
-      ]
-    */
-  }
-  append(row) {
-    this.rows.push(row)
-  }
-  prepend(row) {
-    // insert at pos 0? would we ever even want this?
-    console.log('prepend not implemented')
-    process.exit()
-  }
-  // TODO: support grids/tables
 
-  //get() {return this}
-}
 const logger = new Logger()
 function onLog(log) {
   logger.log(log.module, log.level, log.message)
@@ -99,12 +73,12 @@ const state = {
   // how about we call the .init function on every class after instantiating it?
   // its better than assuming .draw is the right one or something else.
   // TODO: logging
-  const mainMenu = new MainMenu(updateState, updateStack, ViewBuilder)
+  const mainMenu = new MainMenu(updateState, updateStack)
   // this pattern doesnt make too much sense in this infrastructure tbqh. I want
   // something different.
   mainMenu.on('log', onLog)
   state.applicationModules.push(mainMenu)
-  const overlayMenu = new OverlayMenu(updateState, updateStack, ViewBuilder)
+  const overlayMenu = new OverlayMenu(updateState, updateStack)
   overlayMenu.on('log', onLog)
   state.overlayModules.push(overlayMenu)
   mainMenu.draw()
@@ -112,15 +86,18 @@ const state = {
 // probably move the state stuff to its own file, like stateManager.js
 function updateStack(task, item) {
   switch(task) {
-    case 'add': { state.stack.push(item) }
-    case 'remove': { state.stack.pop() }
-    case 'modify': { state.stack[state.stack.length-1] = item }
+    case 'add': { state.applicationModules.push(item) } break
+    case 'remove': { state.applicationModules.pop() } break
+    case 'modify': {
+      state.applicationModules[state.applicationModules.length-1] = item
+    } break
     default: {
       console.log(`task '${task}' unsupported. we only support 'add', 'remove' and 'modify'`)
       process.exit()
     }
   }
-  render()
+  // for now, lets leave it up to the caller to call render
+  //render()
 }
 function getStatePropertyValue(property) {
   if (!property || !property.length || typeof property !== 'string') {
@@ -153,6 +130,8 @@ function updateState(property, value) {
   state[property] = value
   render()
 }
+
+// LOL this code belongs in the ViewBuilder
 // any time an event occurs where the screen should update should pipe to this
 // method.
 // the idea is that this method will always build the overlay and potentially
@@ -173,7 +152,6 @@ function render() {
   // if the current menu has its own draw/buildInterface function, call it. We
   // cannot handle every possible interface here
 
-  console.log('currentView', state.currentView)
   state.currentView.rows.forEach(r => {
     if (r.type === 'static') {
       // apply styles
@@ -188,6 +166,10 @@ function render() {
         if (el.selected) text += chalk.underline.bold(`> ${el.name}\n`)
         else text += `  ${el.name}\n`
       })
+    }
+    if (r.type === 'raw') {
+      // module rendered everything
+      text += r.text
     }
   })
   print(text)

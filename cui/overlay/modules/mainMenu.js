@@ -2,18 +2,19 @@ const chalk = require('chalk')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 const util = require('../lib/util.js')
+const RTSK = require('./rootyTootyShootyKabooty.js')
+const ViewBuilder = require('../lib/viewBuilder.js')
 
 let _self
 function log(level, message) { _self.emit("log",{module:'mainMenu',level,message})}
 
 class MainMenu {
-  constructor(updateState, updateStack, ViewBuilder) {
+  constructor(updateState, updateStack) {
     _self = this
     this.name = 'Main'
     // functions to manipulate state & view
     this.updateState = updateState
     this.updateStack = updateStack
-    this.ViewBuilder = ViewBuilder
 
     this.currentRow = 0
     this.stack = []
@@ -22,6 +23,25 @@ class MainMenu {
       name: this.name,
       type: 'menu',
       options: [
+        {
+          name: 'RTSK',
+          type: util.menuItemTypes.function,
+          handler: () => {
+            const rootinTootin = new RTSK(this.updateState, this.updateStack)
+            updateStack('add', rootinTootin)
+            setTimeout(() => {rootinTootin.draw()}, 10)
+            /*
+              shit fuck, lost a bit of time on this one
+              not working LOC
+                setTimeout(rootinTootin.draw, 10)
+              working LOC
+                setTimeout(() => {rootinTootin.draw()}, 10)
+
+              the class's construtor objects are all missing on that first LOC,
+              yet the draw() event was present
+            */
+          },
+        },
         {
           name: 'Translate',
           type: util.menuItemTypes.function,
@@ -177,7 +197,7 @@ class MainMenu {
   // every module is responsible for building its own view, the global object is
   // responsible for rendering the built view to the screen
   draw() {
-    const vb = new this.ViewBuilder('list')
+    const vb = new ViewBuilder('list')
     // how about we modify this.view in this class and then call the global
     // render function? for now im going to update the state this way, not sure
     // which one is better

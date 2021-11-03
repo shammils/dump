@@ -2,18 +2,18 @@ const chalk = require('chalk')
 const nodeUtil = require('util')
 const EventEmitter = require('events').EventEmitter
 const util = require('../lib/util.js')
+const ViewBuilder = require('../lib/viewBuilder.js')
 
 let _self
 function log(level, message) { _self.emit("log",{module:'OverlayMenu',level,message})}
 
 class OverlayMenu {
-  constructor(updateState, updateStack, ViewBuilder) {
+  constructor(updateState, updateStack) {
     _self = this
     this.name = 'Basically a Pause Menu'
     // functions to manipulate state & view
     this.updateState = updateState
     this.updateStack = updateStack
-    this.ViewBuilder = ViewBuilder
 
     this.currentRow = 0
     this.stack = []
@@ -89,7 +89,7 @@ class OverlayMenu {
   // every module is responsible for building its own view, the global object is
   // responsible for rendering the built view to the screen
   draw() {
-    const vb = new this.ViewBuilder('list')
+    const vb = new ViewBuilder('list')
     // how about we modify this.view in this class and then call the global
     // render function? for now im going to update the state this way, not sure
     // which one is better
