@@ -1,5 +1,36 @@
-overlay with icons and delimiter rendering.
+IDEAS:
+  - how about CTRL + j for jap speech input, CTRL + e for english? how do we tell
+    it what it should output??
+  - CTRL + s to save on settings pages
+  - CTRL + i to go to the Aibo Text Input Mode page
+
+IN_PROGRESS:
+  - verbose logging
+  
 TODO:
+  - implement settings page and update corresponding icon in overlay
+  - play/record functionality with updated overlay icons(too much for a PoC)
   - center icons
+  - center rows
+
+  - table rendering of content
+    - will probably need the ability to use left and right buttons
+  - testing
+    - build simple test module just to get an idea of how it should work
+    - record results at some point
+    - record time spent and implement a setting to allow failure if past n time
+  - I would love to build a simple game
+  - integrate Yonde
+    - BUILD YONDE FIRST FOR FUCKS SAKE
+    - include memory consumption
+    - for first pass, write to the same file, overwrite it on startup
+  - games
+    - https://blog.prepscholar.com/2-player-card-games
+    - ./game0.txt
+
+COMPLETE:
+  - I havent gone down past 1 level deep on any menu yet
+    - functions and backspace(clicking back) also working in main menu only
   - render menu
   - switch between menu and overlay controls
+  - overlay with icons and delimiter rendering.

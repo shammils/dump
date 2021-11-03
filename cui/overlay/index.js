@@ -5,44 +5,8 @@
   TODO: add a 'view legend' option that explains what each icon means. I want to
   add an overlay menu and this would probably be a good item for it.
 */
-const chalk = require('chalk')
-const readline = require('readline')
-readline.emitKeypressEvents(process.stdin)
-
-if (process.stdin.isTTY) { process.stdin.setRawMode(true) }
-
-process.stdin.on('keypress', (str, key) => {
-  if (key.name === 'c' && key.ctrl) process.exit(0)
-  if (key.name === 'escape') {
-    // enter overlay mode. my ipega controller uses this key for one of its buttons
-    // so we need to watch for 'game' mode
-  }
-  // at the moment we probably want to only override CTRL + c and 'escape', so
-  // pass the key to the currently loaded module
-  state.modules[state.modules.length-1].onKeypress(str, key)
-});
-process.stdout.on('resize', () => {
-  //console.log(`screen size: ${process.stdout.columns}x${process.stdout.rows}`)
-  updateState('dimensions', {
-    columns: process.stdout.columns,
-    rows: process.stdout.rows,
-  })
-})
-// do not expose the state object to anyone, only the updateState method
-const state = {
-  modules: [],
-  interactionTarget: 'application', // 'overlay', 'application'
-  dimensions: {
-    columns: process.stdout.columns,
-    rows: process.stdout.rows,
-  },
-  overlay: {
-    playing: false,
-    recording: false,
-    mode: 'navigate',
-    location: 'home',
-  }
-}
+const MainMenu = require('./modules/mainMenu.js')
+const OverlayMenu = require('./modules/overlayMenu.js')
 // todo: put in its own file so we can do logging
 class ViewBuilder {
   constructor(type) {
@@ -72,14 +36,59 @@ class ViewBuilder {
   //get() {return this}
 }
 
-const MainMenu = require('./modules/mainMenu.js')
+const chalk = require('chalk')
+const readline = require('readline')
+readline.emitKeypressEvents(process.stdin)
+
+if (process.stdin.isTTY) { process.stdin.setRawMode(true) }
+
+process.stdin.on('keypress', (str, key) => {
+  if (key.name === 'c' && key.ctrl) process.exit(0)
+  if (key.name === 'escape') {
+    // enter overlay mode. my ipega controller uses this key for one of its buttons
+    // so we need to watch for 'game' mode
+    if (state.interactionTarget === 'applicationModules') {
+      // ???
+      state.interactionTarget = 'overlayModules'
+    } else {
+      // ???
+      state.interactionTarget = 'applicationModules'
+    }
+  }
+  // at the moment we probably want to only override CTRL + c and 'escape', so
+  // pass the key to the currently loaded module
+  state[state.interactionTarget][state[state.interactionTarget].length-1].onKeypress(str, key)
+});
+process.stdout.on('resize', () => {
+  //console.log(`screen size: ${process.stdout.columns}x${process.stdout.rows}`)
+  updateState('dimensions', {
+    columns: process.stdout.columns,
+    rows: process.stdout.rows,
+  })
+})
+// do not expose the state object to anyone, only the updateState method
+const state = {
+  applicationModules: [],
+  overlayModules: [],
+  interactionTarget: 'applicationModules', // 'overlay', 'application'
+  dimensions: {
+    columns: process.stdout.columns,
+    rows: process.stdout.rows,
+  },
+  playing: false,
+  recording: false,
+  mode: 'navigate',
+  location: 'home',
+}
 
 ;(async () => {
   // how about we call the .init function on every class after instantiating it?
   // its better than assuming .draw is the right one or something else.
   // TODO: logging
   const mainMenu = new MainMenu(updateState, updateStack, ViewBuilder)
-  state.modules.push(mainMenu)
+  state.applicationModules.push(mainMenu)
+  const overlayMenu = new OverlayMenu(updateState, updateStack, ViewBuilder)
+  state.overlayModules.push(overlayMenu)
   mainMenu.draw()
 })()
 // probably move the state stuff to its own file, like stateManager.js
@@ -181,22 +190,27 @@ function createOverlay() {
   // fuck it, I know the length is supposed to be 17 with 2 utf8 and 2 emoji, update
   // later
   const iconStringLength = 17
-  if (state.overlay.playing) iconArr.push(chalk.green(' ▶ '))
+  if (state.playing) iconArr.push(chalk.green(' ▶ '))
   else iconArr.push(' ▶ ')
-  if (state.overlay.recording) iconArr.push(chalk.red(' ● '))
+  if (state.recording) iconArr.push(chalk.red(' ● '))
   else iconArr.push(' ● ')
-  switch(state.overlay.mode) {
+  switch(state.mode) {
     case 'navigate': { iconArr.push(' 🔃 ') } break
     case 'input': { iconArr.push(' 🔤 ') } break
     case 'game': { iconArr.push(' 🎮 ') } break
     default: { console.log(`mode '${overlay.mode}' unsupported`);process.exit() } break
   }
-  switch(state.overlay.location) {
-    case 'home': { iconArr.push(' 🏠 ') } break
-    case 'benkyou': { iconArr.push(' 🈴 ') } break
-    case 'settings': { iconArr.push(' 🛠 ') } break
-    case 'game': { iconArr.push(' 🆚 ') } break
-    default: { console.log(`mode '${overlay.mode}' unsupported`);process.exit() } break
+  if (state.interactionTarget === 'overlayModules') {
+    iconArr.push(' 🔒 ')
+  } else {
+    // applicationModules is the only other option atm
+    switch(state.location) {
+      case 'home': { iconArr.push(' 🏠 ') } break
+      case 'benkyou': { iconArr.push(' 🈴 ') } break
+      case 'settings': { iconArr.push(' 🛠 ') } break
+      case 'game': { iconArr.push(' 🆚 ') } break
+      default: { console.log(`mode '${overlay.mode}' unsupported`);process.exit() } break
+    }
   }
   text += `${iconArr.join(' ')}\n`
   text += `${delimiter}\n`

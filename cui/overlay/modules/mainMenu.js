@@ -126,6 +126,7 @@ class MainMenu {
   onKeypress(str, key) {
     this.navigate(key)
   }
+  // TODO: R&D if its possible to move menu navigation to the parent.
   navigate(key) {
     const menuItem = this.stack[this.stack.length-1]
     const current = menuItem.options[this.currentRow]
@@ -137,6 +138,37 @@ class MainMenu {
     if (key.name === 'down') {
       if (this.currentRow < menuItem.options.length-1) {
         this.currentRow += 1
+      }
+    }
+    if (key.name === 'return') {
+      switch(current.type) {
+        case util.menuItemTypes.function: {
+          current.handler() // await?
+        } break
+        case util.menuItemTypes.select: {
+          this.stack.push(current)
+        } break
+        case util.menuItemTypes.menu: {
+          this.stack.push(current)
+          this.currentRow = 0
+        } break
+        case util.menuItemTypes.multiSelect: {
+          this.mode = util.modes.multiSelect
+          this.currentRow = 0
+          this.stack.push(current)
+        } break
+      }
+    }
+    if (key.name === 'backspace') {
+      if (this.stack.length > 1) {
+        // changing modes might not always be the right choice when clicking back
+        // but I cant think of any issues atm
+        this.mode = util.modes.navigate
+        // remove the last menu item from the stack
+        this.stack.pop()
+        // TODO: remember the last currentRow value so the user isnt back to the
+        // top of the previous menu
+        this.currentRow = 0
       }
     }
     this.draw()
