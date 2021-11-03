@@ -128,6 +128,7 @@ class MainMenu {
   }
   // TODO: R&D if its possible to move menu navigation to the parent.
   navigate(key) {
+    log('debug', `key hit: ${key.name}`)
     const menuItem = this.stack[this.stack.length-1]
     const current = menuItem.options[this.currentRow]
     if (key.name === 'up') {

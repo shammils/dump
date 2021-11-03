@@ -7,6 +7,7 @@
 */
 const MainMenu = require('./modules/mainMenu.js')
 const OverlayMenu = require('./modules/overlayMenu.js')
+const Logger = require('./lib/logger.js')
 // todo: put in its own file so we can do logging
 class ViewBuilder {
   constructor(type) {
@@ -35,6 +36,19 @@ class ViewBuilder {
 
   //get() {return this}
 }
+const logger = new Logger()
+function onLog(log) {
+  logger.log(log.module, log.level, log.message)
+  /*switch (log.level) {
+    case 'debug': { } break
+    case 'info': { console.log(`${new Date().toISOString()}: ${log.message}`) } break
+    case 'warn': { console.log(chalk.yellow(`${new Date().toISOString()}: ${log.message}`)) } break
+    case 'error': { console.log(chalk.red(`${new Date().toISOString()}: ${log.message}`)) } break
+    default:
+      throw `unsupported log level ${log.level}`
+  }*/
+}
+
 
 const chalk = require('chalk')
 const readline = require('readline')
@@ -86,8 +100,12 @@ const state = {
   // its better than assuming .draw is the right one or something else.
   // TODO: logging
   const mainMenu = new MainMenu(updateState, updateStack, ViewBuilder)
+  // this pattern doesnt make too much sense in this infrastructure tbqh. I want
+  // something different.
+  mainMenu.on('log', onLog)
   state.applicationModules.push(mainMenu)
   const overlayMenu = new OverlayMenu(updateState, updateStack, ViewBuilder)
+  overlayMenu.on('log', onLog)
   state.overlayModules.push(overlayMenu)
   mainMenu.draw()
 })()

@@ -5,9 +5,12 @@ IDEAS:
   - CTRL + i to go to the Aibo Text Input Mode page
 
 IN_PROGRESS:
-  - verbose logging
-  
+
 TODO:
+  - testing
+    - build simple test module just to get an idea of how it should work
+    - record results at some point
+    - record time spent and implement a setting to allow failure if past n time
   - implement settings page and update corresponding icon in overlay
   - play/record functionality with updated overlay icons(too much for a PoC)
   - center icons
@@ -15,10 +18,6 @@ TODO:
 
   - table rendering of content
     - will probably need the ability to use left and right buttons
-  - testing
-    - build simple test module just to get an idea of how it should work
-    - record results at some point
-    - record time spent and implement a setting to allow failure if past n time
   - I would love to build a simple game
   - integrate Yonde
     - BUILD YONDE FIRST FOR FUCKS SAKE
@@ -29,6 +28,8 @@ TODO:
     - ./game0.txt
 
 COMPLETE:
+  - verbose logging
+    - plubming created at least. tail -f ~/projects/dump/cui/overlay/logs/log.txt
   - I havent gone down past 1 level deep on any menu yet
     - functions and backspace(clicking back) also working in main menu only
   - render menu

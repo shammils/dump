@@ -4,3 +4,4 @@
 *.amrwb
 */data/*
 */temp/*
+cui/overlay/logs/*
