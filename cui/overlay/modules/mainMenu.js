@@ -6,12 +6,16 @@ const RTSK = require('./rootyTootyShootyKabooty.js')
 const ViewBuilder = require('../lib/viewBuilder.js')
 
 let _self
-function log(level, message) { _self.emit("log",{module:'mainMenu',level,message})}
+//function log(level, message) { _self.emit("log",{module:'mainMenu',level,message})}
 
 class MainMenu {
-  constructor(updateState, updateStack) {
+  constructor(updateState, updateStack, onLog) {
     _self = this
     this.name = 'Main'
+    // saving this copy to pass to children
+    this.onLog = onLog
+    // using the saved copy
+    this.log = (level, message) => { this.onLog('main', level, message) }
     // functions to manipulate state & view
     this.updateState = updateState
     this.updateStack = updateStack
@@ -27,7 +31,7 @@ class MainMenu {
           name: 'RTSK',
           type: util.menuItemTypes.function,
           handler: () => {
-            const rootinTootin = new RTSK(this.updateState, this.updateStack)
+            const rootinTootin = new RTSK(this.updateState, this.updateStack, this.onLog)
             updateStack('add', rootinTootin)
             setTimeout(() => {rootinTootin.draw()}, 10)
             /*
@@ -148,7 +152,7 @@ class MainMenu {
   }
   // TODO: R&D if its possible to move menu navigation to the parent.
   navigate(key) {
-    log('debug', `key hit: ${key.name}`)
+    this.log('debug', `key hit: ${key.name}`)
     const menuItem = this.stack[this.stack.length-1]
     const current = menuItem.options[this.currentRow]
     if (key.name === 'up') {

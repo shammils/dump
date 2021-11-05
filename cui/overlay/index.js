@@ -11,8 +11,8 @@ const Logger = require('./lib/logger.js')
 // todo: put in its own file so we can do logging
 
 const logger = new Logger()
-function onLog(log) {
-  logger.log(log.module, log.level, log.message)
+function onLog(moduleName, level, message) {
+  logger.log(moduleName, level, message)
   /*switch (log.level) {
     case 'debug': { } break
     case 'info': { console.log(`${new Date().toISOString()}: ${log.message}`) } break
@@ -73,13 +73,13 @@ const state = {
   // how about we call the .init function on every class after instantiating it?
   // its better than assuming .draw is the right one or something else.
   // TODO: logging
-  const mainMenu = new MainMenu(updateState, updateStack)
+  const mainMenu = new MainMenu(updateState, updateStack, onLog)
   // this pattern doesnt make too much sense in this infrastructure tbqh. I want
   // something different.
-  mainMenu.on('log', onLog)
+  //mainMenu.on('log', onLog)
   state.applicationModules.push(mainMenu)
-  const overlayMenu = new OverlayMenu(updateState, updateStack)
-  overlayMenu.on('log', onLog)
+  const overlayMenu = new OverlayMenu(updateState, updateStack, onLog)
+  //overlayMenu.on('log', onLog)
   state.overlayModules.push(overlayMenu)
   mainMenu.draw()
 })()
@@ -137,6 +137,12 @@ function updateState(property, value) {
 // the idea is that this method will always build the overlay and potentially
 // build whatever the current interface is requesting.
 function render() {
+  onLog('index', 'debug', 'rendering')
+  if (state[state.interactionTarget][state[state.interactionTarget].length-1].name === 'Rooty Tooty Shooty Kabooty' &&
+  state[state.interactionTarget][state[state.interactionTarget].length-1].state === 'playing') {
+    console.log(state.currentView.rows)
+    process.exit()
+  }
   /*
   we have to handle line breaks properly if we want to be able to infinite
   scroll/page when the view's height is more than the device's height.
@@ -181,6 +187,7 @@ function print(text) {
   process.stdout.write(text)
 }
 function createOverlay() {
+  onLog('index', 'debug', 'creating overlay')
   let text = ''
   let iconArr = []
   let delimiter = Array(state.dimensions.columns).fill('_').join('')

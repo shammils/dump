@@ -1,11 +1,12 @@
-IDEAS:
+7yhbh7h7yIDEAS:
   - how about CTRL + j for jap speech input, CTRL + e for english? how do we tell
     it what it should output??
   - CTRL + s to save on settings pages
   - CTRL + i to go to the Aibo Text Input Mode page
 
 IN_PROGRESS:
-
+  - logging not functional in game class. set that up so you can get bullet animation
+    working
 TODO:
   - testing
     - build simple test module just to get an idea of how it should work
