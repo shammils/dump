@@ -5,11 +5,14 @@
   - CTRL + i to go to the Aibo Text Input Mode page
 
 IN_PROGRESS:
-  - logging not functional in game class. set that up so you can get bullet animation
-    working
-TODO:
   - testing
     - build simple test module just to get an idea of how it should work
+      - going to need settings page operational for this to work
+  - games
+    - Rooty Tooty Shooty Kabooty
+
+TODO:
+  - testing
     - record results at some point
     - record time spent and implement a setting to allow failure if past n time
   - implement settings page and update corresponding icon in overlay
@@ -27,8 +30,16 @@ TODO:
   - games
     - https://blog.prepscholar.com/2-player-card-games
     - ./game0.txt
+  - indicators
+    - loading bars, etc. create them as a class, imported and simply updated to
+      show progress. EX.
+        const bar = new Indicator('loadingBar')
+        bar.progress = 0
+        bar.progress = 50
+        bar.progress = 100 // done?
 
 COMPLETE:
+  - (BUG)logging not functional in game class. set that up so you can get bullet animation
   - verbose logging
     - plubming created at least. tail -f ~/projects/dump/cui/overlay/logs/log.txt
   - I havent gone down past 1 level deep on any menu yet

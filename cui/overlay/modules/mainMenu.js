@@ -4,7 +4,7 @@ const EventEmitter = require('events').EventEmitter
 const util = require('../lib/util.js')
 const RTSK = require('./rootyTootyShootyKabooty.js')
 const ViewBuilder = require('../lib/viewBuilder.js')
-
+const SettingsMenu = require('./settings.js')
 let _self
 //function log(level, message) { _self.emit("log",{module:'mainMenu',level,message})}
 
@@ -50,13 +50,8 @@ class MainMenu {
           name: 'Translate',
           type: util.menuItemTypes.function,
           handler: () => {
-            const translateMenu = new TranslateMenu(this.menuStack, this.render)
-            this.menuStack.push(translateMenu)
-            // HACK: put the render call in a setTimeout function to allow the
-            // processing loop to draw core's view first, then the intended translate
-            // view after. Trying to draw translate's view without the setTimeout
-            // fails with core's view rendered on top.
-            setTimeout(() => {this.render()}, 10)
+            console.log('nothing here')
+            process.exit(0)
           },
         },
         {
@@ -67,38 +62,44 @@ class MainMenu {
               name: 'Nan Ji',
               type: util.menuItemTypes.function,
               handler: () => {
-                const settingsMenu = new SettingsMenu(
-                  this.menuStack,
-                  helper.menuConfiguration['Nan Ji'],
-                  {
-                    name: 'Start Test',
-                    type: util.menuItemTypes.function,
-                    handler: (params) => {
-                      const nanji = new NanjiMenu(this.menuStack, this.render, params)
-                      this.menuStack.push(nanji)
-                      nanji.init()
-                    }
-                  },
-                  {
-                    name: 'Cancel',
-                    type: util.menuItemTypes.function,
-                    handler: () => {
-                      this.menuStack.pop()
-                      setTimeout(() => {this.render()}, 10)
-                    }
-                  }
-                )
-                // add settings menu to the stack
-                this.menuStack.push(settingsMenu)
-                setTimeout(() => {this.render()}, 10)
+                console.log('nothing here')
+                process.exit(0)
               },
             },
             {
               name: 'Kotoba',
               type: util.menuItemTypes.function,
               handler: () => {
-                console.log('nothing here')
-                process.exit(0)
+                const settingsMenu = new SettingsMenu(
+                  this.updateState,
+                  this.updateStack,
+                  this.onLog,
+                  util.menuConfiguration['kotoba'],
+                  {
+                    name: chalk.green.bold('Start Test ->'),
+                    type: util.menuItemTypes.function,
+                    handler: (params) => {
+                      console.log('starting kotoba test!')
+                      process.exit(0)
+                      // this.updateStack('remove') // remove the settings menu
+                      // this.updateStack('add', kotobaTestModule)
+                      //const nanji = new NanjiMenu(this.menuStack, this.render, params)
+                      //this.menuStack.push(nanji)
+                      //nanji.init()
+                    }
+                  },
+                  {
+                    name: chalk.red.bold(' <- Cancel'),
+                    type: util.menuItemTypes.function,
+                    handler: () => {
+                      this.updateStack('remove')
+                      setTimeout(() => {this.draw()}, 10)
+                    }
+                  }
+                )
+                // add settings menu to the stack
+                this.updateStack('add', settingsMenu)
+                setTimeout(() => {settingsMenu.draw()}, 10)
               },
             },
             {

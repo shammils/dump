@@ -167,7 +167,18 @@ function render() {
         text += `${r.value}\n`
       }
     }
-    if (r.type === 'menu' || r.type === 'list') {
+    if (r.type === 'menu') {
+      r.options.forEach(el => {
+        let value = ''
+        if (el.value != null) {
+          // do decoration for value types at some point.
+          value = ` - '${el.value}'`
+        }
+        if (el.selected) text += chalk.underline.bold(`> ${el.name}${value}\n`)
+        else text += `  ${el.name}${value}\n`
+      })
+    }
+    if (r.type === 'list') {
       r.options.forEach(el => {
         if (el.selected) text += chalk.underline.bold(`> ${el.name}\n`)
         else text += `  ${el.name}\n`
