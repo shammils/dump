@@ -1,0 +1,7 @@
+<svg version="1.1"
+     width="350" height="350"
+     xmlns="http://www.w3.org/2000/svg">
+     <rect width="100%" height="100%" fill="black" />
+     <text x="10" y="20" fill="white" font-size="20">Name: Maria Schnieder</text>
+     <text x="10" y="40" fill="white" font-size="20">Travel Count: 3</text>
+</svg>

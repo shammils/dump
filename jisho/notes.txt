@@ -1,0 +1,23 @@
+
+https://jisho.org/search/%E8%87%AA%E8%BB%A2%E8%BB%8A%20%23sentences
+
+https://jisho.org/search/水%20%23sentences
+
+FUCK YEAH! by combining
+
+> https://jisho.org/search/
+
+plus
+
+> 水
+
+and
+
+> %20%23sentences
+
+you can search for sentences for all kanji!!! time to scrape every sentence this
+site has to offer and by adding
+
+> ?page=integer
+
+paging. I wonder what the last page looks like

@@ -5,9 +5,16 @@ const ViewBuilder = require('../../lib/viewBuilder.js')
 const createTestSuite = (data) => {
   /*
     Test Types:
-      - show *kana, user selects english? shit
+      - show kana/english, user selects kana/english shit
+        - problem is pool of incorrect options is nil atm
         - instruction: 'Select Answer'
-      - show
+      - speak nihongo/english, user selects kana/english
+        - clearly need to make sure not to speak english and select english
+      - speak question, user inputs romanji/english
+        - instruction: 'Input Romanji/English Answer'
+
+      *future
+      - question proposed any way, user speaks answer
   */
 }
 
