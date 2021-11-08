@@ -2,7 +2,20 @@ const util = require('../../lib/util.js')
 const chalk = require('chalk')
 const ViewBuilder = require('../../lib/viewBuilder.js')
 
-const createTestSuite = (data) => {
+// TODO: make this generic enough to move the the testBuilder/testHelper util
+// and be used my other test modules
+const createTestSuite = (params) => {
+  const test = {
+    index: 0,
+    inProgress: true, // either doing test or its over atm
+    questions: [],
+    metrics: {
+      start: null,
+      end: null,
+      correct: 0,
+      // TODO: add question specific metrics
+    }
+  }
   /*
     Test Types:
       - show kana/english, user selects kana/english shit
@@ -16,6 +29,43 @@ const createTestSuite = (data) => {
       *future
       - question proposed any way, user speaks answer
   */
+
+  // ignore params, question and answer types for now, just show text and select
+  // from a list of options, even if we have to put 1s and 0s as the incorrect
+  // options
+
+  // shuffle the test data every time for now
+  util.shuffle(params.testData)
+  // these currently match the prop names of the mockup test, should it stay
+  // that way?
+
+  for (let i = 0; i < params.testData.length; i++) {
+    const wordOptions = ['kanji','furigana','romanji','english']
+    const questionIndex = Math.floor(Math.random() * wordOptions.length)
+    const questionType = wordOptions[questionIndex]
+
+    wordOptions.splice(questionIndex, questionIndex+1)
+    const answerIndex = Math.floor(Math.random() * wordOptions.length)
+    const answerType = wordOptions[answerIndex]
+
+    const question = {
+      type: util.menuItemTypes.select,
+      value: params.testData[i][questionType][0],
+      instruction: `Select the correct answer`,
+      options: util.shuffle([
+        {
+          value: params.testData[i][answerType][0],
+          correct: true,
+          sentence: params.testData[i].sentences[0]
+        },
+        { value: '0' },
+        { value: 'dog' },
+        { value: 'butt' },
+      ])
+    }
+    test.questions.push(question)
+  }
+  return test
 }
 
 class KotobaTest {
@@ -27,6 +77,39 @@ class KotobaTest {
     this.log = (level, message) => { this.onLog('kotoba', level, message) }
     this.updateState = updateState
     this.updateStack = updateStack
+
+    // these types can probably go in the testHelper... tabun
+    this.questionTypes = {
+      'audible': {
+
+      },
+      'text': {
+
+      }
+    }
+    this.answerTypes = {
+      // 'audible': {} // next version
+      'input': {
+        instruction: 'Use keyboard to input answer',
+      },
+      'list': {
+        instruction: 'Select answer from list',
+      },
+      //'textGrid': { instruction: 'Select options to build answer' },
+    }
+
+    this.test = createTestSuite({
+      testData: getData().data, // how tf is this going to work properly
+      options: params, // how many questions, difficulty, etc
+      questionTypes: this.questionTypes,
+      answerTypes: this.answerTypes,
+    })
+
+    // I could scope this var to the question, but meh
+    this.row = 0
+  }
+  evaluateResponse() {
+
   }
   onKeypress(str, key) {
     this.navigate(key)
@@ -42,7 +125,29 @@ class KotobaTest {
   }
   draw() {
     const vb = new ViewBuilder('list')
-
+    // breadcrumbs still broken since I dont have access to the fucking stack...
+    // what was I thinking
+    vb.append({ type: 'static', style: 'breadcrumb', value: this.name })
+    if (this.test.inProgress) {
+      // show the question
+      const question = this.test.questions[this.test.index]
+      // TODO: center
+      vb.append({ type: 'static', style: 'bold', value: `kotai: '${question.value}'` })
+      // add current instructions
+      vb.append({ type: 'static', value: question.instruction })
+      // render options(we're assuming list for now)
+      const menu = { type:'menu', options:[]}
+      for (let i = 0; i < question.options.length; i++) {
+        menu.options.push({
+          name: question.options[i].value,
+          selected: this.row === i,
+        })
+      }
+      vb.append(menu)
+    } else {
+      // test complete, show final result
+      vb.append({ type: 'static', style: 'error', value: 'nothing here' })
+    }
     this.updateState('currentView', vb)
   }
   reset() {}

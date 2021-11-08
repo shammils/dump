@@ -13,6 +13,7 @@ IN_PROGRESS:
 
 TODO:
   - testing
+    - add emojis where possible. like 📕 = hon, 👜 = kaban, so on 
     - record results at some point
     - record time spent and implement a setting to allow failure if past n time
   - implement settings page and update corresponding icon in overlay

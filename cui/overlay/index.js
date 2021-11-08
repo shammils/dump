@@ -162,12 +162,14 @@ function render() {
     if (r.type === 'static') {
       // apply styles
       if (r.style) {
+        if (r.style === 'bold') { text += `${chalk.bold(r.value)}\n` }
         if (r.style === 'breadcrumb') { text += `${chalk.cyan.bold(r.value)}\n` }
+        if (r.style === 'error') { text += `${chalk.red.bold(r.value)}\n` }
       } else {
         text += `${r.value}\n`
       }
     }
-    if (r.type === 'menu') {
+    if (r.type === 'list') {
       r.options.forEach(el => {
         let value = ''
         if (el.value != null) {
@@ -178,7 +180,7 @@ function render() {
         else text += `  ${el.name}${value}\n`
       })
     }
-    if (r.type === 'list') {
+    if (r.type === 'menu') {
       r.options.forEach(el => {
         if (el.selected) text += chalk.underline.bold(`> ${el.name}\n`)
         else text += `  ${el.name}\n`

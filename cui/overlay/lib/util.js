@@ -21,6 +21,7 @@ const api = {
     multiSelect: 'multi-select',
     boolean: 'boolean',
     input: 'input',
+    grid: 'grid', // supports left and right
   },
   dataTypes: {
     function: 'function',
@@ -60,6 +61,18 @@ const api = {
       crumbs = `...${crumbs.substring(crumbs.length-maxLength, crumbs.length-1)}`
     }
     return crumbs
+  },
+  shuffle: array => {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
   },
   // keep this at the bottom for readablility reasons
   menuConfiguration: {

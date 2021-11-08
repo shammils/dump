@@ -5,6 +5,7 @@ const util = require('../lib/util.js')
 const RTSK = require('./rootyTootyShootyKabooty.js')
 const ViewBuilder = require('../lib/viewBuilder.js')
 const SettingsMenu = require('./settings.js')
+const KotobaTest = require('./tests/kotoba.js')
 let _self
 //function log(level, message) { _self.emit("log",{module:'mainMenu',level,message})}
 
@@ -79,13 +80,10 @@ class MainMenu {
                     name: chalk.green.bold('Start Test ->'),
                     type: util.menuItemTypes.function,
                     handler: (params) => {
-                      console.log('starting kotoba test!')
-                      process.exit(0)
-                      // this.updateStack('remove') // remove the settings menu
-                      // this.updateStack('add', kotobaTestModule)
-                      //const nanji = new NanjiMenu(this.menuStack, this.render, params)
-                      //this.menuStack.push(nanji)
-                      //nanji.init()
+                      this.updateStack('remove') // remove the settings menu
+                      const kotoba = new KotobaTest(this.updateState, this.updateStack, onLog, params)
+                      this.updateStack('add', kotoba) // add the test module
+                      setTimeout(() => {kotoba.draw()}, 10)
                     }
                   },
                   {
