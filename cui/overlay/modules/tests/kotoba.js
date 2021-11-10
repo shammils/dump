@@ -7,8 +7,9 @@ const ViewBuilder = require('../../lib/viewBuilder.js')
 const createTestSuite = (params) => {
   const test = {
     index: 0,
-    inProgress: true, // either doing test or its over atm
-    questions: [],
+    state: 'asking', // asking, answered, completed
+    isCorrect: null,
+    options: [],
     metrics: {
       start: null,
       end: null,
@@ -63,7 +64,7 @@ const createTestSuite = (params) => {
         { value: 'butt' },
       ])
     }
-    test.questions.push(question)
+    test.options.push(question)
   }
   return test
 }
@@ -107,6 +108,11 @@ class KotobaTest {
 
     // I could scope this var to the question, but meh
     this.row = 0
+    this.testState = {
+      asking: 'asking',
+      answered: 'answered',
+      completed: 'completed',
+    }
   }
   evaluateResponse() {
 
@@ -115,12 +121,46 @@ class KotobaTest {
     this.navigate(key)
   }
   navigate(key) {
-    if (key.name === 'up') {}
-    if (key.name === 'down') {}
-    if (key.name === 'return') {}
-    if (key.name === 'backspace') {}
-    if (key.name === 'space') {}
+    const question = this.test.options[this.test.index]
+    if (question.type !== util.menuItemTypes.select &&
+    question.type !== util.menuItemTypes.grid) {
+      console.log(`we dont support type ${this.question.type} during naviation`)
+      process.exit(0)
+    }
+    if (key.name === 'up') {
+      if (this.row > 0) {
+        this.row -= 1
+      }
+    }
+    if (key.name === 'down') {
+      if (this.row < question.options.length-1) {
+        this.row += 1
+      }
+    }
+    // enter and space should work the same on lists
+    if (key.name === 'return' ||
+    key.name === 'space') {
+      if (this.test.state === this.testState.answered) {
+        // user was shown the question results
+        this.row = 0
+        this.test.index += 1
+        this.test.isCorrect = null
+        this.test.state = this.testState.asking
+      } else {
+        // show them their results
+        const selected = question.options[this.test.index]
+        this.test.isCorrect = selected.correct
+        this.test.state = this.testState.answered
+        if (selected.correct) {
+          this.log('info', `correct answer selected: ${selected.value}`)
+        } else {
+          const correctAnswer = question.options.find(x => x.correct)
+          this.log('info', `incorrect answer selected: '${selected.value}'. correct answer was '${correctAnswer.value}'`)
+        }
+      }
 
+    }
+    if (key.name === 'backspace') {}
     this.draw()
   }
   draw() {
@@ -128,10 +168,9 @@ class KotobaTest {
     // breadcrumbs still broken since I dont have access to the fucking stack...
     // what was I thinking
     vb.append({ type: 'static', style: 'breadcrumb', value: this.name })
-    if (this.test.inProgress) {
-      // show the question
-      const question = this.test.questions[this.test.index]
-      // TODO: center
+    if (this.test.state === this.testState.asking) {
+      const question = this.test.options[this.test.index]
+      // show the question TODO: center
       vb.append({ type: 'static', style: 'bold', value: `kotai: '${question.value}'` })
       // add current instructions
       vb.append({ type: 'static', value: question.instruction })
@@ -144,6 +183,10 @@ class KotobaTest {
         })
       }
       vb.append(menu)
+    } else if (this.test.state === this.testState.answered) {
+      const question = this.test.options[this.test.index]
+      if (this.test.isCorrect) vb.append({ type: 'static', style: 'success', value: 'SEKAI' })
+      else vb.append({ type: 'static', style: 'error', value: `CHIGAU, correct answer was '${question.options.find(x => x.correct).value}'` })
     } else {
       // test complete, show final result
       vb.append({ type: 'static', style: 'error', value: 'nothing here' })

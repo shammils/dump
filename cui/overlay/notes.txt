@@ -7,13 +7,13 @@
 IN_PROGRESS:
   - testing
     - build simple test module just to get an idea of how it should work
-      - going to need settings page operational for this to work
+      - going to need settings page operational for this to work (COMPLETE)
   - games
     - Rooty Tooty Shooty Kabooty
 
 TODO:
   - testing
-    - add emojis where possible. like 📕 = hon, 👜 = kaban, so on 
+    - add emojis where possible. like 📕 = hon, 👜 = kaban, so on
     - record results at some point
     - record time spent and implement a setting to allow failure if past n time
   - implement settings page and update corresponding icon in overlay
