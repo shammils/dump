@@ -1,4 +1,4 @@
-7yhbh7h7yIDEAS:
+IDEAS:
   - how about CTRL + j for jap speech input, CTRL + e for english? how do we tell
     it what it should output??
   - CTRL + s to save on settings pages
@@ -10,6 +10,9 @@ IN_PROGRESS:
       - going to need settings page operational for this to work (COMPLETE)
   - games
     - Rooty Tooty Shooty Kabooty
+  - integrate Yonde
+    - starting simple, so lets just get the text mode page accepting text? that
+      sounds like way more than I think it is. lets just start it
 
 TODO:
   - testing

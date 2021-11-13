@@ -63,7 +63,7 @@ const state = {
     columns: process.stdout.columns,
     rows: process.stdout.rows,
   },
-  playing: false,
+  speakOn: true,
   recording: false,
   mode: 'navigate',
   location: 'home',
@@ -210,8 +210,8 @@ function createOverlay() {
   // fuck it, I know the length is supposed to be 17 with 2 utf8 and 2 emoji, update
   // later
   const iconStringLength = 17
-  if (state.playing) iconArr.push(chalk.green(' ▶ '))
-  else iconArr.push(' ▶ ')
+  if (state.speakOn) iconArr.push(chalk.green(' 🗣 '))
+  else iconArr.push(' 🔇 ')
   if (state.recording) iconArr.push(chalk.red(' ● '))
   else iconArr.push(' ● ')
   switch(state.mode) {
