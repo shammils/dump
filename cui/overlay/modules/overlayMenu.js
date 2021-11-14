@@ -82,6 +82,13 @@ class OverlayMenu {
         this.currentRow += 1
       }
     }
+    if (key.name === 'return') {
+      switch(current.type) {
+        case util.menuItemTypes.function: {
+          current.handler()
+        } break
+      }
+    }
     // how about if we press the space bar, we start recording voice?? command
     // mode of course
     this.draw()

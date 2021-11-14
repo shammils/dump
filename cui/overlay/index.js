@@ -165,6 +165,9 @@ function render() {
         if (r.style === 'bold') { text += `${chalk.bold(r.value)}\n` }
         if (r.style === 'breadcrumb') { text += `${chalk.cyan.bold(r.value)}\n` }
         if (r.style === 'error') { text += `${chalk.red.bold(r.value)}\n` }
+        if (r.style === 'success') { text += `${chalk.green.bold(r.value)}\n` }
+        if (r.style === 'ore') { text += `${chalk.blue(r.value)}\n` }
+        if (r.style === 'aibo') { text += `${chalk.bgBlue(r.value)}\n` }
       } else {
         text += `${r.value}\n`
       }

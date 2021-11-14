@@ -74,6 +74,20 @@ const api = {
     }
     return array;
   },
+  getKakeruData: () => {
+    let data = {conversation:[]}
+    if (fs.existsSync('./kakeruData.json')) {
+      data = JSON.parse(
+        Buffer.from(
+          fs.readFileSync('./kakeruData.json', {encoding:'utf8'})
+        ).toString('utf8')
+      )
+    }
+    return data
+  },
+  saveKakeruData: (data) => {
+    return fs.writeFileSync('./kakeruData.json', JSON.stringify(data), {encoding:'utf8'})
+  },
   // keep this at the bottom for readablility reasons
   menuConfiguration: {
     'nan ji': [

@@ -6,6 +6,8 @@ const RTSK = require('./rootyTootyShootyKabooty.js')
 const ViewBuilder = require('../lib/viewBuilder.js')
 const SettingsMenu = require('./settings.js')
 const KotobaTest = require('./tests/kotoba.js')
+const Kakeru = require('./kakeru.js')
+
 let _self
 //function log(level, message) { _self.emit("log",{module:'mainMenu',level,message})}
 
@@ -119,11 +121,12 @@ class MainMenu {
           ]
         },
         {
-          name: 'Text Mode',
+          name: 'Kakeru',
           type: util.menuItemTypes.function,
           handler: () => {
-            console.log('interfacing directly with Yonde goes here')
-            process.exit(0)
+            const kakeru = new Kakeru(this.updateState, this.updateStack, onLog)
+            this.updateStack('add', kakeru)
+            setTimeout(() => {kakeru.draw()}, 10)
           }
         },
         {
