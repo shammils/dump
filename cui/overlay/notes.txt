@@ -7,12 +7,6 @@ IDEAS:
 IN_PROGRESS:
   - testing
     - build simple test module just to get an idea of how it should work
-      - going to need settings page operational for this to work (COMPLETE)
-  - games
-    - Rooty Tooty Shooty Kabooty
-  - integrate Yonde
-    - starting simple, so lets just get the text mode page accepting text? that
-      sounds like way more than I think it is. lets just start it
 
 TODO:
   - testing
@@ -32,6 +26,7 @@ TODO:
     - include memory consumption
     - for first pass, write to the same file, overwrite it on startup
   - games
+    - Rooty Tooty Shooty Kabooty
     - https://blog.prepscholar.com/2-player-card-games
     - ./game0.txt
   - indicators
@@ -51,3 +46,7 @@ COMPLETE:
   - render menu
   - switch between menu and overlay controls
   - overlay with icons and delimiter rendering.
+  - integrate Yonde
+    - Build Kakeru page, first pass basic shit
+  - testing
+    - going to need settings page operational for this to work (COMPLETE)
