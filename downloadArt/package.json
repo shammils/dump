@@ -1,0 +1,16 @@
+{
+  "name": "downloadart",
+  "version": "0.0.0",
+  "description": "Imports content into wix site in DownloadArt fashion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shammils",
+  "license": "ISC",
+  "dependencies": {
+    "follow-redirects": "^1.14.5",
+    "fs-extra": "^10.0.0",
+    "klaw": "^4.0.1"
+  }
+}

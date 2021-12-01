@@ -6,6 +6,7 @@ class BaseModule {
     this.si = iState
     this.onLog = onLog
     this.log = (level, message) => { this.onLog('base', level, message) }
+    this.view = 'test'
   }
   // get the name array for breadcrumbs
   get stackNameArray() {
@@ -44,29 +45,32 @@ class BaseModule {
     const iconStringLength = 17
     if (this.iState.get('speakOn')) iconArr.push(chalk.green(' 🗣 '))
     else iconArr.push(' 🔇 ')
-    if (state.recording) iconArr.push(chalk.red(' ● '))
+    if (this.iState.get('recording')) iconArr.push(chalk.red(' ● '))
     else iconArr.push(' ● ')
-    switch(state.mode) {
+    switch(this.iState.get('mode')) {
       case 'navigate': { iconArr.push(' 🔃 ') } break
       case 'input': { iconArr.push(' 🔤 ') } break
       case 'game': { iconArr.push(' 🎮 ') } break
-      default: { console.log(`mode '${overlay.mode}' unsupported`);process.exit() } break
+      default: { console.log(`mode '${this.iState.get('mode')}' unsupported`);process.exit() } break
     }
-    if (state.interactionTarget === 'overlayModules') {
+    if (this.iState.get('interactionTarget') === 'overlayModules') {
       iconArr.push(' 🔒 ')
     } else {
       // applicationModules is the only other option atm
-      switch(state.location) {
+      switch(this.iState.get('location')) {
         case 'home': { iconArr.push(' 🏠 ') } break
         case 'benkyou': { iconArr.push(' 🈴 ') } break
         case 'settings': { iconArr.push(' 🛠 ') } break
         case 'game': { iconArr.push(' 🆚 ') } break
-        default: { console.log(`mode '${overlay.mode}' unsupported`);process.exit() } break
+        default: { console.log(`mode '${this.iState.get('location')}' unsupported`);process.exit() } break
       }
     }
     text += `${iconArr.join(' ')}\n`
     text += `${delimiter}\n`
     return text
+  }
+  draw() {
+    this.view = []
   }
   render() {
     const overlay = this.createOverlay()
