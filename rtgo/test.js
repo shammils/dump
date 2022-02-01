@@ -30,10 +30,74 @@ function log(log) {
   }
 }
 
-temp()
+//temp()
 async function temp() {
   //console.log(await gooten.listPRPProducts())
   console.log(await gooten.listPRPProductVariants({productName:'Throw Pillows test'}))
+  process.exit()
+}
+
+updateVariants()
+async function updateVariants() {
+  // this method is extremely fucked and has a lot of issues. god help you if you
+  // ever need to run this more than once.
+
+  // get test run product from shopify
+  const product = await shopify.getProducts({ids:['7274751983771']})
+  console.log('product', JSON.stringify(product, ' ', 2))
+
+  // get inventory items
+  //const inventoryItems = await shopify.getInventoryItems([product[0].variants[0].inventory_item_id])
+  //console.log('inItems', JSON.stringify(inventoryItems, ' ', 2))
+
+  // update existing variant
+  await util.delay(200)
+  const updateVariantResult = await shopify.updateVariant(product[0].variants[0].id, {
+    variant: {
+      title: 'USED',
+      option1: 'USED',
+    }
+  })
+  console.log('update variant result', JSON.stringify(updateVariantResult, ' ', 2))
+  process.exit()
+
+  // create new sku from existing sku
+  const sku = product[0].variants[0].sku.replace('USD', 'NEW')
+  console.log('new sku', sku)
+
+  // create variant
+  await util.delay(200)
+  const createVariantResult = await shopify.createVariant(product[0].id, {
+    title: 'NEW',
+    product_id: product[0].id,
+    price: 15.99,
+    sku,
+    inventory_policy: 'deny',
+    compare_at_price: null,
+    fulfillment_service: 'manual',
+    inventory_management: 'shopify',
+    option1: 'NEW',
+    option2: null,
+    option3: null,
+    taxable: true,
+    barcode: '',
+    //grams: 136,
+    weight: 3.0,
+    weight_unit: 'oz',
+    //inventory_quantity: 0,
+    requires_shipping: true,
+  })
+  console.log('create var res', JSON.stringify(createVariantResult, ' ', 2))
+
+  // update inventory item
+  await util.delay(200)
+  const updateItemResult = await shopify.updateInventoryItem(createVariantResult.variant.inventory_item_id, {
+    inventory_item: {
+      id: createVariantResult.variant.inventory_item_id,
+      country_code_of_origin: "US"
+    }
+  })
+  console.log('update inventory item result', JSON.stringify(updateItemResult, ' ', 2))
   process.exit()
 }
 
