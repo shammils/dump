@@ -70,7 +70,7 @@ async function updateVariants() {
   const createVariantResult = await shopify.createVariant(product[0].id, {
     title: 'NEW',
     product_id: product[0].id,
-    price: 15.99,
+    price: 12.99,
     sku,
     inventory_policy: 'deny',
     compare_at_price: null,
