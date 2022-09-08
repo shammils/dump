@@ -106,8 +106,31 @@ class MainMenu {
               name: 'Kanji',
               type: util.menuItemTypes.function,
               handler: () => {
-                console.log('nothing here')
-                process.exit(0)
+                const settingsMenu = new SettingsMenu(
+                  this.updateState,
+                  this.updateStack,
+                  this.onLog,
+                  util.menuConfiguration['kanji'],
+                  {
+                    name: chalk.green.bold('Hajemeru ->'),
+                    type: util.menuItemTypes.function,
+                    handler: (params) => {
+                      console.log('kanji start')
+                      process.exit(0)
+                    }
+                  },
+                  {
+                    name: chalk.red.bold(' <- Cancel'),
+                    type: util.menuItemTypes.function,
+                    handler: () => {
+                      this.updateStack('remove')
+                      setTimeout(() => {this.draw()}, 10)
+                    }
+                  },
+                )
+                // add settings menu to the stack
+                this.updateStack('add', settingsMenu)
+                setTimeout(() => {settingsMenu.draw()}, 10)
               },
             },
             {
