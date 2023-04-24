@@ -1,0 +1,134 @@
+{
+  "label": "MX101x L2: Dialogue Taxi",
+  "groups": ["Language","Mandarin","MX101x","Lesson 2"],
+  "mediaTypes": ["text","html"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 2: Dialogue Taking a Taxi, Traditional",
+  "data": [
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>你好,我要去飯店,這是地址。<br />Nǐ hǎo, wǒ yào qù fàn diàn, zhè shì dì zhǐ.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Hello. I’d like to go to a hotel. Here’s the address.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>司机:</div><div style='display:inline;width:80%;float:right;'>你的中文很好!<br />Nǐ de Zhōng wén hěn hǎo!</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>You speak Chinese really well!</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>謝謝!<br />Xiè xie!</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Thank you.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>司机:</div><div style='display:inline;width:80%;float:right;'>你從哪裡來?<br />Nǐ cóng nǎ lǐ lái?</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Where are you from?</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>我從美國來。<br />Wǒ cóng Měi guó lái.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>I come from the USA.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>司机:</div><div style='display:inline;width:80%;float:right;'>歡迎來臺灣!你在這裡會玩得很開心的!<br />Huān yíng lái Tái wān! Nǐ zài zhè lǐ huì wán de hěn kāi xīn de!</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Welcome to Taiwan! You’ll enjoy yourself here!</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>司机:</div><div style='display:inline;width:80%;float:right;'>先生,飯店到了。一共是一千三百元。<br />Xiān sheng, fàn diàn dào le. Yí gòng shì yì qiān sān bǎi yuán.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Sir. We’ve arrived at the hotel. It’s $1,300.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>給你。<br />Gěi nǐ.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Here you are.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>司机:</div><div style='display:inline;width:80%;float:right;'>謝謝!<br />Xiè xie.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Thank you.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>司机:</div><div style='display:inline;width:80%;float:right;'>你的行李在這裡。<br />Nǐ de xíng lǐ zài zhè lǐ.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Here’s your luggage.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>謝謝你。<br />Xiè xie nǐ.</div>"
+      },
+      "answer": {
+        "type": "text",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Thank you.</div>"]
+      }
+    }
+  ]
+}

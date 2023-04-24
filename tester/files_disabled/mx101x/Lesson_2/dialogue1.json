@@ -1,0 +1,101 @@
+{
+  "label": "MX101x L2: Dialogue Passing Customs",
+  "groups": ["Language","Mandarin","MX101x","Lesson 2"],
+  "mediaTypes": ["html"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 2: Dialogue 1, Passing Customs, Traditional",
+  "data": [
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>海關人員:</div><div style='display:inline;width:80%;float:right;'>請給我你的護照。你為什麼來台灣?<br />Qǐng gěi wǒ nǐ de hù zhào. Nǐ wèi shén me lái Tái wān?</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Please give me your passport. Why do you come to Taiwan?</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>我來觀光。<br />Wǒ lái guān guāng.</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>I come for sightseeing.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>海關人員:</div><div style='display:inline;width:80%;float:right;'>你會住在哪裡?<br />Nǐ huì zhù zài nǎ lǐ?</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>woWhere will you be staying?rd</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>我會住在旅館。<br />Wǒ huì zhù zài lǚ guǎn.</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>I’ll be staying at a hotel.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>海關人員:</div><div style='display:inline;width:80%;float:right;'>你會待多久?<br />Nǐ huì dāi duō jiǔ?</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>How long will you be staying?</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>Dà gài èr shí bā tiān.<br />Dà gài èr shí bā tiān.</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Around 28 days.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>海關人員:</div><div style='display:inline;width:80%;float:right;'>好的,祝你玩得開心。<br />Hǎo de, zhù nǐ wán de kāi xīn.</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Ok, I wish you a pleasant visit.</div>"]
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": "<div style='display:inline;width:10%;float:left;'>旅客:</div><div style='display:inline;width:80%;float:right;'>謝謝。<br />Xiè xie.</div>"
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Word:</div><div style='display:inline;width:80%;float:right;'>Thank you</div>"]
+      }
+    }
+  ]
+}

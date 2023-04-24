@@ -1,0 +1,70 @@
+{
+  "label": "Lakusho Bango",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Easy Numbers",
+  "notes": "",
+  "data": [
+    {
+      "question": { "type": "text", "val": "零" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["0"] }
+    },
+    {
+      "question": { "type": "text", "val": "一" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["1"] }
+    },
+    {
+      "question": { "type": "text", "val": "二" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["2"] }
+    },
+    {
+      "question": { "type": "text", "val": "三" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["3"] }
+    },
+    {
+      "question": { "type": "text", "val": "四" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["4"] }
+    },
+    {
+      "question": { "type": "text", "val": "伍" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["5"] }
+    },
+    {
+      "question": { "type": "text", "val": "六" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["6"] }
+    },
+    {
+      "question": { "type": "text", "val": "七" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["7"] }
+    },
+    {
+      "question": { "type": "text", "val": "八" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["8"] }
+    },
+    {
+      "question": { "type": "text", "val": "九" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["9"] }
+    },
+    {
+      "question": { "type": "text", "val": "十" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["10"] }
+    },
+    {
+      "question": { "type": "text", "val": "百" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["100"] }
+    },
+    {
+      "question": { "type": "text", "val": "千, 仟" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["1000"] }
+    },
+    {
+      "question": { "type": "text", "val": "萬" }, "types": ["input","flashcard"],
+      "answer": { "type": "text", "val": ["1000"] }
+    }
+  ]
+}

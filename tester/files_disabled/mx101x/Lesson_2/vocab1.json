@@ -1,0 +1,118 @@
+{
+  "label": "MX101x L2: Vocab",
+  "groups": ["Language","Mandarin","MX101x","Lesson 2"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 2: Vocabulary, Traditional",
+  "data": [
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "到 – dào" },
+      "answer": { "type": "text", "val": ["to arrive/ to (a place)","arrive","to"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "護照 – hùzhào" },
+      "answer": { "type": "text", "val": ["passport"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "行李 – xínglǐ" },
+      "answer": { "type": "text", "val": ["luggage"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "門 – mén" },
+      "answer": { "type": "text", "val": ["gate / door","gate","door"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "旅行 – lǚxíng" },
+      "answer": { "type": "text", "val": ["to travel","travel"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "旅客 – lǚkè" },
+      "answer": { "type": "text", "val": ["tourist"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "旅館 / 飯店 – lǚguǎn / fàndiàn" },
+      "answer": { "type": "text", "val": ["hotel"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "住 – zhù" },
+      "answer": { "type": "text", "val": ["to live / to stay (e.g. at a hotel)","to live","to stay","live","stay"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "請 – qǐng" },
+      "answer": { "type": "text", "val": ["“please” / to ask / to invite","please","ask","invite"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "大概 – dàgài" },
+      "answer": { "type": "text", "val": ["probably / about / roughly","probably","about","roughly"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "多 – duō" },
+      "answer": { "type": "text", "val": ["much / many","much","many"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "少 – shǎo" },
+      "answer": { "type": "text", "val": ["few / less","few","less"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "久 – jiǔ" },
+      "answer": { "type": "text", "val": ["(long) time","long time","time"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "謝 – xiè" },
+      "answer": { "type": "text", "val": ["to thank / a surname","to thank","surname","thank"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "錢 – qián" },
+      "answer": { "type": "text", "val": ["money"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "計程車 – jìchéngchē" },
+      "answer": { "type": "text", "val": ["taxi"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "地址 – dìzhǐ" },
+      "answer": { "type": "text", "val": ["address"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "去 – qù" },
+      "answer": { "type": "text", "val": ["to go","go"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "為什麼 – wèishénme" },
+      "answer": { "type": "text", "val": ["Why?","why"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "小時 – xiǎoshí" },
+      "answer": { "type": "text", "val": ["hour"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "司機 – sījī" },
+      "answer": { "type": "text", "val": ["driver / chauffeur","driver","chauffeur"] }
+    }
+  ]
+}

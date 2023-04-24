@@ -1,0 +1,337 @@
+{
+  "label": "Pimsleur Jap 1-1",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input","multi"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Pimsleur Jap Level 1 - Lesson 1",
+  "data": [
+    {
+      "level": 1,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "sumimasen, anata wa eigo ga wakarimasu ka." },
+      "answer": {
+        "type": "text",
+        "val": ["Excuse me, do you understand english?"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "すみません、 あなたは えいごが わかりますか。" },
+      "answer": {
+        "type": "text",
+        "val": ["sumimasen, anata wa eigo ga wakarimasu ka."]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "iie, watashi wa eigo ga wakarimasen." },
+      "answer": {
+        "type": "text",
+        "val": ["No, I do not understand english."]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "いいえ、 わたしは えいごが わかりません。" },
+      "answer": {
+        "type": "text",
+        "val": ["iie, watashi wa eigo ga wakarimasen."]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "watashi wa nihongo ga wakarimasu." },
+      "answer": {
+        "type": "text",
+        "val": ["I do undestand japanese."]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "わたしは にほんごが わかります。" },
+      "answer": {
+        "type": "text",
+        "val": ["watashi wa nihongo ga wakarimasu."]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "anata wa amerika-jin desu ka." },
+      "answer": {
+        "type": "text",
+        "val": ["Are you american?"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "あなたは アメリカじん ですか。" },
+      "answer": {
+        "type": "text",
+        "val": ["anata wa amerika-jin desu ka."]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "hai, watashi wa amerika-jin desu." },
+      "answer": {
+        "type": "text",
+        "val": ["Yes, I am american."]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "はい、 わたしは アメリカじん です。" },
+      "answer": {
+        "type": "text",
+        "val": ["hai, watashi wa amerika-jin desu."]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "sumimasen" },
+      "answer": {
+        "type": "text",
+        "val": ["excuse me"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "すみません" },
+      "answer": {
+        "type": "text",
+        "val": ["sumimasen"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "eigo" },
+      "answer": {
+        "type": "text",
+        "val": ["english","english language"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "えいご" },
+      "answer": {
+        "type": "text",
+        "val": ["eigo"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "wakarimasu" },
+      "answer": {
+        "type": "text",
+        "val": ["I understand"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "わかります" },
+      "answer": {
+        "type": "text",
+        "val": ["wakarimasu"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ka" },
+      "answer": {
+        "type": "text",
+        "val": ["Use at the end of a sentence to form a question(particle)"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "か" },
+      "answer": {
+        "type": "text",
+        "val": ["ka"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "iie" },
+      "answer": {
+        "type": "text",
+        "val": ["no"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "いいえ" },
+      "answer": {
+        "type": "text",
+        "val": ["iie"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "watashi" },
+      "answer": {
+        "type": "text",
+        "val": ["I"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "わたし" },
+      "answer": {
+        "type": "text",
+        "val": ["watashi"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "wakarimasen" },
+      "answer": {
+        "type": "text",
+        "val": ["I do not undestand"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "わかりません" },
+      "answer": {
+        "type": "text",
+        "val": ["wakarimasen"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "nihongo" },
+      "answer": {
+        "type": "text",
+        "val": ["Japanese","Japanese language"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "にほんご" },
+      "answer": {
+        "type": "text",
+        "val": ["nihongo"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "sukoshi" },
+      "answer": {
+        "type": "text",
+        "val": ["a little","a few","little","few"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "すこし" },
+      "answer": {
+        "type": "text",
+        "val": ["sukoshi"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "amerika-jin" },
+      "answer": {
+        "type": "text",
+        "val": ["American"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "アメリカじん" },
+      "answer": {
+        "type": "text",
+        "val": ["amerika-jin"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "anata" },
+      "answer": {
+        "type": "text",
+        "val": ["you"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "あなた" },
+      "answer": {
+        "type": "text",
+        "val": ["anata"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "desu" },
+      "answer": {
+        "type": "text",
+        "val": ["is","are"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "です" },
+      "answer": {
+        "type": "text",
+        "val": ["desu"]
+      }
+    },
+    {
+      "level": 1,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "hai" },
+      "answer": {
+        "type": "text",
+        "val": ["yes"]
+      }
+    },
+    {
+      "level": 2,
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "はい" },
+      "answer": {
+        "type": "text",
+        "val": ["hai"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+We will not support html properly obviously
+Will not support images,videos or sound, just text
+create a settings file
+	option to exclude tests suites with html,vid,audio,images
+Not sure how nesting will work at the moment
+
+real multi choice support:
+- generate multiple choice from answers and questions without pre setting up something
+- allow support for reversing the questions and answers as options
+
+This will be a huge win. lets mock some shit up
+
+
+{
+  data: [
+    { question: '1 + 1', answer: '2' },
+    { question: '2 - 1', answer: '1' },
+    { question: '-1 + 4', answer: '3'},
+    { question: '4 + 0', answer: '4' }
+  ]
+}
+
+how would the above be converted into a multi choice test suite??
+Answer: we dont have to, we just need to randomly pluck 3 extra results from the pile
+
+
+
+https://en.wikipedia.org/wiki/Kana

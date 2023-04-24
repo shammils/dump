@@ -1,0 +1,230 @@
+{
+  "label": "Atarashi Tomodachi",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Genki 1.1: Atarashi Tomodachi",
+  "notes": "gutter ghetto = くだけた, normal = たいねい, advanced polite = けいご",
+  "data": [
+    {
+      "question": { "type": "text", "val": "now" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いま"] }
+    },
+    {
+      "question": { "type": "text", "val": "English Language" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ええご"] }
+    },
+    {
+      "question": { "type": "text", "val": "yes(たいねい)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ええ"] }
+    },
+    {
+      "question": { "type": "text", "val": "student" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["がくせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "high school" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["こうこう"] }
+    },
+    {
+      "question": { "type": "text", "val": "P.M" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ごご"] }
+    },
+    {
+      "question": { "type": "text", "val": "A.M" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ごぜん"] }
+    },
+    {
+      "question": { "type": "text", "val": "~years old" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["~さい"] }
+    },
+    {
+      "question": { "type": "text", "val": "~Mr./Ms." }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["~さん"] }
+    },
+    {
+      "question": { "type": "text", "val": "~o'clock" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["~じ"] }
+    },
+    {
+      "question": { "type": "text", "val": "teacher, professor" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["せんせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "major(in school)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["せんもん"] }
+    },
+    {
+      "question": { "type": "text", "val": "college, university" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["だいがく"] }
+    },
+    {
+      "question": { "type": "text", "val": "telephone" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["でんわ"] }
+    },
+    {
+      "question": { "type": "text", "val": "friend" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ともだち"] }
+    },
+    {
+      "question": { "type": "text", "val": "name" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["なまえ"] }
+    },
+    {
+      "question": { "type": "text", "val": "what" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["なん/なに"] }
+    },
+    {
+      "question": { "type": "text", "val": "Japan" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["にほん"] }
+    },
+    {
+      "question": { "type": "text", "val": "~year student" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["~ねんせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "yes(けいご)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["はい"] }
+    },
+    {
+      "question": { "type": "text", "val": "half(time)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["はん"] }
+    },
+    {
+      "question": { "type": "text", "val": "number" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ばんごう"] }
+    },
+    {
+      "question": { "type": "text", "val": "international student" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["りゅうがくせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "I" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["わたし"] }
+    },
+    {
+      "question": { "type": "text", "val": "America" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["アメリカ"] }
+    },
+    {
+      "question": { "type": "text", "val": "Britain" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["イギリス"] }
+    },
+    {
+      "question": { "type": "text", "val": "Australia" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["オーストラリア"] }
+    },
+    {
+      "question": { "type": "text", "val": "Korea" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["かんこく"] }
+    },
+    {
+      "question": { "type": "text", "val": "Sweden" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["スウエーデン"] }
+    },
+    {
+      "question": { "type": "text", "val": "China" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ちゃうごく"] }
+    },
+    {
+      "question": { "type": "text", "val": "science" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["かがく"] }
+    },
+    {
+      "question": { "type": "text", "val": "Asian studies" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["アジアけんきゅう"] }
+    },
+    {
+      "question": { "type": "text", "val": "economics" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["けいざい"] }
+    },
+    {
+      "question": { "type": "text", "val": "international relations" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["こくさいかんけい"] }
+    },
+    {
+      "question": { "type": "text", "val": "computer" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["コンピューター"] }
+    },
+    {
+      "question": { "type": "text", "val": "anthropology" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["じんるいがく"] }
+    },
+    {
+      "question": { "type": "text", "val": "politics" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["せいじ"] }
+    },
+    {
+      "question": { "type": "text", "val": "business" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ビジネス"] }
+    },
+    {
+      "question": { "type": "text", "val": "literature" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ぶんがく"] }
+    },
+    {
+      "question": { "type": "text", "val": "history" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["れきし"] }
+    },
+    {
+      "question": { "type": "text", "val": "job; work; occupation" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["しごと"] }
+    },
+    {
+      "question": { "type": "text", "val": "doctor" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いしゃ"] }
+    },
+    {
+      "question": { "type": "text", "val": "office worker" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["かいしゃいん"] }
+    },
+    {
+      "question": { "type": "text", "val": "high school student" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["こうこうせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "house wife" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["しゅふ"] }
+    },
+    {
+      "question": { "type": "text", "val": "graduate student" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["だいがくいんせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "college student" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["だいがくせい"] }
+    },
+    {
+      "question": { "type": "text", "val": "lawyer" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["べんごし"] }
+    },
+    {
+      "question": { "type": "text", "val": "mother" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おかあさん"] }
+    },
+    {
+      "question": { "type": "text", "val": "father" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おとうさん"] }
+    },
+    {
+      "question": { "type": "text", "val": "older sister" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おねえさん"] }
+    },
+    {
+      "question": { "type": "text", "val": "older brother" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おにいさん"] }
+    },
+    {
+      "question": { "type": "text", "val": "younger sister" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いもうと"] }
+    },
+    {
+      "question": { "type": "text", "val": "younger brother" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おとうと"] }
+    }
+  ]
+}

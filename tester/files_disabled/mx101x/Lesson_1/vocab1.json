@@ -1,0 +1,153 @@
+{
+  "label": "MX101x L1: Vocab",
+  "groups": ["Language","Mandarin","MX101x","Lesson 1"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 1: Vocabulary, Traditional",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "我 – wŏ", "hardMode": "我" },
+      "answer": { "type": "text", "val": ["I, me","I","me"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "你 / 妳 – nĭ", "hardMode": "你 / 妳" },
+      "answer": { "type": "text", "val": ["you (m) / (f)","you"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "是 – shì", "hardMode": "是" },
+      "answer": { "type": "text", "val": ["is, are, am; the “be” verb/ right/yes","is","am","are","be"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "您 – nín", "hardMode": "您" },
+      "answer": { "type": "text", "val": ["you (formal)","you"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "他 / 她 – tā" },
+      "answer": { "type": "text", "val": ["he / she","he","she"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "們 – men" },
+      "answer": { "type": "text", "val": "plural indicator for people" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "好 – hăo" },
+      "answer": { "type": "text", "val": ["good / very","good","very"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "沒 – méi" },
+      "answer": { "type": "text", "val": "negative indicator" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "有 – yŏu" },
+      "answer": { "type": "text", "val": ["to have","have"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "叫 – jiào" },
+      "answer": { "type": "text", "val": ["to be called / to shout","to be called","shout","called"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "大家 – dàjiā" },
+      "answer": { "type": "text", "val": ["everyone"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "要 – yào" },
+      "answer": { "type": "text", "val": ["to want","want"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "人 – rén" },
+      "answer": { "type": "text", "val": ["person / people","person","people"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "什麼 – shénme" },
+      "answer": { "type": "text", "val": ["\"what\"","what"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "名字 – míngzi" },
+      "answer": { "type": "text", "val": ["name"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "這 – zhè" },
+      "answer": { "type": "text", "val": ["here / this","here","this"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "哪 / 那 – nă/nà" },
+      "answer": { "type": "text", "val": ["“where” / “there/that”","where","there","that"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "裡 – lĭ" },
+      "answer": { "type": "text", "val": ["interior / inside","interior","inside"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "幾 – jĭ" },
+      "answer": { "type": "text", "val": ["“how many” / several","how many","several","many"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "歲 – suì" },
+      "answer": { "type": "text", "val": ["age"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "老師 – lăoshī" },
+      "answer": { "type": "text", "val": ["teacher"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "學生 – xuéshēng" },
+      "answer": { "type": "text", "val": ["student"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "國 – guó" },
+      "answer": { "type": "text", "val": ["country"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "男 – nán" },
+      "answer": { "type": "text", "val": ["male / boy","male","boy","man"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "女 – nǚ" },
+      "answer": { "type": "text", "val": ["female / girl","female","girl","woman"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "的 – de" },
+      "answer": { "type": "text", "val": ["possessive indicator"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "朋友 – péngyǒu" },
+      "answer": { "type": "text", "val": ["friend"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "也 – yĕ" },
+      "answer": { "type": "text", "val": ["also / too","also","too"] }
+    }
+  ]
+}

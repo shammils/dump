@@ -1,0 +1,57 @@
+{
+  "label": "Simple Input Test",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input","multi"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Simple Math. Very simple math...",
+  "data": [
+    {
+      "types": ["flashcard","input","multi"],
+      "question": { "type": "text", "val": "1+1" },
+      "answer": {
+        "type": "text",
+        "val": ["2","two"],
+        "incorrectOptions": ["3","55","1","100","5","butt","0"],
+        "max": 4,
+        "useFirstAnswer": true
+      }
+    },
+    {
+      "types": ["flashcard","input","multi"],
+      "question": { "type": "text", "val": "10+1" },
+      "answer": {
+        "type": "text",
+        "val": ["11","eleven"],
+        "incorrectOptions": ["3","55","1","100","5","*","0"],
+        "max": 4,
+        "useFirstAnswer": true
+      }
+    },
+    {
+      "types": ["flashcard","input","multi"],
+      "question": { "type": "text", "val": "5 * 5" },
+      "answer": {
+        "type": "text",
+        "val": ["25","twentyfive","twenty-five"],
+        "incorrectOptions": ["1","55","1","100","5","hams","10"],
+        "max": 4,
+        "useFirstAnswer": true
+      }
+    },
+    {
+      "types": ["flashcard","input","multi"],
+      "question": { "type": "text", "val": "who ran stuff?" },
+      "answer": {
+        "type": "text",
+        "val": ["dog"],
+        "incorrectOptions": ["3","55","1","100","5","butt","0"],
+        "max": 4,
+        "useFirstAnswer": true
+      }
+    }
+  ]
+}

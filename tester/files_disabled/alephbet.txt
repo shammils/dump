@@ -1,0 +1,170 @@
+alif
+Isolated: ا
+End: ـا
+Middle: ـا
+Initial: ا
+
+baa
+Isolated: ب
+End: ب
+Middle: ـبـ
+Initial: بـ
+
+taa
+Isolated: ت
+End: ـت
+Middle: ـتـ
+Initial: تـ
+
+tha
+Isolated: ث
+End: ـث
+Middle: ثـ
+Initial: ثـ
+
+jiim
+Isolated: ج
+End: ـج
+Middle: ـجـ
+Initial: جـ
+
+haa
+Isolated: ح
+End: ـح
+Middle: ـحـ
+Initial: حـ
+
+khaa
+Isolated: خ
+Middle: ـخ
+End: ـخـ
+Initial: خـ
+
+dal
+Isolated: د
+End: ـد
+Middle: ـد
+Initial: د
+
+dhal
+Isolated: ذ
+End: ـذ
+Middle: ـذ
+Initial: ذ
+
+raa
+Isolated: ر
+End: ـر
+Middle: ـر
+Initial: ر
+
+zay
+Isolated: ز
+End: ـز
+Middle: ـز
+Initial: ـز
+
+siin
+Isolated: س
+End: ـس
+Middle: ـسـ
+Initial: سـ
+
+shiin
+Isolated: ش
+End: ـش
+Middle: ـشـ
+Initial: شـ
+
+Saad
+Isolated: ص
+End: ـص
+Middle: ـصـ
+Initial: صـ
+
+Dhad
+Isolated: ض
+End: ض
+Middle: ـضـ
+Isolated: ضـ
+
+Taa
+solated: ط
+End: ـط
+Middle: ـطـ
+Initial: ط
+
+Dhaa
+Isolated: ظ
+End: ـظ
+Middle: ـظـ
+Initial: ظـ
+
+hain
+Isolated: ع
+End: ـع
+Middle: ـعـ
+Initial: عـ
+
+ghain
+Isolated: غ
+End: ـغ
+Middle: ـغـ
+Initial: غـ
+
+faa
+Isolated: ف
+End: ـف
+Middle: ـفـ
+Initial: فـ
+
+qaaf
+Isolated: ق
+End: ق
+Middle: ـقـ
+Initial: قـ
+
+kaaf
+Isolated: ك
+End: ـك
+Middle: ـكـ
+Initial: كـ
+
+laam
+Isolated: ل
+End: لـ
+Middle: ـلـ
+Initial: لـ
+
+miim
+Isolated: م
+End: ـم
+Middle: ـمـ
+Initial: مـ
+
+nun
+Isolated: ن
+End: ـن
+Middle: ـنـ
+Initial: نـ
+
+haa
+Isolated: ه
+End: ـه
+Middle: ـهـ
+Initial: هـ
+
+waw
+Isolated: و
+End: ـو
+Middle: ـو
+Initial: و
+
+yaa
+Isolated: ي
+End: ـي
+Middle: ـيـ
+Initial: يـ
+
+as-salaamu Aalaykum
+ٱلسَّلَامُ عَلَيْكُمْ

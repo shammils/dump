@@ -1,0 +1,73 @@
+{
+  "label": "Spanish: Months",
+  "groups": ["Language","Spanish"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Months in spanish.",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "enero" },
+      "answer": { "type": "text", "val": "January" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "febrero" },
+      "answer": { "type": "text", "val": "February" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "marzo" },
+      "answer": { "type": "text", "val": "March" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "abril" },
+      "answer": { "type": "text", "val": "April" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "mayo" },
+      "answer": { "type": "text", "val": "May" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "junio" },
+      "answer": { "type": "text", "val": "June" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "julio" },
+      "answer": { "type": "text", "val": "July" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "agosto" },
+      "answer": { "type": "text", "val": "August" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "septiembre" },
+      "answer": { "type": "text", "val": "September" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "octubre" },
+      "answer": { "type": "text", "val": "October" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "noviembre" },
+      "answer": { "type": "text", "val": "November" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "diciembre" },
+      "answer": { "type": "text", "val": "December" }
+    }
+  ]
+}

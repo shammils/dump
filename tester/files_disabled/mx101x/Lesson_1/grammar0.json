@@ -1,0 +1,64 @@
+{
+  "label": "MX101x L1: Grammar",
+  "groups": ["Language","Mandarin","MX101x","Lesson 1"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","multi"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 1: Grammar, Traditional",
+  "data": [
+    {
+      "types": ["flashcard","multi"],
+      "question": { "type": "text", "val": "請 / 請問 ____ ?~~Qǐng/ qǐng wèn...?" },
+      "answer": {
+        "type": "text",
+        "val": ["...please?/ may I ask ...please?"],
+        "incorrectOptions": ["help~~can you help?","I am~~I am not...","I am also...","Fuck off~~Fuck off you idiot"],
+        "max": 4,
+        "useFirstAnswer": true
+      }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我 ( 不 ) 是 _____。~~Wǒ (bú) shì _____." },
+      "answer": { "type": "text", "val": ["I am (not)..."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我不是她的男朋友。~~Wǒ bú shì tā de nánpéngyǒu." },
+      "answer": { "type": "text", "val": ["I’m not her boyfriend"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我也是 _____。~~Wǒ yě shì _____ ." },
+      "answer": { "type": "text", "val": ["I am also..."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我也是美國人。~~Wǒ yě shì Měiguó rén." },
+      "answer": { "type": "text", "val": ["I’m also American."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我 ( 沒 ) 有 _____。~~Wǒ (méi) yǒu _____." },
+      "answer": { "type": "text", "val": ["I (don’t) have"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我有一個很漂亮的老師。~~Wǒ yǒu yíge hěn piàoliang de lǎoshī." },
+      "answer": { "type": "text", "val": ["I have a very pretty teacher."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我是 _____ 人。~~Wǒ shì _____ rén." },
+      "answer": { "type": "text", "val": ["I am from..."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我是台灣人。~~Wǒ shì Táiwān rén." },
+      "answer": { "type": "text", "val": ["I am Taiwanese."] }
+    }
+  ]
+}

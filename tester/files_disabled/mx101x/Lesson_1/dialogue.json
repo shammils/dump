@@ -1,0 +1,24 @@
+{
+  "label": "MX101x L1: Dialogue",
+  "groups": ["Language","Mandarin","MX101x","Lesson 1"],
+  "mediaTypes": ["html"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 1: Dialogue, Traditional",
+  "data": [
+    {
+      "types": ["flashcard"],
+      "question": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>老師:</div><div style='display:inline;width:80%;float:right;'>大家好,很高興見到你們。<br />我是你們的老師,你們可以叫我 Estella。我是台灣人,你們呢?<br />告訴我,你叫什麼名字? 你幾歲? 你從哪裡來?<hr />Dà jiā hǎo, hěn gāo xìng jiàn dào nǐ men.<br />Wǒ shì nǐ men de lǎo shī, nǐ men kě yǐ jiào wǒ Estella. Wǒ shì Tái wān rén, nǐ men ne?<br />Gào sù wǒ, nǐ jiào shén me míng zi? Nǐ jǐ suì? Nǐ cóng nǎ lǐ lái?</div>"]
+      },
+      "answer": {
+        "type": "html",
+        "val": ["<div style='display:inline;width:10%;float:left;'>Teacher:</div><div style='display:inline;width:80%;float:right;'>Hello everyone. I’m very happy to meet you all.<br />I am your teacher, you can call me Estella. I’m Taiwanese. How about you?<br />Tell me, What is your name? How old are you? Where are you from?</div>"]
+      }
+    }
+  ]
+}

@@ -5,7 +5,6 @@ const { http, https } = require('follow-redirects');
 const delay = ms =>
 new Promise(resolve =>
   setTimeout(() => resolve(), ms))
-const token = 'rLlc2D4exTFBkA99BScTP5bJcwnP9XhnSISgfakKtFI.eyJpbnN0YW5jZUlkIjoiODFiMzIxZGYtMGRiMy00NTkzLTgyMDAtMGI3NjYzZDhkNTY5IiwiYXBwRGVmSWQiOiIyMmJlZjM0NS0zYzViLTRjMTgtYjc4Mi03NGQ0MDg1MTEyZmYiLCJtZXRhU2l0ZUlkIjoiODFiMzIxZGYtMGRiMy00NTkzLTgyMDAtMGI3NjYzZDhkNTY5Iiwic2lnbkRhdGUiOiIyMDIxLTExLTI4VDE5OjE0OjU0LjA5NVoiLCJ1aWQiOiIyZDFmMTkzMy0xNzkxLTQ3YTMtYTZlZi1lOWNlNDYwZjlhZTgiLCJwZXJtaXNzaW9ucyI6Ik9XTkVSIiwiZGVtb01vZGUiOmZhbHNlLCJzaXRlT3duZXJJZCI6IjJkMWYxOTMzLTE3OTEtNDdhMy1hNmVmLWU5Y2U0NjBmOWFlOCIsInNpdGVNZW1iZXJJZCI6IjJkMWYxOTMzLTE3OTEtNDdhMy1hNmVmLWU5Y2U0NjBmOWFlOCIsImV4cGlyYXRpb25EYXRlIjoiMjAyMS0xMS0yOFQyMzoxNDo1NC4wOTVaIiwibG9naW5BY2NvdW50SWQiOiIyZDFmMTkzMy0xNzkxLTQ3YTMtYTZlZi1lOWNlNDYwZjlhZTgifQ'
 
 ;(async () => {
   // needs to support paging

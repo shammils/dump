@@ -1,0 +1,29 @@
+{
+  "label": "Genki 1",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["course"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Simple Math. Very simple math...",
+  "numberCache": ["0","1","2","3","4","5","6","7","8","9","","","","",""],
+  "data": [
+    {
+      "instruction": "Guess the following number.",
+      "question": "ご"
+    },
+    {
+      "types": ["text"],
+      "question": { "type": "text", "val": "1+1" },
+      "answer": {
+        "type": "text",
+        "val": ["2","two"],
+        "incorrectOptions": ["3","55","1","100","5","butt","0"],
+        "max": 4,
+        "useFirstAnswer": true
+      }
+    }
+  ]
+}

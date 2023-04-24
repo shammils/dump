@@ -1,0 +1,218 @@
+{
+  "label": "SBC 1.1: Basic Sentences",
+  "groups": ["Language","Spanish","SBC","Lesson 1.1"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Spanish Basic Course: Unit 1, Basic Sentences and Useful Patterns",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "Buenos días" },
+      "answer": { "type": "text", "val": ["Good morning"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "Buenos días, señor" },
+      "answer": { "type": "text", "val": ["Good morning, sir"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Buenes tardes, señora." },
+      "answer": { "type": "text", "val": ["Good afternoon, ma'am."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Buenas noches, señorita." },
+      "answer": { "type": "text", "val": ["Good evening, miss."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "¿C6mo está usted?" },
+      "answer": { "type": "text", "val": ["How are you?"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Estoy bien, gracias. ¿y Usted?" },
+      "answer": { "type": "text", "val": ["I'm fine. thanks. How are you?"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Muy bien, gracias" },
+      "answer": { "type": "text", "val": ["Very well, thanks."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "¡Hola! ¿Qué tal?" },
+      "answer": { "type": "text", "val": ["Hi! How goes it?"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "¿Cómo le va?" },
+      "answer": { "type": "text", "val": ["How are ron getting along?"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Bien, gracias." },
+      "answer": { "type": "text", "val": ["Fine, thanks."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Con permiso." },
+      "answer": { "type": "text", "val": ["Excuse me."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Cómo no." },
+      "answer": { "type": "text", "val": ["Certainly."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Dispénseme" },
+      "answer": { "type": "text", "val": ["Excuse me."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Lo siento mucho." },
+      "answer": { "type": "text", "val": ["I'm very sorry."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Está bien." },
+      "answer": { "type": "text", "val": ["That's okay."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "muchas" },
+      "answer": { "type": "text", "val": ["many"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Muchas gracias." },
+      "answer": { "type": "text", "val": ["Thanks a lot."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "de" },
+      "answer": { "type": "text", "val": ["of, from"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "nada" },
+      "answer": { "type": "text", "val": ["nothing"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "De nada." },
+      "answer": { "type": "text", "val": ["You're welcome"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "No hay de qué." },
+      "answer": { "type": "text", "val": ["Don't give it a thought."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "quiero (querer)" },
+      "answer": { "type": "text", "val": ["(I) want (to want)"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "presentar" },
+      "answer": { "type": "text", "val": ["to present"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "presentarle" },
+      "answer": { "type": "text", "val": ["to present to you"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Quiero presentarle al señor Molina." },
+      "answer": { "type": "text", "val": ["I'd like to present Mr. Molina to you."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Quiero presentarle a la señora de Molina." },
+      "answer": { "type": "text", "val": ["I'd like to present Mrs. Molina to you."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "el gusto" },
+      "answer": { "type": "text", "val": ["the pleasure"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Mucho gusto." },
+      "answer": { "type": "text", "val": ["Glad to meet you."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Igualmente, gracias." },
+      "answer": { "type": "text", "val": ["Same here, thanks."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "encantado (encantar)" },
+      "answer": { "type": "text", "val": ["enchanted (to enchant)"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "conocer" },
+      "answer": { "type": "text", "val": ["to meet, get acquainted, to know"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "conocerla" },
+      "answer": { "type": "text", "val": ["to meet you (f)"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Encantado de conocerla." },
+      "answer": { "type": "text", "val": ["Delighted to meet you."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "conocerlo" },
+      "answer": { "type": "text", "val": ["to meet you (m)"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Mucho gusto de conocerlo." },
+      "answer": { "type": "text", "val": ["Glad to meet you."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Adiós" },
+      "answer": { "type": "text", "val": ["Goodbye."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "hasta" },
+      "answer": { "type": "text", "val": ["until"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "mañana" },
+      "answer": { "type": "text", "val": ["tomorrow"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Hasta mañana." },
+      "answer": { "type": "text", "val": ["See you tomorrow."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "luego" },
+      "answer": { "type": "text", "val": ["then, later"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Hasta luego." },
+      "answer": { "type": "text", "val": ["So long/See you later."] }
+    }
+  ]
+}

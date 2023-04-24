@@ -1,0 +1,138 @@
+{
+  "label": "MX101x L1: Supplemetary Vocab",
+  "groups": ["Language","Mandarin","MX101x","Lesson 1"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 1: Supplementary Vocabulary, Traditional",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "美國 – Měiguó" },
+      "answer": { "type": "text", "val": ["The United States","us","america"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "加拿大 – Jiānádà" },
+      "answer": { "type": "text", "val": ["Canada"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "英國 – Yīngguó" },
+      "answer": { "type": "text", "val": ["England"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "法國 – Făguó" },
+      "answer": { "type": "text", "val": ["France"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "德國 – Déguó" },
+      "answer": { "type": "text", "val": ["Germany"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "義大利 – Yìdàlì" },
+      "answer": { "type": "text", "val": ["Italy"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "中國 – Zhōngguó" },
+      "answer": { "type": "text", "val": ["China"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "臺灣 / 台灣 – Táiwān" },
+      "answer": { "type": "text", "val": ["Taiwan"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "泰國 – Tàiguó" },
+      "answer": { "type": "text", "val": ["Thailand"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "香港 – Xiānggăng" },
+      "answer": { "type": "text", "val": ["Hong Kong"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "日本 – Rìběn" },
+      "answer": { "type": "text", "val": ["Japan"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "印度 – Yìndù" },
+      "answer": { "type": "text", "val": ["India"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "澳洲 – Àozhōu" },
+      "answer": { "type": "text", "val": ["Australia"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "歐洲 – Ōuzhōu" },
+      "answer": { "type": "text", "val": ["Europe"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "亞洲 – Yàzhōu" },
+      "answer": { "type": "text", "val": ["Asia"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "非洲 – Fēizhōu" },
+      "answer": { "type": "text", "val": ["Africa"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "北美洲 – Běiměizhōu" },
+      "answer": { "type": "text", "val": ["North America"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "南美洲 – Nánměizhōu" },
+      "answer": { "type": "text", "val": ["South America"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "南極洲 – Nánjízhōu" },
+      "answer": { "type": "text", "val": ["Antarctica"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "雙 – shuāng" },
+      "answer": { "type": "text", "val": ["measure word for pairs (shoes, chopsticks, earrings, etc.)"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "隻 – zhī" },
+      "answer": { "type": "text", "val": ["measure word for certain animals and utensils"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "條 – tiáo" },
+      "answer": { "type": "text", "val": ["measure word for long, thin objects"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "本 – běn" },
+      "answer": { "type": "text", "val": ["measure word for books"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "份 – fèn" },
+      "answer": { "type": "text", "val": ["measure word for a serving"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "顆 – kē" },
+      "answer": { "type": "text", "val": ["measure word for small spheres, eggs, and teeth"] }
+    }
+  ]
+}

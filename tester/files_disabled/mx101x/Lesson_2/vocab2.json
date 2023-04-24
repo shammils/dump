@@ -1,0 +1,63 @@
+{
+  "label": "MX101x L2: Supplementary Vocab",
+  "groups": ["Language","Mandarin","MX101x","Lesson 2"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 2: Supplementary Vocabulary, Traditional",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "海關 – hǎiguān" },
+      "answer": { "type": "text", "val": ["customs"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "簽證 – qiānzhèng" },
+      "answer": { "type": "text", "val": ["visa"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "失物招領區(處) – shīwù zhāolǐngqū(chù)" },
+      "answer": { "type": "text", "val": ["lost and found"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "洗手間 – xǐshǒujiān" },
+      "answer": { "type": "text", "val": ["restroom"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "旅客服務中心 – lǚkè fúwù zhōngxīn" },
+      "answer": { "type": "text", "val": ["tourist information center"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "件 – jiàn" },
+      "answer": { "type": "text", "val": ["measure word for clothing and baggage"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "觀光 – guānguāng" },
+      "answer": { "type": "text", "val": ["sightseeing"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "過期 – guòqí" },
+      "answer": { "type": "text", "val": ["to expire","expire"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "錢包 – qiánbāo" },
+      "answer": { "type": "text", "val": ["wallet / purse","wallet","purse"] }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "元 / 圓 – yuán" },
+      "answer": { "type": "text", "val": ["money / dollar","money","dollar"] }
+    }
+  ]
+}

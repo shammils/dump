@@ -1,0 +1,29 @@
+{
+  "main": {
+    "suitePaths": [
+      "../files",
+      "./files"
+    ],
+    "useComplexMediaTests": false,
+    "allowedComplexTests": []
+  },
+  "personal": {
+    "shuffle": true,
+    "fileDisplayCount": 5,
+    "enableInputTests": true,
+    "enableMultipleChoiceTests": false,
+    "automation": {
+      "ask": true,
+      "automate": false,
+      "questionInterval": 5000,
+      "answerInterval": 2000,
+      "flip": true,
+      "flipTimes": 1,
+      "stopOnLastTest": false
+    },
+    "style": {
+      "defaultIndent": "    ",
+      "hr": "___________________________________________"
+    }
+  }
+}

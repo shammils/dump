@@ -1,0 +1,14 @@
+{
+  "label": "Japanese Kanji",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Japanese Kanji",
+  "data": [
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "あ ア" }, "answer": { "type": "text", "val": ["a"] } }
+  ]
+}

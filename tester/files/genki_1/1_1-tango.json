@@ -1,0 +1,130 @@
+{
+  "label": "Tango",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Genki 1 1: Vocabulary",
+  "notes": "did not add everything",
+  "data": [
+    {
+      "question": { "type": "text", "val": "こうこう" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["high school"] }
+    },
+    {
+      "question": { "type": "text", "val": "ごご" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["P.M"] }
+    },
+    {
+      "question": { "type": "text", "val": "ごぜん" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["A.M"] }
+    },
+    {
+      "question": { "type": "text", "val": "せんもん" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["major"] }
+    },
+    {
+      "question": { "type": "text", "val": "だいがく" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["college; university"] }
+    },
+    {
+      "question": { "type": "text", "val": "でんわ" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["telephone"] }
+    },
+    {
+      "question": { "type": "text", "val": "...ねんせい" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["...year student"] }
+    },
+    {
+      "question": { "type": "text", "val": "ばんごう" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["number"] }
+    },
+    {
+      "question": { "type": "text", "val": "りゅうがくせい" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["international student"] }
+    },
+    {
+      "question": { "type": "text", "val": "アメリカ" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["USA"] }
+    },
+    {
+      "question": { "type": "text", "val": "イギリス" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["Britian"] }
+    },
+    {
+      "question": { "type": "text", "val": "スウエーデン" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["Sweden"] }
+    },
+    {
+      "question": { "type": "text", "val": "オーストラリア" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["Australia"] }
+    },
+    {
+      "question": { "type": "text", "val": "ちゅうごく" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["China"] }
+    },
+    {
+      "question": { "type": "text", "val": "かんこく" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["Korea"] }
+    },
+    {
+      "question": { "type": "text", "val": "かがく" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["science"] }
+    },
+    {
+      "question": { "type": "text", "val": "けいざい" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["economics"] }
+    },
+    {
+      "question": { "type": "text", "val": "こくさいかんけい" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["international relations"] }
+    },
+    {
+      "question": { "type": "text", "val": "じんるいがく" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["anthropology"] }
+    },
+    {
+      "question": { "type": "text", "val": "せいじ" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["politics"] }
+    },
+    {
+      "question": { "type": "text", "val": "ぶんがく" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["literature"] }
+    },
+    {
+      "question": { "type": "text", "val": "れきし" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["history"] }
+    },
+    {
+      "question": { "type": "text", "val": "アジアけんきゅう" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["Asian Studies"] }
+    },
+    {
+      "question": { "type": "text", "val": "コンピューター" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["computer"] }
+    },
+    {
+      "question": { "type": "text", "val": "ビジネス" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["business"] }
+    },
+    {
+      "question": { "type": "text", "val": "しゅふ" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["housewife"] }
+    },
+    {
+      "question": { "type": "text", "val": "だいがくせい" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["college student"] }
+    },
+    {
+      "question": { "type": "text", "val": "だいがくいんせい" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["graduate student"] }
+    },
+    {
+      "question": { "type": "text", "val": "べんごし" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["lawyer"] }
+    }
+  ]
+}

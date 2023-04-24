@@ -1,0 +1,70 @@
+{
+  "label": "Japanese Alephbet",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Japanese Hirigana and Katana Side by Side",
+  "data": [
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "あ ア" }, "answer": { "type": "text", "val": ["a"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "い イ" }, "answer": { "type": "text", "val": ["i"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "う ウ" }, "answer": { "type": "text", "val": ["u"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "え エ" }, "answer": { "type": "text", "val": ["e"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "お オ" }, "answer": { "type": "text", "val": ["o"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "か カ" }, "answer": { "type": "text", "val": ["ka"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "き キ" }, "answer": { "type": "text", "val": ["ki"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "く ク" }, "answer": { "type": "text", "val": ["ku"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "け ケ" }, "answer": { "type": "text", "val": ["ke"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "こ コ" }, "answer": { "type": "text", "val": ["ko"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "さ サ" }, "answer": { "type": "text", "val": ["sa"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "し シ" }, "answer": { "type": "text", "val": ["shi"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "す ス" }, "answer": { "type": "text", "val": ["su"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "せ セ" }, "answer": { "type": "text", "val": ["se"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "そ ソ" }, "answer": { "type": "text", "val": ["so"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "た タ" }, "answer": { "type": "text", "val": ["ta"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ち チ" }, "answer": { "type": "text", "val": ["chi"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "つ ツ" }, "answer": { "type": "text", "val": ["tsu"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "て テ" }, "answer": { "type": "text", "val": ["te"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "と ト" }, "answer": { "type": "text", "val": ["to"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "な ナ" }, "answer": { "type": "text", "val": ["na"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "に ニ" }, "answer": { "type": "text", "val": ["ni"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ぬ ヌ" }, "answer": { "type": "text", "val": ["nu"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ね ネ" }, "answer": { "type": "text", "val": ["ne"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "の ノ" }, "answer": { "type": "text", "val": ["no"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "は ハ" }, "answer": { "type": "text", "val": ["ha"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ひ ヒ" }, "answer": { "type": "text", "val": ["hi"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ふ フ" }, "answer": { "type": "text", "val": ["hu"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "へ ヘ" }, "answer": { "type": "text", "val": ["he"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ほ ホ" }, "answer": { "type": "text", "val": ["ho"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ま マ" }, "answer": { "type": "text", "val": ["ma"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "み ミ" }, "answer": { "type": "text", "val": ["mi"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "む ム" }, "answer": { "type": "text", "val": ["mu"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "め メ" }, "answer": { "type": "text", "val": ["me"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "も モ" }, "answer": { "type": "text", "val": ["mo"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "や ヤ" }, "answer": { "type": "text", "val": ["ya"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ゆ ユ" }, "answer": { "type": "text", "val": ["yu"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "よ ヨ" }, "answer": { "type": "text", "val": ["yo"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ら ラ" }, "answer": { "type": "text", "val": ["ra"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "り リ" }, "answer": { "type": "text", "val": ["ri"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "る ル" }, "answer": { "type": "text", "val": ["ru"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "れ レ" }, "answer": { "type": "text", "val": ["re"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ろ ロ" }, "answer": { "type": "text", "val": ["ro"] } },
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "わ ワ" }, "answer": { "type": "text", "val": ["wa"] } },
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "を" }, "answer": { "type": "text", "val": ["o"] } },
+
+
+    { "types": ["flashcard","input"], "question": { "type": "text", "val": "ん ン" }, "answer": { "type": "text", "val": ["n"] } }
+  ]
+}

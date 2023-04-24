@@ -1,0 +1,264 @@
+{
+  "label": "Arabic Alephbet Isolated and Initial",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Arabic Alephbet Isolated and Initial Form Only",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿß" },
+      "answer": {
+        "type": "text",
+        "val": ["a"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["b"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["t"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["th"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["j"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["h"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["ch","kh"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["d"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["dh"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["r"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["z"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["s"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["sh"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["·π£"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["·∏ç"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["·π≠"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["·∫ì"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["guttural voiced h, similar to ·∏•ƒÅ"]
+      }
+    },
+	
+	{
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "ÿ" },
+      "answer": {
+        "type": "text",
+        "val": ["gh"]
+      }
+    },
+	
+	{
+      "types": [],
+      "question": { "type": "text", "val": "" },
+      "answer": {
+        "type": "text",
+        "val": ["f"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ŸÇ ŸÇŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["q"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ŸÉ ŸÉŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["k"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ŸÑ ŸÑŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["l"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ŸÖ ŸÖŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["m"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "ŸÜ ŸÜŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["n"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Ÿá ŸáŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["h"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Ÿà" },
+      "answer": {
+        "type": "text",
+        "val": ["w","≈´"]
+      }
+    },
+	
+	{
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "Ÿä ŸäŸÄ" },
+      "answer": {
+        "type": "text",
+        "val": ["y","ƒ´"]
+      }
+    }
+  ]
+}

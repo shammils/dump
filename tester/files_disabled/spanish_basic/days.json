@@ -1,0 +1,48 @@
+{
+  "label": "Spanish: Days",
+  "groups": ["Language","Spanish"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard","input"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Days in spanish.",
+  "data": [
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "lunes" },
+      "answer": { "type": "text", "val": "Monday" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "martes" },
+      "answer": { "type": "text", "val": "Tuesday" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "miércoles" },
+      "answer": { "type": "text", "val": "Wednesday" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "jueves" },
+      "answer": { "type": "text", "val": "Thursday" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "viernes" },
+      "answer": { "type": "text", "val": "Friday" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "sábado" },
+      "answer": { "type": "text", "val": "Saturday" }
+    },
+    {
+      "types": ["flashcard","input"],
+      "question": { "type": "text", "val": "domingo" },
+      "answer": { "type": "text", "val": "Sunday" }
+    }
+  ]
+}

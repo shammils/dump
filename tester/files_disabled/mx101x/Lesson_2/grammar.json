@@ -1,0 +1,53 @@
+{
+  "label": "MX101x L2: Grammar",
+  "groups": ["Language","Mandarin","MX101x","Lesson 2"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Learn Basic Mandarin Lesson 2: Grammar, Traditional",
+  "data": [
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "_____ 的 _____。~~_____ de _____." },
+      "answer": { "type": "text", "val": ["Refer to the owner..."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "這是我的行李。~~Zhè shì wǒ de xínglǐ." },
+      "answer": { "type": "text", "val": ["This is my luggage."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "你為什麼 _____ ?~~Nǐ wèi shén me _____ ?" },
+      "answer": { "type": "text", "val": ["Why do you...?"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "你為什麼來臺灣?~~Nǐ wèishénme lái tái wān?" },
+      "answer": { "type": "text", "val": ["Why do you come to Taiwan?"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我快 _____ 了。~~Wǒ kuài _____ le ." },
+      "answer": { "type": "text", "val": ["I am almost..."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我快遲到了。~~Wǒ kuài chídào le." },
+      "answer": { "type": "text", "val": ["I’m almost late."] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "我 _____ 好了。~~Wǒ _____ hǎo le." },
+      "answer": { "type": "text", "val": ["(guessing) I ___ very (something lol)"] }
+    },
+    {
+      "types": ["flashcard"],
+      "question": { "type": "text", "val": "飯店我訂好了。~~Fàndiàn wǒ dìng hǎo le." },
+      "answer": { "type": "text", "val": ["I have booked the hotel."] }
+    }
+  ]
+}

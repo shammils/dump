@@ -1,0 +1,86 @@
+{
+  "label": "Aisatsu",
+  "groups": ["test"],
+  "mediaTypes": ["text"],
+  "testTypes": ["flashcard"],
+  "version": {
+    "content": 1,
+    "schema": 1
+  },
+  "description": "Genki: Greetings",
+  "notes": "gutter ghetto = くだけた, normal = たいねい, advanced polite = けいご",
+  "data": [
+    {
+      "question": { "type": "text", "val": "good morning(たいねい)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おはよう"] }
+    },
+    {
+      "question": { "type": "text", "val": "good morning(けいご)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おはよう ございます"] }
+    },
+    {
+      "question": { "type": "text", "val": "good afternoon" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["こんにちわ"] }
+    },
+    {
+      "question": { "type": "text", "val": "good evening" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["こんばんわ"] }
+    },
+    {
+      "question": { "type": "text", "val": "good bye(forever)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["さようなら"] }
+    },
+    {
+      "question": { "type": "text", "val": "good night" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おやすみなさい"] }
+    },
+    {
+      "question": { "type": "text", "val": "thanks(たいねい)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ありがと"] }
+    },
+    {
+      "question": { "type": "text", "val": "thanks(けいご)" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ありがと ございます"] }
+    },
+    {
+      "question": { "type": "text", "val": "no, no worries" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いいえ"] }
+    },
+    {
+      "question": { "type": "text", "val": "excuse me" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["すみません"] }
+    },
+    {
+      "question": { "type": "text", "val": "im outta here but I will be back later" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いってきます"] }
+    },
+    {
+      "question": { "type": "text", "val": "<what you say when someone(family) is leaving a location(home) and you expect to see them back later that day>" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いってらっしゃい"] }
+    },
+    {
+      "question": { "type": "text", "val": "time to feast!" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["いただきます"] }
+    },
+    {
+      "question": { "type": "text", "val": "thanks for the feast!" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ごちそうさま"] }
+    },
+    {
+      "question": { "type": "text", "val": "im home" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["ただいま"] }
+    },
+    {
+      "question": { "type": "text", "val": "welcome home" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["おかえりなさい"] }
+    },
+    {
+      "question": { "type": "text", "val": "pleased to meet you" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["どうぞ よろしく"] }
+    },
+    {
+      "question": { "type": "text", "val": "how do you do?" }, "types": ["flashcard"],
+      "answer": { "type": "text", "val": ["はじめまして"] }
+    }
+  ]
+}
